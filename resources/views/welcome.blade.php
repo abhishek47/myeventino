@@ -4,7 +4,7 @@
 @section('content')
 <!-- Banner
 ================================================== -->
-<div class="parallax" style="height: 400px;" data-background="/images/slider.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600"  >
+<div class="parallax" id="parallax-banner" style="" data-background="/images/slider.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600"  >
 
     <div class="container">
         <div class="row">
@@ -21,11 +21,7 @@
                       <form method="GET" action="/venues">
 
                          <!-- Main Search Input -->
-                        <div class="col-md-4">
-                            <div class="main-search-input">
-                                <input type="text" name="location" placeholder="Enter name or destination" value=""/>
-                            </div>
-                        </div>
+                        
 
                         <!-- Property Type -->
                         <div class="col-md-3">
@@ -51,11 +47,14 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
-                         <div class="main-search-input">
-                            <button class="button" type="submit"><i class="fa fa-search"></i></button>
+                        <div class="col-md-6">
+                            <div class="main-search-input">
+                                <input type="text" name="location" placeholder="Enter name or destination" value=""/>
+                                <button class="button" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
+
+                        
         
 
 
