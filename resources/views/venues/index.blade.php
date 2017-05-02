@@ -29,6 +29,7 @@
 					<!-- Status -->
 					<div class="col-md-3">
 						<select data-placeholder="Event Type" name="event_type" class="chosen-select-no-single" >
+						 @if(array_key_exists('event_type', $queries))
 							<option value="0" {{ $queries['event_type'] == '0' ? 'selected' : '' }}>-- Event Type --</option>
                             <option value="wedding" {{ $queries['event_type'] == 'wedding' ? 'selected' : '' }}>Wedding</option>
                             <option value="party" {{ $queries['event_type'] == 'party' ? 'selected' : '' }}>Party</option>
@@ -36,24 +37,47 @@
                             <option value="ceremonies" {{ $queries['event_type'] == 'ceremonies' ? 'selected' : '' }}>Ceremonies</option>
                             <option value="date" {{ $queries['event_type'] == 'date' ? 'selected' : '' }}>Date</option>
                             <option value="others" {{ $queries['event_type'] == 'others' ? 'selected' : '' }}>Others</option>
+
+                          @else 
+
+                            <option value="0">-- Event Type --</option>
+                            <option value="wedding" >Wedding</option>
+                            <option value="party" >Party</option>
+                            <option value="meetings">Meetings &amp; Conferences</option>
+                            <option value="ceremonies">Ceremonies</option>
+                            <option value="date">Date</option>
+                            <option value="others">Others</option>  
+
+                          @endif  
 						</select>
 					</div>
 
 					<!-- Property Type -->
 					<div class="col-md-3">
 						<select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
+                           @if(array_key_exists('venue_type', $queries))
+
 							  <option value="0" {{ $queries['venue_type'] == '0' ? 'selected' : '' }}>-- Venue Type --</option>
                                 <option value="banquet" {{ $queries['venue_type'] == 'banquet' ? 'selected' : '' }}>Banquet</option>
                                 <option value="lawns" {{ $queries['venue_type'] == 'lawns' ? 'selected' : '' }}>Lawns</option>
                                 <option value="dome" {{ $queries['venue_type'] == 'dome' ? 'selected' : '' }}>Dome</option>
                                 <option value="conference" {{ $queries['venue_type'] == 'conference' ? 'selected' : '' }}>Conference Room</option>
+                            @else
+                               <option value="0" >-- Venue Type --</option>
+                                <option value="banquet" >Banquet</option>
+                                <option value="lawns" >Lawns</option>
+                                <option value="dome" >Dome</option>
+                                <option value="conference" >Conference Room</option>
+
+
+                            @endif    
 						</select>
 					</div>
 
 					<!-- Main Search Input -->
 					<div class="col-md-6">
 						<div class="main-search-input">
-							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ $queries['location'] }}"/>
+							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ array_key_exists('location', $queries) ? $queries['location'] : '' }}"/>
 							<button class="button" type="submit">Search</button>
 						</div>
 					</div>
