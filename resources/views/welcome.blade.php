@@ -350,7 +350,7 @@
 
 
 <!-- Fullwidth Section -->
-<section class="fullwidth margin-top-105" data-background-color="#f7f7f7" style="margin-bottom: 0;">
+<section class="fullwidth margin-top-105 hidden-xs" data-background-color="#f7f7f7" style="margin-bottom: 0;">
 
     <!-- Box Headline -->
     <h3 class="headline-box">Our Features</h3>

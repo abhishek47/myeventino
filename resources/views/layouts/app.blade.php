@@ -111,7 +111,7 @@
 
 <!-- Footer
 ================================================== -->
-<div id="footer" class="sticky-footer">
+<div id="footer" class="sticky-footer hidden-xs">
     <!-- Main -->
     <div class="container">
         <div class="row">
