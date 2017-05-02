@@ -64,7 +64,7 @@
       <div class="right-side ">
         <ul class="header-widget">
 
-        <li class="with-btn"><a href="submit-property.html" class="button border">Add My Business</a></li>
+        <li class="with-btn"><a href="/venues/create" class="button border">Add My Business</a></li>
 
         <li>
             <i class="fa fa-map-marker"></i>

@@ -28,33 +28,33 @@
 
 					<!-- Status -->
 					<div class="col-md-3">
-						<select data-placeholder="Event Type" class="chosen-select-no-single" >
-							<option>-- Event Type --</option>	
-							<option>Wedding</option>
-							<option>Party</option>
-							<option>Meetings &amp; Conferences</option>
-							<option>Ceremonies</option>
-							<option>Date</option>
-							<option>Others</option>
+						<select data-placeholder="Event Type" name="event_type" class="chosen-select-no-single" >
+							<option value="0" {{ $queries['event_type'] == '0' ? 'selected' : '' }}>-- Event Type --</option>
+                            <option value="wedding" {{ $queries['event_type'] == 'wedding' ? 'selected' : '' }}>Wedding</option>
+                            <option value="party" {{ $queries['event_type'] == 'party' ? 'selected' : '' }}>Party</option>
+                            <option value="meetings" {{ $queries['event_type'] == 'meetings' ? 'selected' : '' }}>Meetings &amp; Conferences</option>
+                            <option value="ceremonies" {{ $queries['event_type'] == 'ceremonies' ? 'selected' : '' }}>Ceremonies</option>
+                            <option value="date" {{ $queries['event_type'] == 'date' ? 'selected' : '' }}>Date</option>
+                            <option value="others" {{ $queries['event_type'] == 'others' ? 'selected' : '' }}>Others</option>
 						</select>
 					</div>
 
 					<!-- Property Type -->
 					<div class="col-md-3">
-						<select data-placeholder="Venue Type" class="chosen-select-no-single" >
-							<option>-- Venue Type --</option>
-							<option>Banquet</option>
-							<option>Lawns</option>
-							<option>Dome</option>
-							<option>Conference Room</option>
+						<select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
+							  <option value="0" {{ $queries['venue_type'] == '0' ? 'selected' : '' }}>-- Venue Type --</option>
+                                <option value="banquet" {{ $queries['venue_type'] == 'banquet' ? 'selected' : '' }}>Banquet</option>
+                                <option value="lawns" {{ $queries['venue_type'] == 'lawns' ? 'selected' : '' }}>Lawns</option>
+                                <option value="dome" {{ $queries['venue_type'] == 'dome' ? 'selected' : '' }}>Dome</option>
+                                <option value="conference" {{ $queries['venue_type'] == 'conference' ? 'selected' : '' }}>Conference Room</option>
 						</select>
 					</div>
 
 					<!-- Main Search Input -->
 					<div class="col-md-6">
 						<div class="main-search-input">
-							<input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
-							<button class="button">Search</button>
+							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ $queries['location'] }}"/>
+							<button class="button" type="submit">Search</button>
 						</div>
 					</div>
 
@@ -70,7 +70,7 @@
 						
 						<!-- Select Input -->
 						<div class="select-input ">
-							<input type="text" placeholder="Area Required" data-unit="Sq Ft">
+							<input type="text" name="area" placeholder="Area Required" data-unit="Sq Ft">
 							
 						</div>
 						<!-- Select Input / End -->
@@ -82,7 +82,7 @@
 						
 						<!-- Select Input -->
 						<div class="select-input">
-							<input type="text" placeholder="No. Of People" data-unit="Count">
+							<input type="text" name="people" placeholder="No. Of People" data-unit="Count">
 						
 						</div>
 						<!-- Select Input / End -->
@@ -95,7 +95,7 @@
 						
 						<!-- Select Input -->
 						<div class="select-input ">
-							<input type="text" placeholder="Min Price" data-unit="INR">
+							<input type="text" name="minprice" placeholder="Min Price/Person" data-unit="INR">
 							
 						</div>
 						<!-- Select Input / End -->
@@ -108,7 +108,7 @@
 						
 						<!-- Select Input -->
 						<div class="select-input">
-							<input type="text" placeholder="Max Price" data-unit="INR">
+							<input type="text" name="maxprice" placeholder="Max Price/Person" data-unit="INR">
 							
 						</div>
 						<!-- Select Input / End -->
@@ -131,39 +131,39 @@
 						<!-- Checkboxes -->
 						<div class="checkboxes in-row">
 					
-							<input id="check-2" type="checkbox" name="check">
-							<label for="check-2">Air Conditioning</label>
+							<input id="check-1" type="checkbox" name="check">
+							<label for="check-1">Air Conditioning</label>
 
-							<input id="check-3" type="checkbox" name="check">
-							<label for="check-3">Swimming Pool</label>
+							<input id="check-2" type="checkbox" name="check">
+							<label for="check-2">Swimming Pool</label>
 
 							<input id="check-3" type="checkbox" name="check">
 							<label for="check-3">Restaurant</label>
 
 
-							<input id="check-5" type="checkbox" name="check">
-							<label for="check-5">Bedrooms</label>
+							<input id="check-4" type="checkbox" name="check">
+							<label for="check-4">Bedrooms</label>
 
 							<input id="check-5" type="checkbox" name="check">
 							<label for="check-5">Stage</label>
 
-							<input id="check-5" type="checkbox" name="check">
-							<label for="check-5">Liquor Served</label>
-
-							<input id="check-5" type="checkbox" name="check">
-							<label for="check-5">Valet Parking</label>	
-
 							<input id="check-6" type="checkbox" name="check">
-							<label for="check-6">External DJ</label>
+							<label for="check-6">Liquor Served</label>
 
 							<input id="check-7" type="checkbox" name="check">
-							<label for="check-7">External Decoration</label>
+							<label for="check-7">Valet Parking</label>	
 
 							<input id="check-8" type="checkbox" name="check">
-							<label for="check-8">External Catering</label>
+							<label for="check-8">External DJ</label>
 
-							<input id="check-8" type="checkbox" name="check">
-							<label for="check-8">External Liquor</label>
+							<input id="check-9" type="checkbox" name="check">
+							<label for="check-9">External Decoration</label>
+
+							<input id="check-10" type="checkbox" name="check">
+							<label for="check-10">External Catering</label>
+
+							<input id="check-11" type="checkbox" name="check">
+							<label for="check-11">External Liquor</label>
 					
 						</div>
 						<!-- Checkboxes / End -->

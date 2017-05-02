@@ -30,24 +30,24 @@
                         <!-- Property Type -->
                         <div class="col-md-3">
                             <select data-placeholder="Event Type" name="event_type" class="chosen-select-no-single" >
-                                <option>-- Event Type --</option>
-                                <option>Wedding</option>
-                                <option>Party</option>
-                                <option>Meetings &amp; Conferences</option>
-                                <option>Ceremonies</option>
-                                <option>Date</option>
-                                <option>Others</option>
+                                <option value="0">-- Event Type --</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="party">Party</option>
+                                <option value="meetings">Meetings &amp; Conferences</option>
+                                <option value="ceremonies">Ceremonies</option>
+                                <option value="date">Date</option>
+                                <option value="others">Others</option>
                             </select>
                         </div>
 
                         <!-- Status -->
                         <div class="col-md-3">
                             <select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
-                                <option>-- Venue Type --</option>
-                                <option>Banquet</option>
-                                <option>Lawns</option>
-                                <option>Dome</option>
-                                <option>Conference Room</option>
+                                <option value="0">-- Venue Type --</option>
+                                <option value="banquet">Banquet</option>
+                                <option value="lawns">Lawns</option>
+                                <option value="dome">Dome</option>
+                                <option value="conference">Conference Room</option>
                             </select>
                         </div>
 

@@ -20,5 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/venues', 'VenuesController@index')->name('venues');
 
+Route::get('/venues/create', 'VenuesController@create')->name('venues.create');
+
 
 
