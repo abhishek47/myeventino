@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/main.css" id="colors">
 
+@if(Request::has('platform'))
+  <link rel="stylesheet" href="/css/mobile.css">
+@endif
+
 <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
@@ -98,7 +102,9 @@
   <!-- Header / End -->
 
 </header>
-<!--<div class="clearfix"></div>-->
+@if(!Request::has('platform'))
+  <div class="clearfix"></div>
+@endif  
 <!-- Header Container / End -->
 
 

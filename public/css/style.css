@@ -12305,8 +12305,8 @@ h4 span.headline-detail {
     }
 
     #titlebar.property-titlebar {
-        padding-top: 4px;
-        padding-bottom: 15px;
+        padding-top: 55px;
+        padding-bottom: 45px;
     }
 
     .search{
@@ -12314,7 +12314,7 @@ h4 span.headline-detail {
     }
 
     .fullwidth-layout{
-    	padding-top: 0px;
+    	padding-top: 40px;
     }
 }
 

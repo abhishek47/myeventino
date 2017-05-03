@@ -1,5 +1,5 @@
  <!-- Mobile Navigation -->
-   @if(Request::has('platform'))
+   @if(!Request::has('platform'))
     <div class="menu-responsive fixed-top hidden-xs" style="width: 100%; margin: 0;padding: 0;height: 30px;position: fixed;">
       <i class="fa fa-reorder menu-trigger"></i>
     </div>
@@ -57,6 +57,8 @@
           </ul>
       </div>
     </nav>
-     <!--<div class="clearfix"></div>-->
+     @if(!Request::has('platform'))
+       <div class="clearfix"></div>
+     @endif  
     
     <!-- Main Navigation / End -->
