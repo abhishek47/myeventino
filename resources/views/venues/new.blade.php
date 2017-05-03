@@ -30,6 +30,8 @@
 			<p>If you don't have an account you can create one by entering your email address in contact details section. A password will be automatically emailed to you.</p>
 		</div>
 
+		<form action="/venues/sections" method="GET">
+
 		<!-- Section -->
 		<h3>Basic Information</h3>
 		<div class="submit-section">
@@ -45,24 +47,29 @@
 
 				<!-- Status -->
 				<div class="col-md-6">
-					<h5>Status</h5>
+					<h5>Venue Type</h5>
 					<select class="chosen-select-no-single" >
 						<option label="blank"></option>	
-						<option>For Sale</option>
-						<option>For Rent</option>
+						 <option value="banquet" >Banquet</option>
+                        <option value="lawns" >Lawns</option>
+                        <option value="dome" >Dome</option>
+                        <option value="resort" >Resort</option>
+                        <option value="plot" >Plot</option>
+                        <option value="conference" >Conference Room</option>
+
 					</select>
 				</div>
 
 				<!-- Type -->
 				<div class="col-md-6">
-					<h5>Type</h5>
+					<h5>Best For</h5>
 					<select class="chosen-select-no-single" >
 						<option label="blank"></option>		
-						<option>Apartment</option>
-						<option>House</option>
-						<option>Commercial</option>
-						<option>Garage</option>
-						<option>Lot</option>
+						<option>Wedding</option>
+						<option>Party</option>
+						<option>Conference</option>
+						<option>Ceremonies</option>
+						<option>Other</option>
 					</select>
 				</div>
 
@@ -75,15 +82,15 @@
 
 				<!-- Price -->
 				<div class="col-md-4">
-					<h5>Price <i class="tip" data-tip-content="Type overall or monthly price if property is for rent"></i></h5>
+					<h5>Avg Price. <i class="tip" data-tip-content="Type overall or average price  to be displayed on Eventino."></i></h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="USD">
+						<input type="text" data-unit="INR">
 					</div>
 				</div>
 				
 				<!-- Area -->
 				<div class="col-md-4">
-					<h5>Area</h5>
+					<h5>Total Area</h5>
 					<div class="select-input disabled-first-option">
 						<input type="text" data-unit="Sq Ft">
 					</div>
@@ -91,17 +98,13 @@
 
 				<!-- Rooms -->			
 				<div class="col-md-4">
-					<h5>Rooms</h5>
-					<select class="chosen-select-no-single" >
-						<option label="blank"></option>	
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>More than 5</option>
-					</select>
+					<h5>No of Sections <i class="tip" data-tip-content="How many different sections like halls,lawns etc. your venue has."></i></h5>
+					<div class="select-input disabled-first-option">
+						<input type="text" data-unit="Count">
+					</div>
 				</div>
+
+				
 
 			</div>
 			<!-- Row / End -->
@@ -109,13 +112,12 @@
 		</div>
 		<!-- Section / End -->
 
+		
 
-		<!-- Section -->
-		<h3>Gallery</h3>
-		<div class="submit-section">
-			<form action="/file-upload" class="dropzone" ></form>
-		</div>
-		<!-- Section / End -->
+
+
+
+	
 
 
 		<!-- Section -->
@@ -170,51 +172,55 @@
 			<div class="row with-forms">
 
 				<!-- Age of Home -->
-				<div class="col-md-4">
-					<h5>Building Age <span>(optional)</span></h5>
+				<div class="col-md-6">
+					<h5>Venue Since <span>(optional)</span></h5>
 					<select class="chosen-select-no-single" >
 						<option label="blank"></option>	
-						<option>0 - 1 Years</option>
-						<option>0 - 5 Years</option>
-						<option>0 - 10 Years</option>
-						<option>0 - 20 Years</option>
-						<option>0 - 50 Years</option>
-						<option>50 + Years</option>
+						<?php $year = date('Y'); ?>
+						@for($i = $year; $i >= 1950; $i--)
+						 <option>{{ $i }}</option>
+						@endfor
 					</select>
 				</div>
 
 				<!-- Beds -->
-				<div class="col-md-4">
-					<h5>Bedrooms <span>(optional)</span></h5>
+				<div class="col-md-6">
+					<h5>Rooms Available</h5>
 					<select class="chosen-select-no-single" >
 						<option label="blank"></option>	
+						<option>Not Available</option>
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
 						<option>4</option>
-						<option>5</option>
+						<option>More than 4</option>
 					</select>
 				</div>
 
-				<!-- Baths -->
-				<div class="col-md-4">
-					<h5>Bathrooms <span>(optional)</span></h5>
-					<select class="chosen-select-no-single" >
-						<option label="blank"></option>	
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</select>
+				<!-- Area -->
+				<div class="col-md-6">
+					<h5>Distance From Railway Station</h5>
+					<div class="select-input disabled-first-option">
+						<input type="text" data-unit="Km">
+					</div>
 				</div>
+
+				<!-- Area -->
+				<div class="col-md-6">
+					<h5>Distance From Airport</h5>
+					<div class="select-input disabled-first-option">
+						<input type="text" data-unit="Km">
+					</div>
+				</div>
+
+				
 
 			</div>
 			<!-- Row / End -->
 
 
 			<!-- Checkboxes -->
-			<h5 class="margin-top-30">Other Features <span>(optional)</span></h5>
+			<h5 class="margin-top-30">Facilities Available</h5>
 			<div class="checkboxes in-row margin-bottom-20">
 		
 				<input id="check-2" type="checkbox" name="check">
@@ -224,20 +230,71 @@
 				<label for="check-3">Swimming Pool</label>
 
 				<input id="check-4" type="checkbox" name="check" >
-				<label for="check-4">Central Heating</label>
+				<label for="check-4">Ample Parking</label>
 
 				<input id="check-5" type="checkbox" name="check">
-				<label for="check-5">Laundry Room</label>	
+				<label for="check-5">Power Backup</label>	
 
 
 				<input id="check-6" type="checkbox" name="check">
-				<label for="check-6">Gym</label>
+				<label for="check-6">Outdoor Games</label>
 
 				<input id="check-7" type="checkbox" name="check">
-				<label for="check-7">Alarm</label>
+				<label for="check-7">Stage</label>
 
 				<input id="check-8" type="checkbox" name="check">
-				<label for="check-8">Window Covering</label>
+				<label for="check-8">PA System</label>
+
+				<input id="check-9" type="checkbox" name="check">
+				<label for="check-9">Multilingual Staff</label>
+
+				<input id="check-8" type="checkbox" name="check">
+				<label for="check-8">PA System</label>
+
+				<input id="check-10" type="checkbox" name="check">
+				<label for="check-10">CCTV</label>
+
+				<input id="check-11" type="checkbox" name="check">
+				<label for="check-11">Restaurant</label>
+
+				<input id="check-12" type="checkbox" name="check">
+				<label for="check-12">Laundry</label>
+
+				<input id="check-13" type="checkbox" name="check">
+				<label for="check-13">Valet Parking</label>
+
+				<input id="check-14" type="checkbox" name="check">
+				<label for="check-14">CCTV</label>
+		
+			</div>
+			<!-- Checkboxes / End -->
+
+
+			<!-- Checkboxes -->
+			<h5 class="margin-top-30">Additional Parameters</h5>
+			<div class="checkboxes in-row margin-bottom-20">
+                
+                <input id="check-15" type="checkbox" name="check">
+				<label for="check-15">DJ Allowed</label>
+
+				<input id="check-16" type="checkbox" name="check">
+				<label for="check-16">Liquor Allowed</label>
+		
+				<input id="check-17" type="checkbox" name="check">
+				<label for="check-17">External DJ</label>
+
+				<input id="check-18" type="checkbox" name="check">
+				<label for="check-18">External Liqour</label>
+
+				<input id="check-19" type="checkbox" name="check">
+				<label for="check-19">External Decorator</label>
+
+				<input id="check-20" type="checkbox" name="check">
+				<label for="check-20">External Event Planner</label>
+
+
+
+				
 		
 			</div>
 			<!-- Checkboxes / End -->
@@ -278,10 +335,25 @@
 		<!-- Section / End -->
 
 
-		<div class="divider"></div>
-		<a href="#" class="button preview margin-top-5">Preview <i class="fa fa-arrow-circle-right"></i></a>
 
+			<!-- Section -->
+		<h3>Gallery</h3>
+		<div class="submit-section">
+			<div class="dropzone" ></div>
 		</div>
+		<!-- Section / End -->
+
+
+		
+
+
+
+		<div class="divider"></div>
+		<button type="submit" class="button preview margin-top-5">Save &amp; Add Section Details <i class="fa fa-arrow-circle-right"></i></button>
+
+		</form>
+		</div>
+
 	</div>
 
 </div>

@@ -35,7 +35,7 @@ class VenuesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('/venues/preview/');
     }
 
     /**
@@ -47,6 +47,17 @@ class VenuesController extends Controller
     public function show()
     {
         return view('venues.show');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function previewSections()
+    {
+        return view('venues.preview.sections');
     }
 
     /**

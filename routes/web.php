@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/venues', 'VenuesController@index')->name('venues');
 Route::get('/venues/create', 'VenuesController@create')->name('venues.create');
+Route::get('/venues/sections', 'VenuesController@previewSections')->name('venues.preview.sections');
 Route::get('/venues/show', 'VenuesController@show')->name('venues.show');
 
 
