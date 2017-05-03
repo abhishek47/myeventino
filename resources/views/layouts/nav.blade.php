@@ -55,6 +55,6 @@
           </ul>
       </div>
     </nav>
-    <div class="clearfix"></div>
+     <!--<div class="clearfix"></div>-->
     
     <!-- Main Navigation / End -->
