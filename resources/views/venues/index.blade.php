@@ -77,7 +77,7 @@
 					<!-- Main Search Input -->
 					<div class="col-md-6">
 						<div class="main-search-input">
-							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ array_key_exists('location', $queries) ? $queries['location'] : '' }}"/>
+							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ Request::has('location') ? Request::get('location') : '' }}"/>
 							<button class="button" type="submit">Search</button>
 						</div>
 					</div>
