@@ -12304,6 +12304,11 @@ h4 span.headline-detail {
     	padding-top: 55px;
     }
 
+    #titlebar.property-titlebar {
+        padding-top: 4px;
+        padding-bottom: 15px;
+    }
+
     .search{
     	padding-top: 50px;
     }
