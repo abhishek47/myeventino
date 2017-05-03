@@ -29,14 +29,14 @@
 					<!-- Status -->
 					<div class="col-md-3">
 						<select data-placeholder="Event Type" name="event_type" class="chosen-select-no-single" >
-						 @if(array_key_exists('event_type', $queries))
-							<option value="0" {{ $queries['event_type'] == '0' ? 'selected' : '' }}>-- Event Type --</option>
-                            <option value="wedding" {{ $queries['event_type'] == 'wedding' ? 'selected' : '' }}>Wedding</option>
-                            <option value="party" {{ $queries['event_type'] == 'party' ? 'selected' : '' }}>Party</option>
-                            <option value="meetings" {{ $queries['event_type'] == 'meetings' ? 'selected' : '' }}>Meetings &amp; Conferences</option>
-                            <option value="ceremonies" {{ $queries['event_type'] == 'ceremonies' ? 'selected' : '' }}>Ceremonies</option>
-                            <option value="date" {{ $queries['event_type'] == 'date' ? 'selected' : '' }}>Date</option>
-                            <option value="others" {{ $queries['event_type'] == 'others' ? 'selected' : '' }}>Others</option>
+						 @if(Request::has('event_type'))
+							<option value="0" {{ Request::get('event_type') == '0' ? 'selected' : '' }}>-- Event Type --</option>
+                            <option value="wedding" {{ Request::get('event_type') == 'wedding' ? 'selected' : '' }}>Wedding</option>
+                            <option value="party" {{ Request::get('event_type') == 'party' ? 'selected' : '' }}>Party</option>
+                            <option value="meetings" {{ Request::get('event_type') == 'meetings' ? 'selected' : '' }}>Meetings &amp; Conferences</option>
+                            <option value="ceremonies" {{ Request::get('event_type') == 'ceremonies' ? 'selected' : '' }}>Ceremonies</option>
+                            <option value="date" {{ Request::get('event_type') == 'date' ? 'selected' : '' }}>Date</option>
+                            <option value="others" {{ Request::get('event_type') == 'others' ? 'selected' : '' }}>Others</option>
 
                           @else 
 
@@ -55,13 +55,13 @@
 					<!-- Property Type -->
 					<div class="col-md-3">
 						<select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
-                           @if(array_key_exists('venue_type', $queries))
+                           @if(Request::has('venue_type'))
 
-							  <option value="0" {{ $queries['venue_type'] == '0' ? 'selected' : '' }}>-- Venue Type --</option>
-                                <option value="banquet" {{ $queries['venue_type'] == 'banquet' ? 'selected' : '' }}>Banquet</option>
-                                <option value="lawns" {{ $queries['venue_type'] == 'lawns' ? 'selected' : '' }}>Lawns</option>
-                                <option value="dome" {{ $queries['venue_type'] == 'dome' ? 'selected' : '' }}>Dome</option>
-                                <option value="conference" {{ $queries['venue_type'] == 'conference' ? 'selected' : '' }}>Conference Room</option>
+							  <option value="0" {{ Request::get('venue_type') == '0' ? 'selected' : '' }}>-- Venue Type --</option>
+                                <option value="banquet" {{ Request::get('venue_type') == 'banquet' ? 'selected' : '' }}>Banquet</option>
+                                <option value="lawns" {{ Request::get('venue_type') == 'lawns' ? 'selected' : '' }}>Lawns</option>
+                                <option value="dome" {{ Request::get('venue_type') == 'dome' ? 'selected' : '' }}>Dome</option>
+                                <option value="conference" {{ Request::get('venue_type') == 'conference' ? 'selected' : '' }}>Conference Room</option>
                             @else
                                <option value="0" >-- Venue Type --</option>
                                 <option value="banquet" >Banquet</option>

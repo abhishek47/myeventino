@@ -11,10 +11,10 @@ class VenuesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-         $queries = $request->all();
-         return view('venues.index', compact('queries'));
+         
+         return view('venues.index');
     }
 
     /**
