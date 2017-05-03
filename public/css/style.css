@@ -12297,7 +12297,7 @@ h4 span.headline-detail {
 
     .search-container {
     	padding-top: 50px;
-    	padding-bottom: 15px;
+    	padding-bottom: 35px;
     }
 
     #titlebar{
@@ -12309,7 +12309,7 @@ h4 span.headline-detail {
     }
 
     .fullwidth-layout{
-    	padding-top: 40px;
+    	padding-top: 0px;
     }
 }
 
