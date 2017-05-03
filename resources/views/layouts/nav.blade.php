@@ -1,7 +1,7 @@
- <!-- Mobile Navigation -->
-    <div class="menu-responsive fixed-top" style="width: 100%; margin: 0;padding: 0;height: 30px;position: fixed;">
+ <!-- Mobile Navigation 
+    <div class="menu-responsive fixed-top hidden-xs" style="width: 100%; margin: 0;padding: 0;height: 30px;position: fixed;">
       <i class="fa fa-reorder menu-trigger"></i>
-    </div>
+    </div>-->
 
 
     <!-- Main Navigation -->
