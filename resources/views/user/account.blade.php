@@ -44,20 +44,20 @@
 					
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Account</li>
-						<li><a href="/account/profile" class="current"><i class="sl sl-icon-user"></i> My Profile</a></li>
-						<li><a href="/account/favourites"><i class="sl sl-icon-star"></i> Favourites</a></li>
+						<li><a href="/account/profile" class="current"><i class="fa fa-user"></i> My Profile</a></li>
+						<li><a href="/account/favourites"><i class="fa fa-star"></i> Favourites</a></li>
 					</ul>
 					
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Listings</li>
-						<li><a href="/account/listings"><i class="sl sl-icon-docs"></i> My Venues</a></li>
-						<li><a href="/venues/new"><i class="sl sl-icon-action-redo"></i> Submit New Venue</a></li>
-						<li><a href="/account/events"><i class="sl sl-icon-action-redo"></i> Showcase Events</a></li>
+						<li><a href="/account/listings"><i class="fa fa-bars"></i> My Venues</a></li>
+						<li><a href="/venues/new"><i class="fa fa-edit"></i> Submit New Venue</a></li>
+						<li><a href="/account/events"><i class="fa fa-map"></i> Showcase Events</a></li>
 					</ul>
 
 					<ul class="my-account-nav">
-						<li><a href="/account/changepassword"><i class="sl sl-icon-lock"></i> Change Password</a></li>
-						<li><a href="/account/logout"><i class="sl sl-icon-power"></i> Log Out</a></li>
+						<li><a href="/account/changepassword"><i class="fa fa-lock"></i> Change Password</a></li>
+						<li><a href="/account/logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
 					</ul>
 
 				</div>
