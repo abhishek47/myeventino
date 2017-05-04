@@ -34,8 +34,23 @@
 
 		<div class="notification notice large margin-bottom-55">
 			<h4>Don't Have an Account?</h4>
-			<p>If you don't have an account you can create one by entering your email address in contact details section. A password will be automatically emailed to you.</p>
+			<p>If you don't have an account your account will be created by entering your email address in contact details section. A password will be automatically emailed to you.</p>
 		</div>
+
+		@if (count($errors) > 0)
+		    <div class="notification notice">
+		        <ul>
+		            @foreach ($errors->all() as $error)
+		                <li>{{ $error }}</li>
+		            @endforeach
+		        </ul>
+		    </div>
+		    <br>
+		@endif
+
+
+
+		
 
 		<form action="/venues" method="POST">
 
@@ -48,7 +63,7 @@
 			<!-- Title -->
 			<div class="form">
 				<h5>Venue Title <i class="tip" data-tip-content="Type title that will also contains an unique feature of your property (e.g. renovated, air contidioned)"></i></h5>
-				<input class="search-field" name="venue_name" type="text" value=""/>
+				<input class="search-field" name="venue_name" type="text" value="" required="true" />
 			</div>
 
 			<!-- Row -->
@@ -57,7 +72,7 @@
 				<!-- Status -->
 				<div class="col-md-6">
 					<h5>Venue Type</h5>
-					<select class="chosen-select-no-single" name="venue_type" multiple="true" >
+					<select class="chosen-select-no-single" name="venue_type[]" multiple="true" required="true">
 						<option label="blank"></option>	
 						 <option value="banquet" >Banquet</option>
                         <option value="lawns" >Lawns</option>
@@ -72,7 +87,7 @@
 				<!-- Type -->
 				<div class="col-md-6">
 					<h5>Best For</h5>
-					<select class="chosen-select-no-single" name="best_for"  multiple="true">
+					<select class="chosen-select-no-single" name="best_for[]"  multiple="true" required="true">
 						<option label="blank"></option>		
 						<option>Wedding</option>
 						<option>Party</option>
@@ -95,7 +110,7 @@
 				<div class="col-md-6">
 					<h5>Total Area</h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" name="total_area" data-unit="Sq Ft">
+						<input type="text" name="total_area" data-unit="Sq Ft" required="true">
 					</div>
 				</div>
 
@@ -103,7 +118,7 @@
 				<div class="col-md-6">
 					<h5>No of Sections <i class="tip" data-tip-content="How many different sections like halls,lawns etc. your venue has."></i></h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" name="sections" data-unit="Count">
+						<input type="text" name="sections" data-unit="Count" required="true">
 					</div>
 				</div>
 
@@ -133,31 +148,31 @@
 				<!-- Address -->
 				<div class="col-md-6">
 					<h5>Address</h5>
-					<input name="address" type="text">
+					<input name="address" type="text" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>City</h5>
-					<input name="city" type="text">
+					<input name="city" type="text" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>State</h5>
-					<input name="state" type="text">
+					<input name="state" type="text" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>Country</h5>
-					<input name="country" type="text">
+					<input name="country" type="text" required="true">
 				</div>
 
 				<!-- Zip-Code -->
 				<div class="col-md-6">
 					<h5>Zip-Code</h5>
-					<input name="pincode" type="text">
+					<input name="pincode" type="text" required="true">
 				</div>
 
 			</div>
@@ -174,7 +189,7 @@
 			<!-- Description -->
 			<div class="form">
 				<h5>Description</h5>
-				<textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+				<textarea  name="description" cols="40" rows="3" id="description" spellcheck="true"></textarea>
 			</div>
 
 			<!-- Row -->
@@ -183,7 +198,7 @@
 				<!-- Age of Home -->
 				<div class="col-md-6">
 					<h5>Venue Since <span>(optional)</span></h5>
-					<select name="venue_since" class="chosen-select-no-single" >
+					<select name="venue_since" class="chosen-select-no-single" required="true">
 						<option label="blank"></option>	
 						<?php $year = date('Y'); ?>
 						@for($i = $year; $i >= 1950; $i--)
@@ -195,7 +210,7 @@
 				<!-- Beds -->
 				<div class="col-md-6">
 					<h5>Rooms Available</h5>
-					<select name="rooms" class="chosen-select-no-single" >
+					<select name="rooms" class="chosen-select-no-single" required="true">
 						<option label="blank"></option>	
 						<option value="0">Not Available</option>
 						<option value="1">1</option>
@@ -210,7 +225,7 @@
 				<div class="col-md-6">
 					<h5>Distance From Railway Station</h5>
 					<div class="select-input disabled-first-option">
-						<input name="railway" type="text" data-unit="Km">
+						<input name="railway" type="text" data-unit="Km" >
 					</div>
 				</div>
 
@@ -218,7 +233,7 @@
 				<div class="col-md-6">
 					<h5>Distance From Airport</h5>
 					<div class="select-input disabled-first-option">
-						<input name="airport" type="text" data-unit="Km">
+						<input name="airport" type="text" data-unit="Km" >
 					</div>
 				</div>
 
@@ -323,14 +338,14 @@
 			<h5 class="margin-top-30">Food Available(If Provided)</h5>
 			<div class="checkboxes in-row margin-bottom-20">
                 
-                <input id="check-21" type="checkbox" name="food_available[]" value="veg">
-				<label for="check-21">Vegeterian</label>
+                <input id="check-22" type="checkbox" name="food_available[]" value="veg">
+				<label for="check-22">Vegeterian</label>
 
-				<input id="check-22" type="checkbox" name="food_available[]" value="non_veg">
-				<label for="check-22">Non Vegeterian</label>
+				<input id="check-23" type="checkbox" name="food_available[]" value="non_veg">
+				<label for="check-23">Non Vegeterian</label>
 		
-				<input id="check-23" type="checkbox" name="food_available[]" value="jain">
-				<label for="check-23">Jain Food</label>
+				<input id="check-25" type="checkbox" name="food_available[]" value="jain">
+				<label for="check-25">Jain Food</label>
 
 						
 			</div>
@@ -352,20 +367,34 @@
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Name</h5>
-					<input name="contact_name" type="text">
+					<input name="contact_name" type="text" required="true">
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-4">
 					<h5>E-Mail</h5>
-					<input name="email" type="text">
+					<input name="email" type="text" required="true">
 				</div>
 
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Phone</h5>
-					<input name="phone" type="text">
+					<input name="phone" type="text" required="true">
 				</div>
+
+				<!-- Name -->
+				<div class="col-md-4">
+					<h5>Landline</h5>
+					<input name="landline" type="text" required="true">
+				</div>
+
+				<!-- Name -->
+				<div class="col-md-4">
+					<h5>Website</h5>
+					<input name="website" type="text" required="true">
+				</div>
+
+				
 
 			</div>
 			<!-- Row / End -->
@@ -375,12 +404,12 @@
 
 
 
-			<!-- Section -->
+			<!-- Section 
 		<h3>Gallery</h3>
 		<div class="submit-section">
 			<div class="dropzone" ></div>
 		</div>
-		<!-- Section / End -->
+		Section / End -->
 
 
 		

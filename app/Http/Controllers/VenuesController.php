@@ -39,14 +39,61 @@ class VenuesController extends Controller
      */
     public function store(Request $request)
     {
+        
+
+        $this->validate($request, [
+          
+          'venue_name' => 'required',
+          'venue_type' => 'required',
+          'best_for'   => 'required',
+          'total_area' => 'required',
+          'sections'   => 'required',
+          'address'    => 'required',
+          'city'       => 'required',
+          'state'      => 'required',
+          'country'    => 'required',
+          'pincode'    => 'required',
+          'venue_since' => 'required',
+          'rooms'      => 'required',
+          'contact_name' => 'required',
+          'email' => 'required',
+          'phone' => 'required',
+
+        ]);
+
+
         $data = $request->all();
-       
-        $data['facilities'] = json_encode($data['facilities']);
 
-         $data['parameters'] = json_encode($data['parameters']);
+         if($request->has('venue_type')){
+         
+           $data['venue_type'] = json_encode($data['venue_type']);
 
-         $data['food_available'] = json_encode($data['food_available']);
-      
+         }
+
+         if($request->has('best_for')){
+         
+           $data['best_for'] = json_encode($data['best_for']);
+
+         }
+         
+        if($request->has('facilities')){
+         
+           $data['facilities'] = json_encode($data['facilities']);
+
+         }
+         
+         if($request->has('parameters')){
+          
+            $data['parameters'] = json_encode($data['parameters']);
+
+          }  
+          
+          if($request->has('food_available')){
+          
+            $data['food_available'] = json_encode($data['food_available']);
+          
+          }
+
         $data['slug'] = str_slug($data['venue_name']);
         
         $user = User::where('email', $data['email'])->first();

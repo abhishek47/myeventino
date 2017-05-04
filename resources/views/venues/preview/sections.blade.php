@@ -110,14 +110,7 @@
 		</div>
 		<!-- Section / End -->
 
-			<!-- Section -->
-		<h3>Gallery</h3>
-		<div class="submit-section">
-			<div action="/file-upload" class="dropzone" ></div>
-		</div>
-		<!-- Section / End -->
-
-
+	
 
 		<div class="divider"></div>
 		<a href="#" class="button preview margin-top-5">Save Section 1 <i class="fa fa-arrow-circle-right"></i></a>
@@ -201,12 +194,7 @@
 		</div>
 		<!-- Section / End -->
 
-			<!-- Section -->
-		<h3>Gallery</h3>
-		<div class="submit-section">
-			<div action="/file-upload" class="dropzone" ></div>
-		</div>
-		<!-- Section / End -->
+		
 
 
 

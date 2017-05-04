@@ -20,9 +20,9 @@ class CreateVenuesTable extends Migration
 
              $table->string('slug');
 
-            $table->text('venue_type');
+            $table->json('venue_type');
 
-            $table->text('best_for');
+            $table->json('best_for');
 
 
             $table->double('total_area');
