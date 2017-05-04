@@ -28,5 +28,8 @@ Route::get('/venues/show', 'VenuesController@show')->name('venues.show');
 Route::get('/events', 'EventsController@index')->name('events');
 Route::get('/events/filter', 'EventsController@filter')->name('events.filter');
 
+Route::get('/vendors', 'VendorsController@index')->name('vendors');
+Route::get('/vendors/filter', 'VendorsController@filter')->name('vendors.filter');
+
 
 
