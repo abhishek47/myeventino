@@ -4,11 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Venue extends Model
+class Event extends Model
 {
-    
-  protected $guarded = [];
- 
-
-
+    //
 }

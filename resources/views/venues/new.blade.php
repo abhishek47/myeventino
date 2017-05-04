@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 
+@section('css')
+
+<link rel="stylesheet" type="text/css" href="/css/plugins.css">
+
+@endsection
+
+
 @section('content')
 
 <!-- Titlebar
@@ -30,7 +37,9 @@
 			<p>If you don't have an account you can create one by entering your email address in contact details section. A password will be automatically emailed to you.</p>
 		</div>
 
-		<form action="/venues/sections" method="GET">
+		<form action="/venues" method="POST">
+
+		{{ csrf_field() }}
 
 		<!-- Section -->
 		<h3>Basic Information</h3>
@@ -39,7 +48,7 @@
 			<!-- Title -->
 			<div class="form">
 				<h5>Venue Title <i class="tip" data-tip-content="Type title that will also contains an unique feature of your property (e.g. renovated, air contidioned)"></i></h5>
-				<input class="search-field" type="text" value=""/>
+				<input class="search-field" name="venue_name" type="text" value=""/>
 			</div>
 
 			<!-- Row -->
@@ -48,7 +57,7 @@
 				<!-- Status -->
 				<div class="col-md-6">
 					<h5>Venue Type</h5>
-					<select class="chosen-select-no-single" >
+					<select class="chosen-select-no-single" name="venue_type" multiple="true" >
 						<option label="blank"></option>	
 						 <option value="banquet" >Banquet</option>
                         <option value="lawns" >Lawns</option>
@@ -63,7 +72,7 @@
 				<!-- Type -->
 				<div class="col-md-6">
 					<h5>Best For</h5>
-					<select class="chosen-select-no-single" >
+					<select class="chosen-select-no-single" name="best_for"  multiple="true">
 						<option label="blank"></option>		
 						<option>Wedding</option>
 						<option>Party</option>
@@ -80,27 +89,21 @@
 			<!-- Row -->
 			<div class="row with-forms">
 
-				<!-- Price -->
-				<div class="col-md-4">
-					<h5>Avg Price. <i class="tip" data-tip-content="Type overall or average price  to be displayed on Eventino."></i></h5>
-					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="INR">
-					</div>
-				</div>
+				
 				
 				<!-- Area -->
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h5>Total Area</h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="Sq Ft">
+						<input type="text" name="total_area" data-unit="Sq Ft">
 					</div>
 				</div>
 
 				<!-- Rooms -->			
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h5>No of Sections <i class="tip" data-tip-content="How many different sections like halls,lawns etc. your venue has."></i></h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="Count">
+						<input type="text" name="sections" data-unit="Count">
 					</div>
 				</div>
 
@@ -130,25 +133,31 @@
 				<!-- Address -->
 				<div class="col-md-6">
 					<h5>Address</h5>
-					<input type="text">
+					<input name="address" type="text">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>City</h5>
-					<input type="text">
+					<input name="city" type="text">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>State</h5>
-					<input type="text">
+					<input name="state" type="text">
+				</div>
+
+				<!-- City -->
+				<div class="col-md-6">
+					<h5>Country</h5>
+					<input name="country" type="text">
 				</div>
 
 				<!-- Zip-Code -->
 				<div class="col-md-6">
 					<h5>Zip-Code</h5>
-					<input type="text">
+					<input name="pincode" type="text">
 				</div>
 
 			</div>
@@ -165,7 +174,7 @@
 			<!-- Description -->
 			<div class="form">
 				<h5>Description</h5>
-				<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+				<textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
 			</div>
 
 			<!-- Row -->
@@ -174,7 +183,7 @@
 				<!-- Age of Home -->
 				<div class="col-md-6">
 					<h5>Venue Since <span>(optional)</span></h5>
-					<select class="chosen-select-no-single" >
+					<select name="venue_since" class="chosen-select-no-single" >
 						<option label="blank"></option>	
 						<?php $year = date('Y'); ?>
 						@for($i = $year; $i >= 1950; $i--)
@@ -186,14 +195,14 @@
 				<!-- Beds -->
 				<div class="col-md-6">
 					<h5>Rooms Available</h5>
-					<select class="chosen-select-no-single" >
+					<select name="rooms" class="chosen-select-no-single" >
 						<option label="blank"></option>	
-						<option>Not Available</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>More than 4</option>
+						<option value="0">Not Available</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">More than 4</option>
 					</select>
 				</div>
 
@@ -201,7 +210,7 @@
 				<div class="col-md-6">
 					<h5>Distance From Railway Station</h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="Km">
+						<input name="railway" type="text" data-unit="Km">
 					</div>
 				</div>
 
@@ -209,9 +218,18 @@
 				<div class="col-md-6">
 					<h5>Distance From Airport</h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" data-unit="Km">
+						<input name="airport" type="text" data-unit="Km">
 					</div>
 				</div>
+
+				<!-- Area -->
+				<div class="col-md-12">
+					<h5>Exclusive Features</h5>
+						
+                  <input type="text" name="exclusive_features" class="rs-selectize-tags" value="Educated Staff,Green Place" >
+					
+				</div>
+
 
 				
 
@@ -223,49 +241,47 @@
 			<h5 class="margin-top-30">Facilities Available</h5>
 			<div class="checkboxes in-row margin-bottom-20">
 		
-				<input id="check-2" type="checkbox" name="check">
+				<input id="check-2" type="checkbox" name="facilities[]" value="air_conditioning">
 				<label for="check-2">Air Conditioning</label>
 
-				<input id="check-3" type="checkbox" name="check">
+				<input id="check-3" type="checkbox" name="facilities[]" value="pool">
 				<label for="check-3">Swimming Pool</label>
 
-				<input id="check-4" type="checkbox" name="check" >
+				<input id="check-4" type="checkbox" name="facilities[]" value="parking">
 				<label for="check-4">Ample Parking</label>
 
-				<input id="check-5" type="checkbox" name="check">
+				<input id="check-5" type="checkbox" name="facilities[]" value="power">
 				<label for="check-5">Power Backup</label>	
 
 
-				<input id="check-6" type="checkbox" name="check">
+				<input id="check-6" type="checkbox" name="facilities[]" value="outdoor_games">
 				<label for="check-6">Outdoor Games</label>
 
-				<input id="check-7" type="checkbox" name="check">
+				<input id="check-24" type="checkbox" name="facilities[]" value="clubhouse">
+				<label for="check-24">Club House</label>
+
+				<input id="check-7" type="checkbox" name="facilities[]" value="stage">
 				<label for="check-7">Stage</label>
 
-				<input id="check-8" type="checkbox" name="check">
+				<input id="check-8" type="checkbox" name="facilities[]" value="pa"> 
 				<label for="check-8">PA System</label>
 
-				<input id="check-9" type="checkbox" name="check">
+				<input id="check-9" type="checkbox" name="facilities[]" value="multilingual_staff">
 				<label for="check-9">Multilingual Staff</label>
 
-				<input id="check-8" type="checkbox" name="check">
-				<label for="check-8">PA System</label>
+				
 
-				<input id="check-10" type="checkbox" name="check">
+				<input id="check-10" type="checkbox" name="facilities[]" value="cctv">
 				<label for="check-10">CCTV</label>
 
-				<input id="check-11" type="checkbox" name="check">
+				<input id="check-11" type="checkbox" name="facilities[]" value="restaurant">
 				<label for="check-11">Restaurant</label>
 
-				<input id="check-12" type="checkbox" name="check">
+				<input id="check-12" type="checkbox" name="facilities[]" value="laundry">
 				<label for="check-12">Laundry</label>
 
-				<input id="check-13" type="checkbox" name="check">
+				<input id="check-13" type="checkbox" name="facilities[]" value="valet">
 				<label for="check-13">Valet Parking</label>
-
-				<input id="check-14" type="checkbox" name="check">
-				<label for="check-14">CCTV</label>
-		
 			</div>
 			<!-- Checkboxes / End -->
 
@@ -274,22 +290,22 @@
 			<h5 class="margin-top-30">Additional Parameters</h5>
 			<div class="checkboxes in-row margin-bottom-20">
                 
-                <input id="check-15" type="checkbox" name="check">
+                <input id="check-15" type="checkbox" name="parameters[]" value="dj_allowed">
 				<label for="check-15">DJ Allowed</label>
 
-				<input id="check-16" type="checkbox" name="check">
+				<input id="check-16" type="checkbox" name="parameters[]" value="liquor_allowed">
 				<label for="check-16">Liquor Allowed</label>
 		
-				<input id="check-17" type="checkbox" name="check">
+				<input id="check-17" type="checkbox" name="parameters[]" value="external_dj">
 				<label for="check-17">External DJ</label>
 
-				<input id="check-18" type="checkbox" name="check">
+				<input id="check-18" type="checkbox" name="parameters[]" value="external_liquor">
 				<label for="check-18">External Liqour</label>
 
-				<input id="check-19" type="checkbox" name="check">
+				<input id="check-19" type="checkbox" name="parameters[]" value="external_decorator">
 				<label for="check-19">External Decorator</label>
 
-				<input id="check-20" type="checkbox" name="check">
+				<input id="check-20" type="checkbox" name="parameters[]" value="external_planner">
 				<label for="check-20">External Event Planner</label>
 
 
@@ -298,6 +314,26 @@
 		
 			</div>
 			<!-- Checkboxes / End -->
+
+
+			<!-- Checkboxes -->
+			<h5 class="margin-top-30">Food Available(If Provided)</h5>
+			<div class="checkboxes in-row margin-bottom-20">
+                
+                <input id="check-21" type="checkbox" name="food_available[]" value="veg">
+				<label for="check-21">Vegeterian</label>
+
+				<input id="check-22" type="checkbox" name="food_available[]" value="non_veg">
+				<label for="check-22">Non Vegeterian</label>
+		
+				<input id="check-23" type="checkbox" name="food_available[]" value="jain">
+				<label for="check-23">Jain Food</label>
+
+						
+			</div>
+			<!-- Checkboxes / End -->
+
+
 
 		</div>
 		<!-- Section / End -->
@@ -313,19 +349,19 @@
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Name</h5>
-					<input type="text">
+					<input name="contact_name" type="text">
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-4">
 					<h5>E-Mail</h5>
-					<input type="text">
+					<input name="email" type="text">
 				</div>
 
 				<!-- Name -->
 				<div class="col-md-4">
-					<h5>Phone <span>(optional)</span></h5>
-					<input type="text">
+					<h5>Phone</h5>
+					<input name="phone" type="text">
 				</div>
 
 			</div>
@@ -360,5 +396,14 @@
 </div>
 
 <div class="margin-top-55"></div>
+
+@endsection
+
+
+@section('js')
+
+<script src="/js/selectize.min.js"></script>
+ 
+<script src="/js/selectize-example.js"></script>
 
 @endsection

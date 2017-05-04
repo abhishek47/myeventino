@@ -24,7 +24,16 @@
 	<!-- Submit Page -->
 	<div class="col-md-12">
 		<div class="submit-page">
+  
 
+        @if( session('flash_title') && session('flash_message'))
+
+		<div class="notification notice large margin-bottom-55">
+			<h4>{{ session('flash_title') }}</h4>
+			<p>{{ session('flash_message') }}</p>
+		</div>
+      
+       @endif
 	
 
 

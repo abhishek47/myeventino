@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Venue;
+
+use App\User;
+
 class VenuesController extends Controller
 {
     /**
@@ -35,7 +39,35 @@ class VenuesController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/venues/preview/');
+        $data = $request->all();
+       
+        $data['facilities'] = json_encode($data['facilities']);
+
+         $data['parameters'] = json_encode($data['parameters']);
+
+         $data['food_available'] = json_encode($data['food_available']);
+      
+        $data['slug'] = str_slug($data['venue_name']);
+        
+        $user = User::where('email', $data['email'])->first();
+
+       if(!$user)
+       {
+            $user =  User::create([
+            'name' => $data['contact_name'],
+            'email' => $data['email'],
+            'password' => bcrypt('123456'),
+        ]);
+       } 
+        
+        $data['user_id'] = $user->id;
+
+        Venue::create($data);
+
+        session()->flash('flash_title', 'Venue Registered on Eventino!');
+        session()->flash('flash_message', 'Venue has been successfully registered on Eventino!Please details of all the sections you have in the venue!'); 
+
+         return redirect('/venues/sections/');
     }
 
     /**

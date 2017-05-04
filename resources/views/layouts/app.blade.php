@@ -34,6 +34,9 @@
 <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
+
+@yield('css')
+
 </head>
 
 <body>
@@ -201,6 +204,8 @@
 <script type="text/javascript" src="/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/scripts/markerclusterer.js"></script>
 <script type="text/javascript" src="/scripts/maps.js"></script>
+
+@yield('js')
 
 
 
