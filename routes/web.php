@@ -25,4 +25,7 @@ Route::get('/venues/sections', 'VenuesController@previewSections')->name('venues
 Route::get('/venues/show', 'VenuesController@show')->name('venues.show');
 
 
+Route::get('/events', 'EventsController@index')->name('events');
+
+
 
