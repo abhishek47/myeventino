@@ -18,3 +18,8 @@
     margin: 0;
     font-size: 17px;
 }
+
+#account-nav {
+	padding-right: 0;
+	padding-left: 0;
+}

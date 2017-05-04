@@ -4,6 +4,8 @@
 @section('content')
 
 
+
+
 <!-- Titlebar
 ================================================== -->
 @if(!Request::has('platform'))
@@ -37,7 +39,7 @@
 
 
 		<!-- Widget -->
-		<div class="col-md-12">
+		<div id="account-nav" class="col-md-12">
 
 				<div class="my-account-nav-container">
 					
@@ -66,7 +68,7 @@
 						<li><a href="/account/events"><i class="fa fa-map"></i> Showcase Events</a></li>
 					</ul>
 
-					
+
 				</div>
 
 		</div>
