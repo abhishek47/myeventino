@@ -32,5 +32,9 @@ Route::get('/events/filter', 'EventsController@filter')->name('events.filter');
 Route::get('/vendors', 'VendorsController@index')->name('vendors');
 Route::get('/vendors/filter', 'VendorsController@filter')->name('vendors.filter');
 
+Route::get('/user/account', 'ProfileController@index')->name('profile.index');
+
+
+
 
 
