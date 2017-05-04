@@ -308,6 +308,9 @@
 				<input id="check-20" type="checkbox" name="parameters[]" value="external_planner">
 				<label for="check-20">External Event Planner</label>
 
+				<input id="check-21" type="checkbox" name="parameters[]" value="external_catering">
+				<label for="check-21">External Catering</label>
+
 
 
 				
