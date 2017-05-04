@@ -20,6 +20,12 @@ class VenuesController extends Controller
          
          return view('venues.index');
     }
+    
+    public function filter()
+    {
+         
+         return view('venues.filter');
+    }
 
     /**
      * Show the form for creating a new resource.

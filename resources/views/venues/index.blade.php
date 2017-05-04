@@ -4,9 +4,16 @@
 
 <div class="clearfix"></div>
 <!-- Header Container / End -->
-<a href="#" id="search-trigger" class="float visible-xs">
-<i class="fa fa-filter my-float"></i>
-</a>
+
+@if(Request::has('platform'))
+   <a href="/venues/filter"  class="float visible-xs">
+	<i class="fa fa-filter my-float"></i>
+	</a>
+@else
+	<a href="#" id="search-trigger" class="float visible-xs">
+	<i class="fa fa-filter my-float"></i>
+	</a>
+@endif
 
 
 <!-- Search
