@@ -219,12 +219,7 @@
 					</ul>
 				</nav>
 
-				<nav class="pagination-next-prev">
-					<ul>
-						<li><a href="#" class="prev">Previous</a></li>
-						<li><a href="#" class="next">Next</a></li>
-					</ul>
-				</nav>
+				
 			</div>
 			<!-- Pagination / End -->
 		</div>
