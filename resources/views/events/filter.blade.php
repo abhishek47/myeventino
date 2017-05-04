@@ -3,37 +3,10 @@
 @section('content')
 
 
-<div class="clearfix"></div>
-<!-- Header Container / End -->
-<a href="/events/filter" class="float visible-xs">
-<i class="fa fa-filter my-float"></i>
-</a>
-
-
 <!-- Titlebar
 ================================================== -->
-@if(!Request::has('platform'))
-<div id="titlebar">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
 
-				<h2>Events Showcase</h2>
-				<span>Find information about various events nearby and get booking details.</span>
-				
-				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Events</li>
-					</ul>
-				</nav>
 
-			</div>
-		</div>
-	</div>
-</div>
-@endif
 
 
 <!-- Content
@@ -41,198 +14,17 @@
 <div class="container">
 	<div class="row sticky-wrapper">
 
-		<div class="col-md-8">
 
-			<!-- Main Search Input -->
-			<div class="main-search-input margin-bottom-35">
-				<input type="text" class="ico-01" placeholder="Enter address e.g. street, city and state or zip" value=""/>
-				<button class="button">Search</button>
-			</div>
-
-			
-
-			
-			<!-- Listings Container -->
-			<div class="row">
-
-
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-01.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-02.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-03.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-04.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-05.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				
-
-			</div>
-			<!-- Listings Container / End -->
-
-			
-			<!-- Pagination -->
-			<div class="clearfix"></div>
-			<div class="pagination-container margin-top-20">
-				<nav class="pagination">
-					<ul>
-						<li><a href="#" class="current-page">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li class="blank">...</li>
-						<li><a href="#">22</a></li>
-					</ul>
-				</nav>
-
-				<nav class="pagination-next-prev hidden-xs">
-					<ul>
-						<li><a href="#" class="prev">Previous</a></li>
-						<li><a href="#" class="next">Next</a></li>
-					</ul>
-				</nav>
-			</div>
-			<!-- Pagination / End -->
-
-		</div>
-        
-
-
-        @if(!Request::has('platform'))
 
 		<!-- Sidebar
 		================================================== -->
-		<div class="col-md-4">
-			<div class="sidebar sticky right">
+		<div class="col-md-12">
 
 				<!-- Widget -->
 				<div class="widget margin-bottom-40">
-					<h3 class="margin-top-0 margin-bottom-35">Find An Event</h3>
-
+				  
+					<h3 class="{{ Request::has('platform') ?  'margin-top-25' : 'margin-top-55' }} margin-bottom-35">Find An Event</h3>
+                    <form method="GET" action="/events">
 					<!-- Row -->
 					<div class="row with-forms">
 						<!-- Status -->
@@ -435,14 +227,14 @@
 
 					<button class="button fullwidth margin-top-30">Search</button>
 
+					</form>
+
 
 				</div>
 				<!-- Widget / End -->
 
-			</div>
 		</div>
 		<!-- Sidebar / End -->
-		@endif
 	</div>
 </div>
 

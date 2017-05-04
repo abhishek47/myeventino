@@ -26,6 +26,7 @@ Route::get('/venues/show', 'VenuesController@show')->name('venues.show');
 
 
 Route::get('/events', 'EventsController@index')->name('events');
+Route::get('/events/filter', 'EventsController@filter')->name('events.filter');
 
 
 

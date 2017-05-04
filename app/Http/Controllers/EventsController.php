@@ -17,6 +17,18 @@ class EventsController extends Controller
          return view('events.index');
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filter()
+    {
+         
+         return view('events.filter');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
