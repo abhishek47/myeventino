@@ -12,11 +12,11 @@
 				
 				<a href="/venues" class="back-to-listings"></a>
 				<div class="property-title">
-					<h2>G.P. Farms (Banquet) <span class="property-badge">Best For Weddings</span></h2>
+					<h2>{{ $venue->venue_name }} <span class="property-badge">Best For {{ json_decode($venue->best_for)[0] }}</span></h2>
 					<span>
 						<a href="#location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
-							 Maharashtra State Highway 26, Opp. Stone Crusher, Harsul Roa...
+							<?= substr( $venue->address , 0, 60); ?>...
 						</a>
 					</span>
 				</div>
@@ -67,20 +67,10 @@
 				<h3 class="desc-headline">Description</h3>
 				<div class="show-more">
 					<p>
-						Spread in large area in the Girnare sector of Nashik, a little bit over 19 kilometres from the city, G.P. Farm is located in the arms of nature. Surrounded by thoughtfully engineered and well maintained farms, in the vicinity of mountains, hills, and waters, this place just can't get better - This is not our view, it is the visitors who have shared this great feedback with us (Check out the testimonials). If we were to describe about green living, peaceful stay, tranquil environment, and any other synonyms that one can think of, G.P. Farm is all that, plus one!
+						{{ $venue->description }}
 					</p>
 
-					<p>
-						 It was the vision of our founders that could picture a premium hospitality and event venue in midst of home-grown farm. In 2010, G.P. Farm was officially launched to serve public in various areas - event organization, comfortable vacation stay, corporate event planning and much more!
-					</p>
-
-					<p>
-						Every company should have their long-term plans in place and here is where we decided to advance. From the very beginning, our team, staff, and stakeholders have been working towards the development of GP Farm as a world class hospitality service provider, corporate training venue, and preferred holiday home for the majority of people.
-					</p>
-
-					<p>
-						The main service area of GP Farm is hospitality - we have a total of 22 fine living facilities to welcome our guest. These include executive suites, deluxe rooms, dormitories, and family cottages. So, be it an individual, a business professional, a group of friends, or a large family, we have covered every aspect by constructing luxurious villas for all purposes.
-					</p>
+					
 
 					<a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
 				</div>
@@ -136,6 +126,7 @@
 
 				<h3 class="desc-headline">Facilities Offered</h3>
 				<ul class="property-features facilities margin-top-0">
+				   @if(in_array("wifi", json_decode($venues->facilities)))
 					 <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -146,7 +137,9 @@
                      </div> 
                      </div> 
                    </li>
-
+                  @endif 
+                  
+                  @if(in_array("power", json_decode($venues->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -158,6 +151,9 @@
                      </div> 
                    </li>
 
+                   @endif
+                   
+                    @if(in_array("restaurant", json_decode($venues->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -168,6 +164,10 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
+
+
+                    @if(in_array("parking", json_decode($venues->facilities)))
 
                    <li>
                      <div class="row">
@@ -179,6 +179,10 @@
                      </div> 
                      </div> 
                    </li>
+
+                   @endif
+
+                    @if(in_array("stage", json_decode($venues->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -189,6 +193,8 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
+                    @if(in_array("pa", json_decode($venues->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -199,6 +205,8 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
+                    @if(in_array("cctv", json_decode($venues->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -209,6 +217,8 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
+                    @if(in_array("multilingual_staff", json_decode($venues->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -219,6 +229,8 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
+                    @if(in_array("outdoor_games", json_decode($venues->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -229,6 +241,7 @@
                      </div> 
                      </div> 
                    </li>
+                   @endif
 				</ul>
 
 
@@ -275,12 +288,35 @@
 					<!-- Features -->
 				<h3 class="desc-headline">Features</h3>
 				<ul class="property-features checkboxes margin-top-0">
+				  @if(in_array("air_conditioning", json_decode($venues->facilities)))
 					<li>Air Conditioning</li>
+			      @endif
+			       @if(in_array("pool", json_decode($venues->facilities)))
 					<li>Swimming Pool</li>
-					<li>Resides In Outskirts</li>
-					<li>Surrounded By Farms</li>
-					<li>Scenic Beautify</li>
-					<li>Well Trained Staff</li>
+			      @endif
+			      @if(in_array("clubhouse", json_decode($venues->facilities)))
+					<li>Clubhouse</li>
+			      @endif
+			      @if(in_array("laundry", json_decode($venues->facilities)))
+					<li>Laundry</li>
+			      @endif
+			      @if(in_array("valet", json_decode($venues->facilities)))
+					<li>Valet Parking</li>
+			      @endif	
+
+			      <?php $exclusive = explode(',', $venue->exclusive_features); 	?>
+			      @foreach($exclusive as $item)
+					<li>{{ $item }}</li>
+				  @endforeach	
+				</ul>
+
+					<!-- Features -->
+				<h3 class="desc-headline">Food Available</h3>
+				<ul class="property-features checkboxes margin-top-0">
+				 <?php $foods = json_decode($venue->food_available); ?>
+			      @foreach($foods as $item)
+					<li>{{ $item }}</li>
+				  @endforeach	
 				</ul>
                 
 
@@ -327,15 +363,23 @@
 
                 <h3 class="desc-headline">Venue Policies</h3>
 				<ul class="property-features terms margin-top-0">
-					<li>External Liquor : <span>Allowed</span></li>
-					<li>External Catering : <span >Allowed</span></li>
-					<li>External DJ: <span>Allowed</span></li>
-					<li>External Decorator : <span>From Panel</span></li>
+					<li>Liquor Allowed : {{ in_array("liquor_allowed", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					<li>DJ Allowed : {{ in_array("dj_allowed", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					@if(in_array("liquor_allowed", json_decode($venues->parameters)))
+					  <li>External Liquor : {{ in_array("external_liquor", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					@endif
+					<li>External Catering :{{ in_array("external_catering", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+					@if(in_array("dj_allowed", json_decode($venues->parameters)))
+					  <li>External DJ: {{ in_array("external_dj", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+					@endif
+					<li>External Decorator : {{ in_array("external_decorator", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+				    @if($venue->rooms > 0)
 					<li>Rooms : <span class="danger">Charged Seperately</span></li>
-					<li>Refunds : <span>25%-50%</span></li>
-					
+					@endif
 					
 				</ul>
+
+
                 
                 
 

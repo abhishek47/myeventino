@@ -288,7 +288,7 @@
 								<h4><a href="/venues/show">{{ $venue->venue_name }}</a></h4>
 								<a href="https://maps.google.com/maps?q=Racca+Estate,+Old+Gangapur+Naka+Hanuman+Wadi,+Hanumanwadi+Road,+Panchavati,+Nashik,+Maharashtra+422003,+India" class="listing-address popup-gmaps">
 									<i class="fa fa-map-marker"></i>
-									<?= substr( $venue->address , 0, 60); ?>...å
+									<?= substr( $venue->address , 0, 60); ?>...
 								</a>
 							</div>
 
