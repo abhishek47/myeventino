@@ -342,7 +342,7 @@
             itemsMobile: [767, 1]
         });
         $('.logo-carousel').owlCarousel({
-            autoPlay: false,
+            autoPlay: true,
             navigation: false,
             slideSpeed: 600,
             items: 5,
