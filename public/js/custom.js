@@ -344,7 +344,7 @@
         $('.logo-carousel').owlCarousel({
             autoPlay: true,
             navigation: false,
-            slideSpeed: 300,
+            slideSpeed: 1000,
             items: 5,
             itemsDesktop: [1239, 4],
             itemsTablet: [991, 3],
