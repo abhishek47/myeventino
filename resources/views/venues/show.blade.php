@@ -56,7 +56,7 @@
 
 				<!-- Main Features -->
 				<ul class="property-main-features">
-					<li>Area <span>1450 sq ft</span></li>
+					<li>Area <span>{{ $venue->total_area }}</span></li>
 					<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
 					<li>Capacity <span>150-200</span></li>
 					<li>Reviews <span>13</span></li>
@@ -111,18 +111,7 @@
 			<!-- Toggles Container / End -->
 		</div>
 
-				<!-- Details -->
-				<h3 class="desc-headline">Details</h3>
-				<ul class="property-features margin-top-0">
-					<li>Building Age: <span>2 Years</span></li>
-					<li>Parking: <span>Attached Garage</span></li>
-					<li>Cooling: <span>Central Cooling</span></li>
-					<li>Heating: <span>Forced Air, Gas</span></li>
-					<li>Sewer: <span>Public/City</span></li>
-					<li>Water: <span>City</span></li>
-					<li>Exercise Room: <span>Yes</span></li>
-					<li>Storage Room: <span>Yes</span></li>
-				</ul>
+				
 
 				<h3 class="desc-headline">Facilities Offered</h3>
 				<ul class="property-features facilities margin-top-0">
@@ -424,8 +413,8 @@
 						<div class="agent-title">
 							<div class="agent-photo"><img src="/images/avatar4.png" alt="" /></div>
 							<div class="agent-details">
-								<h4><a href="#">Mr. Rohit Rankhambe</a></h4>
-								<span><i class="sl sl-icon-call-in"></i>(+91) 8308331178</span>
+								<h4><a href="#">{{ $venue->contact_name }}</a></h4>
+								<span><i class="sl sl-icon-call-in"></i>{{ $venue->phone }}</span>
 							</div>
 							<div class="clearfix"></div>
 						</div>
