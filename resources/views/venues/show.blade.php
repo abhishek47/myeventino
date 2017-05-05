@@ -140,8 +140,8 @@
 				
 
 				<h3 class="desc-headline">Facilities Offered</h3>
-				<ul class="margin-top-0">
-				 <div class="{{logo-carousel">
+				<ul class=" margin-top-0">
+				 <div class="logo-carousel">
                 
                 <!-- Listing Item -->
                
