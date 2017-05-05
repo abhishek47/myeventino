@@ -141,7 +141,12 @@
 
 				<h3 class="desc-headline">Facilities Offered</h3>
 				<ul class="property-features facilities margin-top-0">
+				 <div class="carousel">
+                
+                <!-- Listing Item -->
+               
 				   @if(in_array("wifi", json_decode($venue->facilities)))
+				    <div class="carousel-item">
 					 <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -152,9 +157,11 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                   @endif 
                   
                   @if(in_array("power", json_decode($venue->facilities)))
+                  <div class="carousel-item">
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -165,10 +172,11 @@
                      </div> 
                      </div> 
                    </li>
-
+                   </div>
                    @endif
                    
                     @if(in_array("restaurant", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -179,11 +187,12 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
 
 
                     @if(in_array("parking", json_decode($venue->facilities)))
-
+                   <div class="carousel-item">
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -194,10 +203,11 @@
                      </div> 
                      </div> 
                    </li>
-
+                   </div>
                    @endif
 
                     @if(in_array("stage", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -208,8 +218,10 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
                     @if(in_array("pa", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -220,8 +232,10 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
                     @if(in_array("cctv", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -232,8 +246,10 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
                     @if(in_array("multilingual_staff", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -244,8 +260,10 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
                     @if(in_array("outdoor_games", json_decode($venue->facilities)))
+                    <div class="carousel-item">
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -256,7 +274,9 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
                    @endif
+                   </div>
 				</ul>
 
 
