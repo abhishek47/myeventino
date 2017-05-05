@@ -17,8 +17,9 @@ class VenuesController extends Controller
      */
     public function index()
     {
+        $venues = Venue::latest()->get();
          
-         return view('venues.index');
+         return view('venues.index', compact('venues'));
     }
     
     public function filter()

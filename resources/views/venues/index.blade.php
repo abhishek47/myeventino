@@ -255,6 +255,9 @@
 			<!-- Listings -->
 			<div class="listings-container list-layout">
 
+
+			@foreach($venues as $venue)
+
 				<!-- Listing Item -->
 				<div class="listing-item">
 
@@ -262,7 +265,7 @@
 
 							<div class="listing-badges">
 							    <span class="featured">Elite</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
+								<span><i class="fa fa-map-marker"></i> {{ $venue->city }}</span>
 							</div>
 
 							<div class="listing-img-content">
@@ -270,17 +273,22 @@
 								<span class="like-icon"></span>
 							</div>
 
-							<img src="/images/listing-02.jpg" alt="">
+							
+                            <div class="listing-carousel">
+                                <div><img src="/images/listing-02.jpg" alt=""></div>
+                                <div><img src="/images/listing-02.jpg" alt=""></div>
+                                <div><img src="/images/listing-02.jpg" alt=""></div>
+                            </div>
 
 						</a>
 						
 						<div class="listing-content">
 
 							<div class="listing-title">
-								<h4><a href="/venues/show">Racca's Green Square</a></h4>
+								<h4><a href="/venues/show">{{ $venue->venue_name }}</a></h4>
 								<a href="https://maps.google.com/maps?q=Racca+Estate,+Old+Gangapur+Naka+Hanuman+Wadi,+Hanumanwadi+Road,+Panchavati,+Nashik,+Maharashtra+422003,+India" class="listing-address popup-gmaps">
 									<i class="fa fa-map-marker"></i>
-									<?= substr('Racca Estate, Old Gangapur Naka Hanuman Wadi, Hanumanwadi Road, Panchavati, Nashik, Maharashtra 422003, India', 0, 60); ?>...
+									<?= substr( $venue->address , 0, 60); ?>...å
 								</a>
 							</div>
 
@@ -300,193 +308,9 @@
 					</div>
 				<!-- Listing Item / End -->
 
-
-				<!-- Listing Item -->
-				<div class="listing-item">
-
-						<a href="/venues/show" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Elite</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-price">&#8377 275,000 <i>&#8377 520 / Hr.</i></span>
-								<span class="like-icon tooltip"></span>
-							</div>
-
-							<div class="listing-carousel">
-								<div><img src="/images/listing-01.jpg" alt=""></div>
-								<div><img src="/images/listing-01b.jpg" alt=""></div>
-								<div><img src="/images/listing-01c.jpg" alt=""></div>
-							</div>
-
-						</a>
-						
-						<div class="listing-content">
-
-							<div class="listing-title">
-								<h4><a href="/venues/show">G.P. Farm Nashik</a></h4>
-								<a href="https://maps.google.com/maps?q=G.P Farm" class="listing-address popup-gmaps">
-									<i class="fa fa-map-marker"></i>
-									<?= substr('Maharashtra State Highway 26, Opp. Stone Crusher, Harsul Road, Girnare, Nashik, Maharashtra 422203, India', 0, 60); ?>...
-								</a>
-							</div>
-
-							<ul class="listing-features">
-								<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-								<li>Capacity <span>300-400</span></li>
-								<li>Reviews <span>1</span></li>
-							</ul>
-
-							<div class="listing-footer">
-								<a href="#"><i class="fa fa-user"></i> 27 Favourites</a>
-								<span><i class="fa fa-eye"></i> 36 Views</span>
-							</div>
-
-						</div>
-
-					</div>
-				<!-- Listing Item / End -->
-
-
-				<!-- Listing Item -->
-				<div class="listing-item">
-
-						<a href="/venues/show" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-price">&#8377 900 <i>hourly</i></span>
-								<span class="like-icon"></span>
-							</div>
-
-							<img src="/images/listing-02.jpg" alt="">
-
-						</a>
-						
-						<div class="listing-content">
-
-							<div class="listing-title">
-								<h4><a href="/venues/show">Bon Vivant Nashik</a></h4>
-								<a href="https://maps.google.com/maps?q=Bon+Vivant,+Nashik,+Maharashtra,+India" class="listing-address popup-gmaps">
-									<i class="fa fa-map-marker"></i>
-									<?= substr('Patil Park, Old Gangapur Naka, Opposite To Dongre Vasti Gruha, Yashwant Colony, Patil Colony, Nashik, Maharashtra 422002, India', 0, 60); ?>...
-								</a>
-							</div>
-
-							<ul class="listing-features">
-								<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-								<li>Capacity <span>200-300</span></li>
-								<li>Reviews <span>1</span></li>
-							</ul>
-
-							<div class="listing-footer">
-								<a href="#"><i class="fa fa-user"></i> 19 Favourites</a>
-								<span><i class="fa fa-eye"></i> 21 Views</span>
-							</div>
-
-						</div>
-
-					</div>
-				<!-- Listing Item / End -->
-
-
-				<!-- Listing Item -->
-				<div class="listing-item">
-
-						<a href="/venues/show" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-price">&#8377 900 <i>hourly</i></span>
-								<span class="like-icon"></span>
-							</div>
-
-							<img src="/images/listing-05.jpg" alt="">
-
-						</a>
-						
-						<div class="listing-content">
-
-							<div class="listing-title">
-								<h4><a href="/venues/show">Vrindavan Lawns</a></h4>
-								<a href="https://maps.google.com/maps?q=Bon+Vivant,+Nashik,+Maharashtra,+India" class="listing-address popup-gmaps">
-									<i class="fa fa-map-marker"></i>
-									<?= substr('Patil Park, Old Gangapur Naka, Opposite To Dongre Vasti Gruha, Yashwant Colony, Patil Colony, Nashik, Maharashtra 422002, India', 0, 60); ?>...
-								</a>
-							</div>
-
-							<ul class="listing-features">
-								<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-								<li>Capacity <span>200-300</span></li>
-								<li>Reviews <span>1</span></li>
-							</ul>
-
-							<div class="listing-footer">
-								<a href="#"><i class="fa fa-user"></i> 19 Favourites</a>
-								<span><i class="fa fa-eye"></i> 21 Views</span>
-							</div>
-
-						</div>
-
-					</div>
-				<!-- Listing Item / End -->
-
-
-				<!-- Listing Item -->
-				<div class="listing-item">
-
-						<a href="/venues/show" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-price">&#8377 900 <i>hourly</i></span>
-								<span class="like-icon"></span>
-							</div>
-
-							<img src="/images/listing-03.jpg" alt="">
-
-						</a>
-						
-						<div class="listing-content">
-
-							<div class="listing-title">
-								<h4><a href="/venues/show">Veg Aroma</a></h4>
-								<a href="https://maps.google.com/maps?q=Bon+Vivant,+Nashik,+Maharashtra,+India" class="listing-address popup-gmaps">
-									<i class="fa fa-map-marker"></i>
-									<?= substr('Patil Park, Old Gangapur Naka, Opposite To Dongre Vasti Gruha, Yashwant Colony, Patil Colony, Nashik, Maharashtra 422002, India', 0, 60); ?>...
-								</a>
-							</div>
-
-							<ul class="listing-features">
-								<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-								<li>Capacity <span>200-300</span></li>
-								<li>Reviews <span>1</span></li>
-							</ul>
-
-							<div class="listing-footer">
-								<a href="#"><i class="fa fa-user"></i> 19 Favourites</a>
-								<span><i class="fa fa-eye"></i> 21 Views</span>
-							</div>
-
-						</div>
-
-					</div>
-					<!-- Listing Item / End -->
-
-				</div>
-				<!-- Listing Item / End -->
+               
+               @endforeach
+				
 
 				
 				
