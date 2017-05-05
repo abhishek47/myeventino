@@ -399,7 +399,7 @@
 
 				<!-- Widget -->
 				<div class="widget margin-bottom-30">
-					<button class="widget-button"><i class="sl sl-icon-share"></i> Share</button>
+					<button class="widget-button"><i class="fa fa-share"></i> Share</button>
 					<button class="widget-button save" data-save-title="Save" data-saved-title="Saved"><span class="like-icon"></span></button>
 				</div>
 				<!-- Widget / End -->
@@ -414,7 +414,7 @@
 							<div class="agent-photo"><img src="/images/avatar4.png" alt="" /></div>
 							<div class="agent-details">
 								<h4><a href="#">{{ $venue->contact_name }}</a></h4>
-								<span><i class="sl sl-icon-call-in"></i>{{ $venue->phone }}</span>
+								<span><i class="fa fa-phone"></i>{{ $venue->phone }}</span>
 							</div>
 							<div class="clearfix"></div>
 						</div>
