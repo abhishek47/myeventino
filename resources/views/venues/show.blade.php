@@ -79,9 +79,6 @@
 								<div class="clearfix"></div>
 							</div>
 
-							<input type="text" placeholder="Your Name" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
-							<input type="text" placeholder="Your Phone">
-							<textarea>I'm interested in this venue [with the specified requirements] and I'd like to know more details.</textarea>
 							<button class="button fullwidth margin-top-5">Get Price &amp; Availability</button>
 						</div>
 						<!-- Agent Widget / End -->
@@ -449,9 +446,6 @@
 							<div class="clearfix"></div>
 						</div>
 
-						<input type="text" placeholder="Your Name" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
-						<input type="text" placeholder="Your Phone">
-						<textarea>I'm interested in this venue [with the specified requirements] and I'd like to know more details.</textarea>
 						<button class="button fullwidth margin-top-5">Get Price &amp; Availability</button>
 					</div>
 					<!-- Agent Widget / End -->
