@@ -141,7 +141,10 @@
 
 				<h3 class="desc-headline">Facilities Offered</h3>
 				<ul class="property-features facilities margin-top-0">
-				 <div class="carousel">
+
+				@if(Request::has('platform'))
+				 <div class="logo-carousel">
+				 @endif
                 
                 <!-- Listing Item -->
                
