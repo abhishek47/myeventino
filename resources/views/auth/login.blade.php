@@ -1,68 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+<!-- Titlebar
+================================================== -->
+@if(!Request::has('platform'))
+<div id="titlebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                <h2>Log In</h2>
+                <span>Manage your venues &amp; events with Eventino</span>
+                
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li>Account</li>
+                    </ul>
+                </nav>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
 </div>
+@endif
+
+<!-- Content
+================================================== -->
+<div class="container">
+<div class="row">
+
+    <!-- Submit Page -->
+    <div class="col-md-12">
+        <div class="submit-page">
+          
+           @include('layouts.errors')
+
+           <div class="row with-forms">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+
+                       <div class="col-md-12">
+                            <h5>Email Address</h5>
+                            <input name="email" type="email" required="true" value="{{ old('email') }}">
+                        </div>
+
+                         <div class="col-md-12">
+                            <h5>Passowrd</h5>
+                            <input name="password" type="password" required="true">
+                        </div>
+                        
+                         <div class="col-md-12">
+                        <div class="checkboxes in-row margin-bottom-20">
+                
+                            <input id="check-22" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label for="check-22">Remember Me</label>
+
+                          
+
+                                    
+                        </div>
+                        </div>
+
+                         
+                        <div class="col-md-12">
+                          <div class="divider"></div>
+                          <button type="submit" class="button preview margin-top-5">Login To Account <i class="fa fa-sign-in"></i></button>
+                        </div>  
+
+                    </form>
+                </div>
+
+                <div class="notification notice large margin-top-35 margin-bottom-55">
+            <h4>Don't Have an Account?</h4>
+            <p>If you don't have an account you can create new account over Here -> <b><a href="/register">Create Account</a></b>.</p>
+        </div>
+           
+    </div>
+</div>
+</div>
+</div>
+<div class="margin-bottom-45"></div>
 @endsection

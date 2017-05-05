@@ -10,6 +10,18 @@ use App\User;
 
 class VenuesController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['preview', 'update', 'edit']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -116,12 +128,12 @@ class VenuesController extends Controller
         
         $data['user_id'] = $user->id;
 
-        Venue::create($data);
+        $venue = Venue::create($data);
 
         session()->flash('flash_title', 'Venue Registered on Eventino!');
-        session()->flash('flash_message', 'Venue has been successfully registered on Eventino!Please details of all the sections you have in the venue!'); 
+        session()->flash('flash_message', 'Venue has been successfully registered on Eventino!Please check the mail that has been sent to you for your account password to add further details!'); 
 
-         return redirect('/venues/sections/');
+         return redirect('/venues/preview/' . $venue->slug);
     }
 
     /**
@@ -144,6 +156,23 @@ class VenuesController extends Controller
     public function previewSections()
     {
         return view('venues.preview.sections');
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function preview(Venue $venue)
+    {
+        if(\Auth::user()->id != $venue->user_id)
+         {
+            return redirect('venues/show/' . $venue->slug); 
+         }
+
+        return view('venues.preview.index');
     }
 
     /**

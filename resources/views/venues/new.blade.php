@@ -36,17 +36,9 @@
 			<h4>Don't Have an Account?</h4>
 			<p>If you don't have an account your account will be created by entering your email address in contact details section. A password will be automatically emailed to you.</p>
 		</div>
+      
 
-		@if (count($errors) > 0)
-		    <div class="notification notice">
-		        <ul>
-		            @foreach ($errors->all() as $error)
-		                <li>{{ $error }}</li>
-		            @endforeach
-		        </ul>
-		    </div>
-		    <br>
-		@endif
+      @include('layouts.errors')
 
 
 

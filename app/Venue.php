@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Venue extends Model
 {
     
@@ -13,6 +14,12 @@ class Venue extends Model
    public function getRouteKeyName()
      {
         return 'slug';
+     }
+
+
+     public function photos()
+     {
+        return $this->hasMany(Photo::class);
      }
  
 

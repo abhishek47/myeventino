@@ -39,7 +39,7 @@
 
 
 		<!-- Widget -->
-		<div id="account-nav" class="col-md-12">
+		<div id="account-nav" class="{{ Request::has('platform') ? 'col-md-12' : 'col-md-4' }}">
 
 				<div class="my-account-nav-container">
 					
@@ -72,7 +72,67 @@
 				</div>
 
 		</div>
+        
+        @if(!Request::has('platform'))
+		<div class="col-md-8">
+			<div class="row">
 
+
+				<div class="col-md-8 my-profile">
+					<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
+
+					<form method="GET" action="/user/update">
+
+					<label>Your Name</label>
+					<input name="name" value="{{ Auth::user()->name }}" type="text">
+
+
+					<label>Email</label>
+					<input name="email" value="{{ Auth::user()->email }}" type="text">
+
+					<label>Mobile No</label>
+					<input name="phone" value="" placeholder="Enter Mobile No" type="text">
+
+					<label>Address</label>
+					<input name="address" value="" placeholder="Your Address" type="text">
+
+					<label>State</label>
+					<input name="state" value="Maharashtra" type="text">
+				    
+				    <label>City</label>
+					<input name="city" value="Nashik" type="text">
+
+					<label>Pincode</label>
+					<input name="pincode" value="422002" type="text">
+
+					
+
+
+					<button type="submit" class="button margin-top-20 margin-bottom-20">Save Changes</button>
+
+					</form>
+				</div>
+
+				<div class="col-md-4">
+					<!-- Avatar -->
+					<div class="edit-profile-photo">
+						<img src="/images/agent-02.jpg" alt="">
+						<div class="change-photo-btn">
+							<div class="photoUpload">
+							   <form>
+							    <span><i class="fa fa-upload"></i> Upload Photo</span>
+							    <input type="file" class="upload" />
+							    </form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+       @endif
 		
 
 	</div>
