@@ -130,9 +130,9 @@ class VenuesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Venue $venue)
     {
-        return view('venues.show');
+        return view('venues.show', compact('venue'));
     }
 
     /**

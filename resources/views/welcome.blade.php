@@ -103,7 +103,7 @@
                 <div class="carousel-item">
                 <div class="listing-item">
 
-                        <a href="/venues/show" class="listing-img-container">
+                        <a href="/venues/show/{{$venue->slug}}" class="listing-img-container">
 
                             <div class="listing-badges">
                                 <span class="featured">Elite</span>
