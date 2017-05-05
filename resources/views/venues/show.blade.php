@@ -56,7 +56,7 @@
 
 				<!-- Main Features -->
 				<ul class="property-main-features">
-					<li>Area <span>{{ $venue->total_area }}</span></li>
+					<li>Area <span>{{ $venue->total_area }} sq.ft.</span></li>
 					<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
 					<li>Capacity <span>150-200</span></li>
 					<li>Reviews <span>13</span></li>
