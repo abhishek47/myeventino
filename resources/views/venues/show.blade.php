@@ -61,6 +61,34 @@
 					<li>Capacity <span>150-200</span></li>
 					<li>Reviews <span>13</span></li>
 				</ul>
+               
+               @if(Request::has('platform'))
+
+					<!-- Widget -->
+					<div class="widget">
+
+						<!-- Agent Widget -->
+						<div class="agent-widget">
+							<div class="agent-title">
+								<div class="agent-photo"><img src="/images/avatar4.png" alt="" /></div>
+								<div class="agent-details">
+									<h4><a href="#">{{ $venue->contact_name }}</a></h4>
+									<span><i class="fa fa-phone"></i>{{ $venue->phone }}</span>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+
+							<input type="text" placeholder="Your Name" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
+							<input type="text" placeholder="Your Phone">
+							<textarea>I'm interested in this venue [with the specified requirements] and I'd like to know more details.</textarea>
+							<button class="button fullwidth margin-top-5">Get Price &amp; Availability</button>
+						</div>
+						<!-- Agent Widget / End -->
+
+					</div>
+					<!-- Widget / End -->
+
+				@endif
 
 
 				<!-- Description -->
@@ -395,6 +423,7 @@
 
 		<!-- Sidebar -->
 		<div class="col-lg-4 col-md-5">
+
 			<div class="sidebar sticky right">
 
 				<!-- Widget -->
@@ -404,7 +433,7 @@
 				</div>
 				<!-- Widget / End -->
 
-
+               @if(!Request::has('platform'))
 				<!-- Widget -->
 				<div class="widget">
 
@@ -428,6 +457,8 @@
 
 				</div>
 				<!-- Widget / End -->
+
+				@endif
 
 
 				<!-- Widget -->
