@@ -126,7 +126,7 @@
 
 				<h3 class="desc-headline">Facilities Offered</h3>
 				<ul class="property-features facilities margin-top-0">
-				   @if(in_array("wifi", json_decode($venues->facilities)))
+				   @if(in_array("wifi", json_decode($venue->facilities)))
 					 <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -139,7 +139,7 @@
                    </li>
                   @endif 
                   
-                  @if(in_array("power", json_decode($venues->facilities)))
+                  @if(in_array("power", json_decode($venue->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -153,7 +153,7 @@
 
                    @endif
                    
-                    @if(in_array("restaurant", json_decode($venues->facilities)))
+                    @if(in_array("restaurant", json_decode($venue->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -167,7 +167,7 @@
                    @endif
 
 
-                    @if(in_array("parking", json_decode($venues->facilities)))
+                    @if(in_array("parking", json_decode($venue->facilities)))
 
                    <li>
                      <div class="row">
@@ -182,7 +182,7 @@
 
                    @endif
 
-                    @if(in_array("stage", json_decode($venues->facilities)))
+                    @if(in_array("stage", json_decode($venue->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -194,7 +194,7 @@
                      </div> 
                    </li>
                    @endif
-                    @if(in_array("pa", json_decode($venues->facilities)))
+                    @if(in_array("pa", json_decode($venue->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -206,7 +206,7 @@
                      </div> 
                    </li>
                    @endif
-                    @if(in_array("cctv", json_decode($venues->facilities)))
+                    @if(in_array("cctv", json_decode($venue->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -218,7 +218,7 @@
                      </div> 
                    </li>
                    @endif
-                    @if(in_array("multilingual_staff", json_decode($venues->facilities)))
+                    @if(in_array("multilingual_staff", json_decode($venue->facilities)))
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -230,7 +230,7 @@
                      </div> 
                    </li>
                    @endif
-                    @if(in_array("outdoor_games", json_decode($venues->facilities)))
+                    @if(in_array("outdoor_games", json_decode($venue->facilities)))
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -288,19 +288,19 @@
 					<!-- Features -->
 				<h3 class="desc-headline">Features</h3>
 				<ul class="property-features checkboxes margin-top-0">
-				  @if(in_array("air_conditioning", json_decode($venues->facilities)))
+				  @if(in_array("air_conditioning", json_decode($venue->facilities)))
 					<li>Air Conditioning</li>
 			      @endif
-			       @if(in_array("pool", json_decode($venues->facilities)))
+			       @if(in_array("pool", json_decode($venue->facilities)))
 					<li>Swimming Pool</li>
 			      @endif
-			      @if(in_array("clubhouse", json_decode($venues->facilities)))
+			      @if(in_array("clubhouse", json_decode($venue->facilities)))
 					<li>Clubhouse</li>
 			      @endif
-			      @if(in_array("laundry", json_decode($venues->facilities)))
+			      @if(in_array("laundry", json_decode($venue->facilities)))
 					<li>Laundry</li>
 			      @endif
-			      @if(in_array("valet", json_decode($venues->facilities)))
+			      @if(in_array("valet", json_decode($venue->facilities)))
 					<li>Valet Parking</li>
 			      @endif	
 
@@ -363,16 +363,16 @@
 
                 <h3 class="desc-headline">Venue Policies</h3>
 				<ul class="property-features terms margin-top-0">
-					<li>Liquor Allowed : {{ in_array("liquor_allowed", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
-					<li>DJ Allowed : {{ in_array("dj_allowed", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
-					@if(in_array("liquor_allowed", json_decode($venues->parameters)))
-					  <li>External Liquor : {{ in_array("external_liquor", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					<li>Liquor Allowed : {{ in_array("liquor_allowed", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					<li>DJ Allowed : {{ in_array("dj_allowed", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
+					@if(in_array("liquor_allowed", json_decode($venue->parameters)))
+					  <li>External Liquor : {{ in_array("external_liquor", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' }}</li>
 					@endif
-					<li>External Catering :{{ in_array("external_catering", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
-					@if(in_array("dj_allowed", json_decode($venues->parameters)))
-					  <li>External DJ: {{ in_array("external_dj", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+					<li>External Catering :{{ in_array("external_catering", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+					@if(in_array("dj_allowed", json_decode($venue->parameters)))
+					  <li>External DJ: {{ in_array("external_dj", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
 					@endif
-					<li>External Decorator : {{ in_array("external_decorator", json_decode($venues->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
+					<li>External Decorator : {{ in_array("external_decorator", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">From Panel</span>' }}</li>
 				    @if($venue->rooms > 0)
 					<li>Rooms : <span class="danger">Charged Seperately</span></li>
 					@endif

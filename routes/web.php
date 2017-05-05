@@ -23,7 +23,7 @@ Route::get('/venues/filter', 'VenuesController@filter')->name('venues.filter');
 Route::post('/venues', 'VenuesController@store')->name('venues.store');
 Route::get('/venues/create', 'VenuesController@create')->name('venues.create');
 Route::get('/venues/sections', 'VenuesController@previewSections')->name('venues.preview.sections');
-Route::get('/venues/show', 'VenuesController@show')->name('venues.show');
+Route::get('/venues/show/{venue}', 'VenuesController@show')->name('venues.show');
 
 
 Route::get('/events', 'EventsController@index')->name('events');
