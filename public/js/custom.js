@@ -343,7 +343,7 @@
         });
         $('.logo-carousel').owlCarousel({
             autoPlay: false,
-            navigation: true,
+            navigation: false,
             slideSpeed: 600,
             items: 5,
             itemsDesktop: [1239, 4],
