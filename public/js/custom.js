@@ -348,7 +348,7 @@
             items: 5,
             itemsDesktop: [1239, 4],
             itemsTablet: [991, 3],
-            itemsMobile: [767, 1]
+            itemsMobile: [767, 2]
         });
         $('.listing-carousel').owlCarousel({
             autoPlay: false,
