@@ -279,7 +279,10 @@
                    </li>
                    </div>
                    @endif
+
+                   @if(Request::has('platform'))
                    </div>
+                   @endif
 				</ul>
 
 
@@ -332,6 +335,10 @@
                    </li>
 
                    </div>
+
+                @if(Request::has('platform'))
+                   </div>
+                   @endif
 				</ul>
 
 
