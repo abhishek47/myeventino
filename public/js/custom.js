@@ -344,11 +344,11 @@
         $('.logo-carousel').owlCarousel({
             autoPlay: true,
             navigation: false,
-            slideSpeed: 600,
+            slideSpeed: 300,
             items: 5,
             itemsDesktop: [1239, 4],
             itemsTablet: [991, 3],
-            itemsMobile: [767, 2]
+            itemsMobile: [767, 3]
         });
         $('.listing-carousel').owlCarousel({
             autoPlay: false,
