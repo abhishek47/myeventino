@@ -63,7 +63,8 @@
 				</ul>
                
                @if(Request::has('platform'))
-
+                     
+                     <br>
 					<!-- Widget -->
 					<div class="widget">
 
