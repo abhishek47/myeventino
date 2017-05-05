@@ -285,18 +285,25 @@
 
 				<h3 class="desc-headline">Eventino Ratings</h3>
 				<ul class="property-features margin-top-0">
-					 <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/ratings/first.png">
-                     </div> 
-                     <div class="col-md-8">
-                      <b class="title">Ambience</b><br>
-                      80%
-                     </div> 
-                     </div> 
-                   </li>
+				@if(Request::has('platform'))
+				 <div class="logo-carousel">
+				 @endif
 
+				    <div class="carousel-item">
+						 <li>
+	                     <div class="row">
+	                     <div class="col-md-4">
+	                      <img style="width: 60px;" src="/images/ratings/first.png">
+	                     </div> 
+	                     <div class="col-md-8">
+	                      <b class="title">Ambience</b><br>
+	                      80%
+	                     </div> 
+	                     </div> 
+	                   </li>
+                    </div>
+                    
+                      <div class="carousel-item">
                     <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -308,6 +315,9 @@
                      </div> 
                      </div> 
                    </li>
+                   </div>
+
+                     <div class="carousel-item">
 
                     <li>
                      <div class="row">
@@ -320,6 +330,8 @@
                      </div> 
                      </div> 
                    </li>
+
+                   </div>
 				</ul>
 
 
