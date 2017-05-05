@@ -64,10 +64,10 @@
                
                @if(Request::has('platform'))
                      
-                     <br>
-					<!-- Widget -->
-					<div class="widget">
 
+					<!-- Widget -->
+					<div class="widget margin-top-35">
+                  
 						<!-- Agent Widget -->
 						<div class="agent-widget">
 							<div class="agent-title">
