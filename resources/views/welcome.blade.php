@@ -2,6 +2,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style type="text/css">
+    .twitter-typeahead {
+        width: 100%;
+    }
+</style>
 <!-- Banner
 ================================================== -->
 <div class="parallax" id="parallax-banner" style="" data-background="/images/slider.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600"  >
