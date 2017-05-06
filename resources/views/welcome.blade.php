@@ -7,6 +7,11 @@
     .twitter-typeahead {
         width: 100%;
     }
+
+   .tt-dataset-venuesList {
+    top: 80%;
+    width: 22.7em;
+   }
 </style>
 <!-- Banner
 ================================================== -->
@@ -585,7 +590,7 @@ jQuery(document).ready(function($) {
                 '<div class="list-group search-results-dropdown">'
             ],
             suggestion: function (data) {
-                return '<a href="/venues/show/' + data.slug  + '"class="list-group-item">' + data.venue_name + ' - ' + data.city + '</a>'
+                return '<div class="list-group-item">' + data.venue_name + ' - ' + data.city + '</div>'
       }
         }
     });
