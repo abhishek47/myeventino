@@ -579,7 +579,7 @@ jQuery(document).ready(function($) {
                 '<div class="list-group search-results-dropdown">'
             ],
             suggestion: function (data) {
-                return '<a href="' + data.venue_name + '" class="list-group-item">' + data.city + '- @' + data.phone + '</a>'
+                return '<a href=/venues/show/"' + data.slug  + '" class="list-group-item">' + data.venue_name + ' - ' + data.city + '</a>'
       }
         }
     });
