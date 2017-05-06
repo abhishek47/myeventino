@@ -702,11 +702,10 @@ jQuery(document).ready(function($) {
             empty: [
                 '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
             ],
-            header: [
-                '<div class="ProfileCard u-cf Typeahead-suggestion Typeahead-selectable">'
-            ],
-            suggestion: function (data) {
-                return  '<div class="ProfileCard-details">' +
+          suggestion: function (data) {
+                return '<div class="ProfileCard u-cf">' +
+                        
+                        '<div class="ProfileCard-details">' +
                           '<div class="ProfileCard-realName">' + data.venue_name + '</div>' +
                           '<div class="ProfileCard-screenName">@' + data.city + '</div>' + 
                           '<div class="ProfileCard-description">' + data.address + '</div>' +
