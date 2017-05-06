@@ -13,6 +13,37 @@
     width: 22.7em;
    }
 
+   .Typeahead-menu {
+  position: absolute;
+  top: 95%;
+  left: 2.5%;
+  z-index: 100;
+  display: none;
+  width: 95%;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+          box-shadow: 0px 0px 0px 1px green;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.Typeahead-menu.is-open {
+  display: block;
+}
+
+.Typeahead-selectable {
+  cursor: pointer;
+}
+
+.Typeahead-selectable + .Typeahead-selectable {
+  border-top: 1px solid #ccd6dd;
+}
+
    .ProfileCard {
   position: relative;
   padding: 8px;
@@ -649,6 +680,7 @@ jQuery(document).ready(function($) {
     });
 
     $("#venue-search-input").typeahead({
+    menu: $('.Typeahead-menu'),
         hint: true,
         highlight: true,
         minLength: 1,
