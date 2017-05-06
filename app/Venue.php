@@ -13,9 +13,9 @@ class Venue extends Model
 
     protected $searchable = [
         'columns' => [
-            'venue.venue_name' => 10,
-            'venue.city' => 5,
-            'venue.address' => 3,
+            'venue_name' => 10,
+            'city' => 5,
+            'address' => 3,
         ]
     ];
     
