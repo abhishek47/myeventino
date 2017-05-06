@@ -8,7 +8,7 @@ use App\Venue;
 class SearchController extends Controller
 {
 
-    public function find(Request $request)
+    public function findVenues(Request $request)
 	{
 	    return Venue::search($request->get('q'))->get();
 	}
