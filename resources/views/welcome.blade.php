@@ -706,8 +706,7 @@ jQuery(document).ready(function($) {
                 '<div class="ProfileCard u-cf Typeahead-suggestion Typeahead-selectable">'
             ],
             suggestion: function (data) {
-                return '<div class="ProfileCard u-cf">' +
-                        
+                return  
                         '<div class="ProfileCard-details">' +
                           '<div class="ProfileCard-realName">' + data.venue_name + '</div>' +
                           '<div class="ProfileCard-screenName">@' + data.city + '</div>' + 
