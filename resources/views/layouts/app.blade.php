@@ -9,6 +9,7 @@
 
 <!-- CSS
 ================================================== -->
+<link rel="stylesheet" href="/css/bootstrap.css" id="colors">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/main.css" id="colors">
 
@@ -207,7 +208,7 @@
 
  <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
