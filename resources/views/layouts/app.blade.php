@@ -205,6 +205,9 @@
 <script type="text/javascript" src="/scripts/markerclusterer.js"></script>
 <script type="text/javascript" src="/scripts/maps.js"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+
+
 @yield('js')
 
 

@@ -27,6 +27,7 @@
                         <div class="col-md-3">
                             <select data-placeholder="Event Type" name="event_type" class="chosen-select-no-single" >
                                 <option value="0">-- Event Type --</option>
+                                 <option value="all">All</option>
                                 <option value="wedding">Wedding</option>
                                 <option value="party">Party</option>
                                 <option value="meetings">Meetings &amp; Conferences</option>
@@ -40,16 +41,19 @@
                         <div class="col-md-3">
                             <select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
                                 <option value="0">-- Venue Type --</option>
+                                 <option value="all">All</option>
                                 <option value="banquet">Banquet</option>
                                 <option value="lawns">Lawns</option>
                                 <option value="dome">Dome</option>
                                 <option value="conference">Conference Room</option>
+                                <option value="resort">Resorts</option>
+                                <option value="plot">Plots</option>
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <div class="main-search-input">
-                                <input type="text" name="location" placeholder="Enter name or destination" value=""/>
+                                <input type="text" id="venue-search-input" name="location" placeholder="Enter name or destination" autocomplete="false" value="" />
                                 <button class="button" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
@@ -540,4 +544,45 @@
     </div>
 </a>
 
+@endsection
+
+@section('js')
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    // Set the Options for "Bloodhound" suggestion engine
+    var engine = new Bloodhound({
+        remote: {
+            url: '/findVenues?q=%QUERY%',
+            wildcard: '%QUERY%'
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $("#venue-search-input").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, {
+        source: engine.ttAdapter(),
+
+        // This will be appended to "tt-dataset-" to form the class name of the suggestion menu.
+        name: 'venuesList',
+
+        // the key from the array we want to display (name,id,email,etc...)
+        templates: {
+            empty: [
+                '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+            ],
+            header: [
+                '<div class="list-group search-results-dropdown">'
+            ],
+            suggestion: function (data) {
+                return '<a href="' + data.venue_name + '" class="list-group-item">' + data.city + '- @' + data.phone + '</a>'
+      }
+        }
+    });
+});
+</script>
 @endsection

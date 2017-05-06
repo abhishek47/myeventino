@@ -36,6 +36,9 @@ Route::get('/vendors/filter', 'VendorsController@filter')->name('vendors.filter'
 Route::get('/user/account', 'ProfileController@index')->name('profile.index');
 
 
+Route::get('findVenues', 'SearchController@findVenues');
+
+
 
 
 
