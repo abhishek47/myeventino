@@ -674,10 +674,21 @@ jQuery(document).ready(function($) {
                 '<div class="ProfileCard u-cf Typeahead-suggestion Typeahead-selectable">'
             ],
             suggestion: function (data) {
-                return '<div class="ProfileCard-details"> <div class="ProfileCard-realName">' + data.venue_name + '</div><div class="ProfileCard-screenName">@' + data.city + '</div><div class="ProfileCard-description">' + data.address + '</div></div>' + '<div class="ProfileCard-stats"> <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Reviews:</span> 260</div>' +
-                  '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Favourites:</span> 20</div>' +
-          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Rating:</span> 3.5</div>' +
-        '</div></div>'
+                return '<div class="ProfileCard u-cf">' +
+                        
+                        '<div class="ProfileCard-details">' +
+                          '<div class="ProfileCard-realName">' + data.venue_name + '</div>' +
+                          '<div class="ProfileCard-screenName">@' + data.city + '</div>' + 
+                          '<div class="ProfileCard-description">' + data.address + '</div>' +
+                        '</div>' +
+
+                        '<div class="ProfileCard-stats">' +
+                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Reviews:</span> 45</div>' + 
+                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Rating:</span>3.5</div>' +
+                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Favourites:</span>12</div>' +
+                        '</div>' +
+                      '</div>' 
+
       }
         }
     });
