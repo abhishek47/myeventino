@@ -12,6 +12,83 @@
     top: 80%;
     width: 22.7em;
    }
+
+   .ProfileCard {
+  position: relative;
+  padding: 8px;
+}
+
+.ProfileCard-avatar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #ccd6dd;
+  border-radius: 5px;
+}
+
+.ProfileCard:hover .ProfileCard-avatar {
+  border-color: #f5f8fa;
+}
+
+.ProfileCard-details {
+  min-height: 60px;
+  padding-left: 60px;
+}
+
+.ProfileCard-realName,
+.ProfileCard-screenName {
+  display: inline-block;
+}
+
+.ProfileCard-realName {
+  font-weight: 700;
+}
+
+.ProfileCard-screenName {
+  color: #8899a6;
+}
+
+.ProfileCard-description {
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.ProfileCard-stats {
+  float: right;
+  text-align: right;
+}
+
+.ProfileCard-stat {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.ProfileCard-stat-label {
+  color: #8899a6;
+  font-weight: 500;
+}
+
+.ProfileCard-stat + .ProfileCard-stat {
+  margin-left: 5px;
+}
+
+.ProfileCard:hover,
+.ProfileCard.is-active {
+  color: #fff;
+  background: #55acee;
+}
+
+.ProfileCard:hover .ProfileCard-screenName,
+.ProfileCard:hover .ProfileCard-stat-label,
+.ProfileCard.is-active .ProfileCard-screenName,
+.ProfileCard.is-active .ProfileCard-stat-label {
+  color: #fff;
+}
 </style>
 <!-- Banner
 ================================================== -->
@@ -587,13 +664,20 @@ jQuery(document).ready(function($) {
                 '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
             ],
             header: [
-                '<div class="list-group search-results-dropdown">'
+                '<div class="ProfileCard u-cf Typeahead-suggestion Typeahead-selectable">'
             ],
             suggestion: function (data) {
-                return '<div class="list-group-item">' + data.venue_name + ' - ' + data.city + '</div>'
+                return '<div class="ProfileCard-details"> <div class="ProfileCard-realName">' + data.venue_name + '</div><div class="ProfileCard-screenName">@' + data.city + '</div><div class="ProfileCard-description">' + data.address + '</div></div>' + '<div class="ProfileCard-stats"> <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Reviews:</span> 260</div>' +
+                  '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Favourites:</span> 20</div>' +
+          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Rating:</span> 3.5</div>' +
+        '</div></div>'
       }
         }
     });
+
+    
+
+        
 });
 </script>
 @endsection
