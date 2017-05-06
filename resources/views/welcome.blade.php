@@ -651,7 +651,14 @@ jQuery(document).ready(function($) {
     $("#venue-search-input").typeahead({
         hint: true,
         highlight: true,
-        minLength: 1
+        minLength: 1,
+        classNames: {
+      open: 'is-open',
+      empty: 'is-empty',
+      cursor: 'is-active',
+      suggestion: 'Typeahead-suggestion',
+      selectable: 'Typeahead-selectable'
+    }
     }, {
         source: engine.ttAdapter(),
 
