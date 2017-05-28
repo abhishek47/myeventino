@@ -111,7 +111,7 @@
 
 				<!-- Toggle 1 -->
 				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">Package 1<i class="sl sl-icon-plus"></i></a></span>
+					<span class="trigger "><a href="#">Package 1<i class="fa fa-plus"></i></a></span>
 					<div class="toggle-container">
 						<p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Donec ut volutpat metus. Vivamus justo arcu, elementum a sollicitudin pellentesque, tincidunt ac enim. Proin id arcu ut ipsum vestibulum elementum.</p>
 					</div>
