@@ -361,7 +361,7 @@
 						<div class="listing-content">
 
 							<div class="listing-title">
-								<h4><a href="/venues/{{ $vendor->slug }}">{{ $vendor->venue_name }}</a><br>
+								<h4><a href="/vendors/{{ $vendor->slug }}">{{ $vendor->name }}</a><br>
 								 @foreach($vendor->vendor_types as $type)
 								  <span class="badge">{{ ucwords($type) }}</span> 
 								 @endforeach 
@@ -415,4 +415,36 @@
 <div class="margin-top-55"></div>
 
 
+@endsection
+
+
+@section('js')
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/js/star-rating.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script type="text/javascript">
+    function toggleFavourite(id) {
+    	console.log('clicked');
+      
+       
+      var slug = $('#' + id).data('slug');
+
+      console.log(id);
+       
+      axios.post("/vendors/" + slug + "/favourites", {})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
+     
+
+  </script>
+
+  
 @endsection

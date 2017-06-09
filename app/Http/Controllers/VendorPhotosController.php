@@ -18,7 +18,7 @@ class VendorPhotosController extends Controller
     public function store(PhotoUploadRequest $request, Vendor $vendor)
     {
         
-        $photo = VendorPhoto::fromFileAndEvent($request->file('file'), $vendor);
+        $photo = VendorPhoto::fromFileAndVendor($request->file('file'), $vendor);
 
         return $photo->saveWithResponse();
     

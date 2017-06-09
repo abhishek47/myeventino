@@ -84,6 +84,25 @@
 						</td>
 					</tr>
 
+					@elseif(is_a($favourite->favourited, App\Vendor::class))
+
+						<!-- Item #1 -->
+					<tr id="vendor-{{$favourite->favourited->id}}">
+						<td class="title-container">
+							<img src="{{ $favourite->favourited->photos()->first()->thumbnail_path }}" alt="">
+							<div class="title">
+								<h4><a href="/vendors/{{$favourite->favourited->slug}}">{{ $favourite->favourited->name }}</a></h4>
+								<span style="display: inline;" class="badge">Vendor</span>
+								<span>{{ $favourite->favourited->address }}</span>
+								<span class="table-property-price"> &#8377 {{ $favourite->favourited->starting_package }} onwards</span>
+							</div>
+						</td>
+						<td class="action">
+						   <i hidden="true" id="vendor-id-{{$favourite->favourited->id}}" data-slug="{{$favourite->favourited->slug}}"></i>
+							<a style="cursor: pointer;" onclick="unfavouriteVendor({{$favourite->favourited->id}})" class="delete"><i class="fa fa-remove"></i> Remove</a>
+						</td>
+					</tr>
+
 					@endif
 
 
@@ -142,6 +161,21 @@
       .then(function (response) {
         console.log(response);
         $('#event-' + id).hide();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
+    function unfavouriteVendor(id) {
+
+
+    	var slug = $('#vendor-id-' + id).data('slug');
+
+      axios.post("/vendors/" + slug + "/favourites", {})
+      .then(function (response) {
+        console.log(response);
+        $('#vendor-' + id).hide();
       })
       .catch(function (error) {
         console.log(error);

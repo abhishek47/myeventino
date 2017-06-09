@@ -7,6 +7,20 @@
 		</ul>
 
 
+		<!-- Description -->
+		<h3 class="desc-headline">Description</h3>
+		<div class="show-more">
+			<p>
+				{{ $vendor->description }}
+			</p>
+
+			
+
+			<a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
+		</div>
+
+
+
 		  <h3 class="desc-headline">Photos &amp; Banners</h3>
 			<!-- Slider -->
 			<div class="property-slider default">
@@ -24,24 +38,13 @@
 			</div>
 
 
-		<!-- Description -->
-		<h3 class="desc-headline">Description</h3>
-		<div class="show-more">
-			<p>
-				{{ $vendor->description }}
-			</p>
-
-			
-
-			<a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
-		</div>
-
+		
 		
 
 
 		<!-- Features -->
 				<h3 class="desc-headline">Facilities</h3>
-				<ul class="property-features checkboxes margin-top-0">
+				<ul class="property-features checkboxes margin-top-0 margin-bottom-40">
 				  @if(in_array("air_conditioning", json_decode($vendor->facilities)))
 					<li>Air Conditioning</li>
 			      @endif

@@ -16,6 +16,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+			    <a href="{{ url()->previous() }}" class="back-to-listings"></a>
 				<h2><i class="fa fa-plus-circle"></i> List your Venue For Free</h2>
 			</div>
 		</div>

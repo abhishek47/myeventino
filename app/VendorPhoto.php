@@ -16,7 +16,7 @@ class VendorPhoto extends Model
     protected $vendor;
 
     
-    public static function fromFileAndvendor($file, $vendor)
+    public static function fromFileAndVendor($file, $vendor)
     {
     	$photo = new static;
 

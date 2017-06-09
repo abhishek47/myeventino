@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				
-				<a href="/venues" class="back-to-listings"></a>
+				<a href="{{ url()->previous() }}" class="back-to-listings"></a>
 				<div class="property-title">
 					<h2>{{ $venue->venue_name }} <span class="property-badge">Best For {{ json_decode($venue->best_for)[0] }}</span> 
              

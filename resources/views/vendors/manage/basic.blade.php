@@ -33,7 +33,7 @@
 					<h5>Vendor Categories</h5>
 					<select class="chosen-select-no-single" name="vendor_types[]" multiple="true" required="true">
 						<option label="blank"></option>	
-						<option value="play" {{ in_array('play', $vendor->vendor_types) ? 'selected' : '' }}>Play</option>
+						<option value="photography" {{ in_array('photography', $vendor->vendor_types) ? 'selected' : '' }}>Photography</option>
 						<option value="conference" {{ in_array('conference', $vendor->vendor_types) ? 'selected' : '' }}>Conferences</option>
                         <option value="workshop" {{ in_array('workshop', $vendor->vendor_types) ? 'selected' : '' }}>Workshop</option>
                         <option value="exihibition" {{ in_array('exihibition', $vendor->vendor_types) ? 'selected' : '' }}>Exhibition</option>

@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				
-				<a href="listings-list-with-sidebar.html" class="back-to-listings"></a>
+				<a href="{{ url()->previous() }}" class="back-to-listings"></a>
 				<div class="property-title">
 					<h2>{{ $event->name }} </h2>
 					

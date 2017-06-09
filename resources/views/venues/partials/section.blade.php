@@ -51,9 +51,8 @@
           </ul>
         
         @if($section->exclusive_features)
-            <!-- Features -->
-          <h3 class="desc-headline">Features</h3>
-          <ul class="property-features checkboxes margin-top-0">
+            <!-- Features --> 
+          <ul class="property-features checkboxes margin-top-30">
            
             <?php $exclusive = explode(',', $section->exclusive_features);  ?>
 
