@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\{Venue, User, VenueSection};
 use Illuminate\Http\Request;
+use App\Http\Requests\SubmitVenueRequest;
 
-use App\Venue;
 
-use App\User;
 
 class VenuesController extends Controller
 {
@@ -27,10 +28,68 @@ class VenuesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $venues = Venue::latest()->get();
-         
+
+        $venues = Venue::latest();
+
+        if($request->has('venue_type') && $request->get('venue_type') != 'all' && $request->get('venue_type') != '0')
+        {
+            $venues = $venues->where('venue_type', 'LIKE', '%'. $request->get('venue_type') . '%');
+        }
+
+
+        if($request->has('location'))
+        {
+            $venues = $venues->where('venue_name', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('address', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('city', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('state', 'LIKE', '%'. $request->get('location') . '%');
+        }
+
+        if($request->has('area'))
+        {
+            $venues = $venues->where('total_area', '>=', $request->get('area'));
+        }
+        
+        if($request->has('facilities'))
+        {
+            foreach ($request->get('facilities') as $key => $facility) {
+               $venues = $venues->where('facilities', 'LIKE', '%'. $facility . '%'); 
+            }
+        }
+
+        if($request->has('parameters'))
+        {
+            foreach ($request->get('parameters') as $key => $parameter) {
+               $venues = $venues->where('parameters', 'LIKE', '%'. $parameter . '%'); 
+            }
+        }
+
+        $venues = $venues->paginate(15);
+
+        
+        if($request->has('people'))
+        {
+             $venues = $venues->filter(function($venue) use ($request){
+                return $venue->max_cap >= $request->get('people');
+             });
+        }
+
+        if($request->has('minprice'))
+        {
+             $venues = $venues->filter(function($venue) use ($request){
+                return $venue->serves_from >= $request->get('minprice');
+             });
+        }
+
+        if($request->has('maxprice'))
+        {
+             $venues = $venues->filter(function($venue) use ($request){
+                return $venue->serves_from <= $request->get('maxprice');
+             });
+        }
+        
          return view('venues.index', compact('venues'));
     }
     
@@ -56,84 +115,20 @@ class VenuesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubmitVenueRequest $request)
     {
         
-
-        $this->validate($request, [
-          
-          'venue_name' => 'required',
-          'venue_type' => 'required',
-          'best_for'   => 'required',
-          'total_area' => 'required',
-          'sections'   => 'required',
-          'address'    => 'required',
-          'city'       => 'required',
-          'state'      => 'required',
-          'country'    => 'required',
-          'pincode'    => 'required',
-          'venue_since' => 'required',
-          'rooms'      => 'required',
-          'contact_name' => 'required',
-          'email' => 'required',
-          'phone' => 'required',
-
-        ]);
-
-
         $data = $request->all();
-
-         if($request->has('venue_type')){
-         
-           $data['venue_type'] = json_encode($data['venue_type']);
-
-         }
-
-         if($request->has('best_for')){
-         
-           $data['best_for'] = json_encode($data['best_for']);
-
-         }
-         
-        if($request->has('facilities')){
-         
-           $data['facilities'] = json_encode($data['facilities']);
-
-         }
-         
-         if($request->has('parameters')){
-          
-            $data['parameters'] = json_encode($data['parameters']);
-
-          }  
-          
-          if($request->has('food_available')){
-          
-            $data['food_available'] = json_encode($data['food_available']);
-          
-          }
 
         $data['slug'] = str_slug($data['venue_name']);
         
-        $user = User::where('email', $data['email'])->first();
-
-       if(!$user)
-       {
-            $user =  User::create([
-            'name' => $data['contact_name'],
-            'email' => $data['email'],
-            'password' => bcrypt('123456'),
-        ]);
-       } 
-        
-        $data['user_id'] = $user->id;
+        $data['user_id'] = User::findOrCreate($data);
 
         $venue = Venue::create($data);
 
-        session()->flash('flash_title', 'Venue Registered on Eventino!');
-        session()->flash('flash_message', 'Venue has been successfully registered on Eventino!Please check the mail that has been sent to you for your account password to add further details!'); 
+        flash('Venue Registered on Eventino!', 'Venue has been successfully registered on Eventino!Please check the mail that has been sent to you for your account password to add further details!');
 
-         return redirect('/venues/preview/' . $venue->slug);
+        return redirect('/venues/' . $venue->slug);
     }
 
     /**
@@ -144,46 +139,21 @@ class VenuesController extends Controller
      */
     public function show(Venue $venue)
     {
-        return view('venues.show', compact('venue'));
+        $venue->load('photos', 'sections');
+        
+        return view('venues.show.index', compact('venue'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function previewSections()
-    {
-        return view('venues.preview.sections');
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function preview(Venue $venue)
-    {
-        if(\Auth::user()->id != $venue->user_id)
-         {
-            return redirect('venues/show/' . $venue->slug); 
-         }
-
-        return view('venues.preview.index');
-    }
-
+   
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Venue $venue)
     {
-        //
+        return view('venues.edit', compact('venue'));
     }
 
     /**
@@ -193,9 +163,17 @@ class VenuesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubmitVenueRequest $request, Venue $venue)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = str_slug($data['venue_name']);
+
+        $venue->update($data);
+
+        flash('Venue Successfully Updated!', 'Venue has been successfully updated on Eventino!!');
+
+        return back();
     }
 
     /**
@@ -204,8 +182,17 @@ class VenuesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Venue $venue)
     {
-        //
+        $venue->delete();
+
+        if($request->wantsJson())
+        {
+            return response([], 200);
+        }    
+ 
+        return back();
     }
+
+
 }

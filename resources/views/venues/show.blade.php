@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 
+@section('css')
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/css/star-rating.min.css" />
+
+@endsection
+
+
 @section('content')
 
 <!-- Titlebar
@@ -12,18 +19,24 @@
 				
 				<a href="/venues" class="back-to-listings"></a>
 				<div class="property-title">
-					<h2>{{ $venue->venue_name }} <span class="property-badge">Best For {{ json_decode($venue->best_for)[0] }}</span></h2>
+					<h2>{{ $venue->venue_name }} <span class="property-badge">Best For {{ json_decode($venue->best_for)[0] }}</span> 
+            @can('update', $venue)
+             <a href="/venues/{{$venue->slug}}/edit#basic" ><i class="fa fa-edit"></i></a>
+            @endcan 
+             </h2>
 					<span>
 						<a href="#location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
 							<?= substr( $venue->address , 0, 60); ?>...
 						</a>
 					</span>
+        
+          
 				</div>
 
 				<div class="property-pricing">
-					<div><small style="color: #ccc;font-size: 14px">Starts from</small> &#8377 51,000</div>
-					<div class="sub-price"><small style="color: #ccc;font-size: 14px">Serves from</small> &#8377 450 / plate</div>
+					<div><small style="color: #ccc;font-size: 14px">Starts from</small> &#8377 {{ $venue->starts_from }}</div>
+					<div class="sub-price"><small style="color: #ccc;font-size: 14px">Serves from</small> &#8377 {{ $venue->serves_from }} / plate</div>
 				</div>
 
 
@@ -38,17 +51,20 @@
 
 <!-- Slider -->
 <div class="fullwidth-property-slider margin-bottom-50">
-	<a href="/uploads/venues/1/photos/01.jpg" data-background-image="/uploads/venues/1/photos/01.jpg" class="item mfp-gallery"></a>
-	<a href="/uploads/venues/1/photos/02.jpg" data-background-image="/uploads/venues/1/photos/02.jpg" class="item mfp-gallery"></a>
-	<a href="/uploads/venues/1/photos/03.jpg" data-background-image="/uploads/venues/1/photos/03.jpg" class="item mfp-gallery"></a>
-	<a href="/uploads/venues/1/photos/04.jpg" data-background-image="/uploads/venues/1/photos/04.jpg" class="item mfp-gallery"></a>
-	<a href="/uploads/venues/1/photos/05.jpg" data-background-image="/uploads/venues/1/photos/05.jpg" class="item mfp-gallery"></a>
-	<a href="/uploads/venues/1/photos/06.jpg" data-background-image="/uploads/venues/1/photos/06.jpg" class="item mfp-gallery"></a>
+	  @foreach($venue->photos as $photo)
+      <a href="{{ $photo->path }}" data-background-image="{{ $photo->path }}" class="item mfp-gallery"></a>
+    @endforeach 
 </div>
 
 
 <div class="container">
 	<div class="row">
+
+  @can('update', $venue)
+    <form action="{{ $venue->photosPath() }}" class="dropzone dz-clickable"><div class="dz-default dz-message"><span><i class="sl sl-icon-plus"></i> Click here or drop files to upload</span></div>
+      {{ csrf_field() }}
+    </form>
+  @endcan
 
 		<!-- Property Description -->
 		<div class="col-lg-8 col-md-7">
@@ -57,9 +73,9 @@
 				<!-- Main Features -->
 				<ul class="property-main-features">
 					<li>Area <span>{{ $venue->total_area }} sq.ft.</span></li>
-					<li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-					<li>Capacity <span>150-200</span></li>
-					<li>Reviews <span>13</span></li>
+					<li>Rating <span><i class="fa fa-star"></i> {{ $venue->avg_rating }}</span></li>
+					<li>Capacity <span>{{ $venue->min_cap }}-{{ $venue->max_cap }}</span></li>
+					<li>Reviews <span>{{ count($venue->reviews) }}</span></li>
 				</ul>
                
                @if(Request::has('platform'))
@@ -90,7 +106,11 @@
 
 
 				<!-- Description -->
-				<h3 class="desc-headline">Description</h3>
+				<h3 class="desc-headline">Description 
+           @can('update', $venue) 
+          <a href="/venues/{{$venue->slug}}/edit#details" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit Description</a>
+          @endcan
+        </h3>
 				<div class="show-more">
 					<p>
 						{{ $venue->description }}
@@ -103,35 +123,24 @@
 
 
 
-				<h3 class="desc-headline">Packages</h3>
+				<h3 class="desc-headline">Sections 
+          @can('update', $venue) 
+           <a href="/venues/{{$venue->slug}}/sections/" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit Sections</a>
+          @endcan 
+        </h3>
 				<div class="">
 
 			<!-- Toggles Container -->
 			<div class="style-2">
 
-				<!-- Toggle 1 -->
-				<div class="toggle-wrap">
-					<span class="trigger "><a href="#">Package 1<i class="fa fa-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Donec ut volutpat metus. Vivamus justo arcu, elementum a sollicitudin pellentesque, tincidunt ac enim. Proin id arcu ut ipsum vestibulum elementum.</p>
-					</div>
-				</div>
+				@forelse($venue->sections as $index => $section)
 
-				<!-- Toggle 2 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#">Package 2 <i class="sl sl-icon-plus"></i></a></span>
-					<div class="toggle-container">
-						<p>Seded ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Donec ut volutpat metus. Aliquam tortor lorem, fringilla tempor dignissim at, pretium et arcu.</p>
-					</div>
-				</div>
+          @include('venues.partials.section')
 
-				<!-- Toggle 3 -->
-				<div class="toggle-wrap">
-					<span class="trigger"><a href="#">Package 3 <i class="sl sl-icon-plus"></i> </a></span>
-					<div class="toggle-container">
-						<p>Seded ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Donec ut volutpat metus. Aliquam tortor lorem, fringilla tempor dignissim at, pretium et arcu.</p>
-					</div>
-				</div>
+        @empty
+            
+
+        @endforelse
 
 			</div>
 			<!-- Toggles Container / End -->
@@ -139,207 +148,33 @@
 
 				
 
-				<h3 class="desc-headline">Facilities Offered</h3>
+				<h3 class="desc-headline">Facilities Offered 
+         @can('update', $venue)
+           <a href="/venues/{{$venue->slug}}/edit#facilities" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit Facilities</a>
+         @endcan
+        </h3>
 				<ul class="property-features facilities margin-top-0">
 
-				@if(Request::has('platform'))
-				 <div class="logo-carousel">
-				 @endif
-                
-                <!-- Listing Item -->
-               
-				   @if(in_array("wifi", json_decode($venue->facilities)))
-				    <div class="carousel-item">
-					 <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/wifi.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Wifi</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                  @endif 
-                  
-                  @if(in_array("power", json_decode($venue->facilities)))
-                  <div class="carousel-item">
-                    <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/light.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">24-Hr Electricity</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
-                   
-                    @if(in_array("restaurant", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                    <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/food.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Multi-Cuisine Restaurant</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
+  				 @if(Request::has('platform')) 
+  				   <div class="logo-carousel">
+  				 @endif
 
+              @foreach(json_decode($venue->facilities) as $facility)
 
-                    @if(in_array("parking", json_decode($venue->facilities)))
-                   <div class="carousel-item">
-                   <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/parking.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Ample Parking</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
+                @if(View::exists("venues.facilities.$facility"))
+                     @include("venues.facilities.$facility")
+                @endif
+                 
 
-                    @if(in_array("stage", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                   <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/stage.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Stage</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
-                    @if(in_array("pa", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                   <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/pa.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">PA System</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
-                    @if(in_array("cctv", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                   <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/cctv.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">CCTV Surveillance</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
-                    @if(in_array("multilingual_staff", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                   <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/translation.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Multi-lingual Staff</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
-                    @if(in_array("outdoor_games", json_decode($venue->facilities)))
-                    <div class="carousel-item">
-                    <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/facilities/games.png">
-                     </div> 
-                     <div class="col-md-8" style="padding-top: 10px;">
-                      <b class="title">Outdoor Games</b>
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-                   @endif
+              @endforeach
 
-                   @if(Request::has('platform'))
-                   </div>
-                   @endif
+           @if(Request::has('platform'))
+             </div>
+           @endif
 				</ul>
 
-
-				<h3 class="desc-headline">Eventino Ratings</h3>
-				<ul class="property-features margin-top-0">
-				@if(Request::has('platform'))
-				 <div class="logo-carousel">
-				 @endif
-
-				    <div class="carousel-item">
-						 <li>
-	                     <div class="row">
-	                     <div class="col-md-4">
-	                      <img style="width: 60px;" src="/images/ratings/first.png">
-	                     </div> 
-	                     <div class="col-md-8">
-	                      <b class="title">Ambience</b><br>
-	                      80%
-	                     </div> 
-	                     </div> 
-	                   </li>
-                    </div>
-                    
-                      <div class="carousel-item">
-                    <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/ratings/second.png">
-                     </div> 
-                     <div class="col-md-8">
-                      <b class="title">Hospitality</b><br>
-                      90%
-                     </div> 
-                     </div> 
-                   </li>
-                   </div>
-
-                     <div class="carousel-item">
-
-                    <li>
-                     <div class="row">
-                     <div class="col-md-4">
-                      <img style="width: 60px;" src="/images/ratings/third.png">
-                     </div> 
-                     <div class="col-md-8">
-                      <b class="title">Food</b><br>
-                      70%
-                     </div> 
-                     </div> 
-                   </li>
-
-                   </div>
-
-                @if(Request::has('platform'))
-                   </div>
-                   @endif
-				</ul>
+  
+			<!-- Ratings To Be Added Later -->
 
 
 					<!-- Features -->
@@ -368,12 +203,19 @@
 				</ul>
 
 					<!-- Features -->
-				<h3 class="desc-headline">Food Available</h3>
+				<h3 class="desc-headline">Food Available 
+
+          @can('update', $venue)
+            <a href="/venues/{{$venue->slug}}/edit#food" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit</a>
+          @endcan
+          
+        </h3>
+
 				<ul class="property-features checkboxes margin-top-0">
 				 <?php $foods = json_decode($venue->food_available); ?>
 				 @if($foods != null)
 			      @foreach($foods as $item)
-					<li>{{ $item }}</li>
+					<li>{{ ucwords($item) }}</li>
 				  @endforeach
 				 @endif 	
 				</ul>
@@ -388,7 +230,7 @@
                      </div> 
                      <div class="col-md-8">
                       <b class="title">Theatre Capacity</b><br>
-                      150 People
+                      {{ $venue->theatre_cap }} People
                      </div> 
                      </div> 
                    </li>
@@ -400,7 +242,7 @@
                      </div> 
                      <div class="col-md-8">
                       <b class="title">Floating Capacity</b><br>
-                      200 People
+                      {{ $venue->floating_cap }} People
                      </div> 
                      </div> 
                    </li>
@@ -412,7 +254,7 @@
                      </div> 
                      <div class="col-md-8">
                       <b class="title">Cluster Capacity</b><br>
-                      40 People
+                      {{ $venue->cluster_cap }} People
                      </div> 
                      </div> 
                    </li>
@@ -420,8 +262,14 @@
 				</ul>
 
 
-                <h3 class="desc-headline">Venue Policies</h3>
-				<ul class="property-features terms margin-top-0">
+                <h3 class="desc-headline">Venue Policies 
+                 @can('update', $venue)
+                  <a href="/venues/{{$venue->slug}}/edit#policies" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit Policies</a>
+                 @endcan 
+                </h3>
+				
+
+        <ul class="property-features terms margin-top-0">
 					<li>Liquor Allowed : {!! in_array("liquor_allowed", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' !!}</li>
 					<li>DJ Allowed : {!! in_array("dj_allowed", json_decode($venue->parameters)) ? '<span>Allowed</span>' : '<span class="danger">Not Allowed</span>' !!}</li>
 					@if(in_array("liquor_allowed", json_decode($venue->parameters)))
@@ -448,12 +296,74 @@
 
 
 				<!-- Location -->
-				<h3 class="desc-headline no-border" id="location">Location</h3>
+				<h3 class="desc-headline no-border" id="location">Location 
+          @can('update', $venue)
+           <a href="/venues/{{$venue->slug}}/edit#location" style="font-size: 16px;" ><i class="fa fa-edit"></i> Edit Location</a>
+          @endcan
+        </h3>
 				<div id="propertyMap-container">
 					<div id="propertyMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
 					<a href="#" id="streetView">Street View</a>
 				</div>
+       
+       
+       <h3 class="desc-headline">Reviews &amp; Ratings</h3>
+       @if(Auth::check()) 
+           <form method="POST" action="/venues/{{$venue->slug}}/reviews">
 
+             @include('layouts.errors')
+
+             {{ csrf_field() }}
+             <!-- Description -->
+              <div class="form">
+                <textarea placeholder="Write about this place..."  name="comment" cols="40" rows="3" id="comment" spellcheck="true">{{ old('comment') }}</textarea>
+                </div>
+
+                <input id="input-7-xs" name="rating" class="rating rating-loading" value="1" data-min="0" data-max="5" data-step="0.5" data-size="xs"><hr/>
+            
+                <div class="divider"></div>
+                <button type="submit" class="button preview margin-top-5">Post Review <i class="fa fa-arrow-circle-right"></i></button>
+
+              
+           </form>
+
+           @else
+
+            <div class="notification notice large margin-bottom-55">
+              <p>Login to review this place! <a href="/login"><b>Login Here</b></a></p>
+            </div>
+
+          @endif
+
+       <hr/>
+
+       @foreach($venue->reviews as $review)
+
+          <div style="border: 1px solid #e3e3e3;padding: 15px;margin-top: 15px;">
+            <h4>{{ $review->user->name }} <small>{{ $review->created_at->diffForHumans() }}</small>
+            @if(auth()->id() == $review->user->id)
+            <form action="/venues/{{$venue->slug}}/reviews/{{ $review->id }}" method="POST" class="pull-right">
+              {{ csrf_field() }}
+              
+              {{ method_field('DELETE') }}
+
+              <button type="submit" class="btn btn-link"><i style="font-size: 22px;" class="fa fa-trash"></i></button>
+              
+            </form>
+            @endif
+
+            </h4>
+            <hr/>
+            <p>{{ $review->comment }}</p>
+
+            <input id="input-8-xs" name="rating" class="rating rating-loading" data-display-only="true" data-readonly="true" value="{{ $review->rating }}" data-min="0" data-max="5" data-step="0.5" data-size="xs" data-show-clear="false">
+            
+
+          </div>
+
+
+
+       @endforeach
 
 
 			</div>
@@ -468,12 +378,25 @@
 
 				<!-- Widget -->
 				<div class="widget margin-bottom-30">
-					<button class="widget-button"><i class="fa fa-share"></i> Share</button>
-					<button class="widget-button save" data-save-title="Save" data-saved-title="Saved"><span class="like-icon"></span></button>
+					<button id="share" data-toggle="modal" data-target="#shareModal" class="widget-button"><i class="fa fa-share"></i> Share</button>
+
+          @if(Auth::check())
+         
+           @if(!$venue->isFavourited)
+            <button id="favourite" onclick="toggleFavourite()" class="widget-button save" data-save-title="Save" data-saved-title="Saved"><span class="like-icon"></span></button>
+
+          @else
+            <button id="unfavourite" onclick="toggleFavourite()" class="widget-button save liked" data-save-title="Save" data-saved-title="Saved"><span class="like-icon liked"></span></button>
+
+          @endif  
+        @endif
+              
+           
+					
 				</div>
 				<!-- Widget / End -->
 
-               @if(!Request::has('platform'))
+       @if(!Request::has('platform'))
 				<!-- Widget -->
 				<div class="widget">
 
@@ -483,12 +406,22 @@
 							<div class="agent-photo"><img src="/images/avatar4.png" alt="" /></div>
 							<div class="agent-details">
 								<h4><a href="#">{{ $venue->contact_name }}</a></h4>
-								<span><i class="fa fa-phone"></i>{{ $venue->phone }}</span>
+								<span><i class="fa fa-phone"></i>{{ $venue->phone }}</span><br>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 
-						<button class="button fullwidth margin-top-5">Get Price &amp; Availability</button>
+
+            
+            <input type="text" value="Landline : {{ $venue->landline }}" readonly>
+            <input type="text" value="Website : {{ $venue->website }}" readonly>
+
+           
+           @can('update', $venue)
+            <a href="/venues/{{$venue->slug}}/edit#contact" class="button fullwidth margin-top-5"><i class="fa fa-edit"></i> Edit Contact Info</a>
+           @else
+           	<a href="tel:{{ $venue->phone }}" class="button fullwidth margin-top-5">Get Price &amp; Availability</a>
+           @endcan 
 					</div>
 					<!-- Agent Widget / End -->
 
@@ -607,4 +540,52 @@
 <div class="margin-top-55"></div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sharing Url</h4>
+      </div>
+      <div class="modal-body">
+      <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-link"></i></div>
+      
+        <input type="text" class="form-control" readonly value="https://www.myeventino.com/venues/{{$venue->slug}}">
+    </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+@endsection
+
+
+
+@section('js')
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/js/star-rating.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script type="text/javascript">
+    function toggleFavourite(argument) {
+
+      axios.post("/venues/{{ $venue->slug }}/favourites", {})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
+     
+
+  </script>
+
+  
 @endsection

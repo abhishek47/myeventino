@@ -14,13 +14,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>My Profile</h2>
+				<h2>{{ auth()->user()->name }} - Profile</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li>My Profile</li>
+						<li>Profile</li>
 					</ul>
 				</nav>
 
@@ -38,40 +38,7 @@
 	<div class="row">
 
 
-		<!-- Widget -->
-		<div id="account-nav" class="{{ Request::has('platform') ? 'col-md-12' : 'col-md-4' }}">
-
-				<div class="my-account-nav-container">
-					
-					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Account</li>
-						<li><a href="/account/profile" class="current"><i class="fa fa-user"></i> My Profile</a></li>
-						<li><a href="/account/favourites"><i class="fa fa-star"></i> Favourites</a></li>
-					</ul>
-					
-					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Listings</li>
-						<li><a href="/account/listings"><i class="fa fa-bars"></i> My Venues</a></li>
-						<li><a href="/venues/new"><i class="fa fa-edit"></i> Submit New Venue</a></li>
-						<li><a href="/account/events"><i class="fa fa-map"></i> Showcase Events</a></li>
-					</ul>
-
-					<ul class="my-account-nav">
-						<li><a href="/account/changepassword"><i class="fa fa-lock"></i> Change Password</a></li>
-						<li><a href="/account/logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
-					</ul>
-
-					<ul class="my-account-nav">
-						<li class="sub-nav-title">Manage Listings</li>
-						<li><a href="/account/listings"><i class="fa fa-bars"></i> My Venues</a></li>
-						<li><a href="/venues/new"><i class="fa fa-edit"></i> Submit New Venue</a></li>
-						<li><a href="/account/events"><i class="fa fa-map"></i> Showcase Events</a></li>
-					</ul>
-
-
-				</div>
-
-		</div>
+		@include('user.partials.sidebar')
         
         @if(!Request::has('platform'))
 		<div class="col-md-8">
@@ -79,9 +46,13 @@
 
 
 				<div class="col-md-8 my-profile">
-					<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
+					<h4 class="margin-top-0 margin-bottom-30">Account Details</h4>
 
-					<form method="GET" action="/user/update">
+					<form method="POST" action="/user/account">
+
+					@include('layouts.errors')
+
+					{{ csrf_field() }}
 
 					<label>Your Name</label>
 					<input name="name" value="{{ Auth::user()->name }}" type="text">
@@ -91,16 +62,19 @@
 					<input name="email" value="{{ Auth::user()->email }}" type="text">
 
 					<label>Mobile No</label>
-					<input name="phone" value="" placeholder="Enter Mobile No" type="text">
+					<input name="phone" value="{{ Auth::user()->profile ? Auth::user()->profile->phone  : ''}}" placeholder="Enter Mobile No" type="text">
 
 					<label>Address</label>
-					<input name="address" value="" placeholder="Your Address" type="text">
+					<input name="address" value="{{ Auth::user()->profile ? Auth::user()->profile->address : '' }}" placeholder="Your Address" type="text">
 
 					<label>State</label>
-					<input name="state" value="Maharashtra" type="text">
+					<input name="state" value="{{ Auth::user()->profile ? Auth::user()->profile->state : 'Maharashtra' }}" type="text">
 				    
 				    <label>City</label>
-					<input name="city" value="Nashik" type="text">
+					<input name="city" value="{{ Auth::user()->profile ? Auth::user()->profile->city : 'Nashik' }}" type="text">
+
+					<label>Country</label>
+					<input name="country" value="{{ Auth::user()->profile ? Auth::user()->profile->country : 'India' }}" type="text">
 
 					<label>Pincode</label>
 					<input name="pincode" value="422002" type="text">

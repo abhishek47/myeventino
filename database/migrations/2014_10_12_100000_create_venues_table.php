@@ -27,7 +27,6 @@ class CreateVenuesTable extends Migration
 
             $table->double('total_area');
 
-            $table->integer('sections');
 
             $table->string('address');
             $table->string('city');

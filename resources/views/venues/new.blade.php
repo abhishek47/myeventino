@@ -32,10 +32,14 @@
 	<div class="col-md-12">
 		<div class="submit-page">
 
-		<div class="notification notice large margin-bottom-55">
-			<h4>Don't Have an Account?</h4>
-			<p>If you don't have an account your account will be created by entering your email address in contact details section. A password will be automatically emailed to you.</p>
-		</div>
+		@if(Auth::guest())
+
+			<div class="notification notice large margin-bottom-55">
+				<h4>Don't Have an Account?</h4>
+				<p>If you don't have an account your account will be created by entering your email address in contact details section. A password will be automatically emailed to you.</p>
+			</div>
+
+		@endif
       
 
       @include('layouts.errors')
@@ -55,7 +59,7 @@
 			<!-- Title -->
 			<div class="form">
 				<h5>Venue Title <i class="tip" data-tip-content="Type title that will also contains an unique feature of your property (e.g. renovated, air contidioned)"></i></h5>
-				<input class="search-field" name="venue_name" type="text" value="" required="true" />
+				<input class="search-field" name="venue_name" type="text" value="{{ old('venue_name') }}" required="true" />
 			</div>
 
 			<!-- Row -->
@@ -72,7 +76,7 @@
                         <option value="resort" >Resort</option>
                         <option value="plot" >Plot</option>
                         <option value="conference" >Conference Room</option>
-
+                    	<option value="other" >Other</option>
 					</select>
 				</div>
 
@@ -81,11 +85,11 @@
 					<h5>Best For</h5>
 					<select class="chosen-select-no-single" name="best_for[]"  multiple="true" required="true">
 						<option label="blank"></option>		
-						<option>Wedding</option>
-						<option>Party</option>
-						<option>Conference</option>
-						<option>Ceremonies</option>
-						<option>Other</option>
+						<option value="wedding">Wedding</option>
+						<option value="party">Party</option>
+						<option value="conference">Conference</option>
+						<option value="ceremonies">Ceremonies</option>
+						<option value="other">Other</option>
 					</select>
 				</div>
 
@@ -102,17 +106,17 @@
 				<div class="col-md-6">
 					<h5>Total Area</h5>
 					<div class="select-input disabled-first-option">
-						<input type="text" name="total_area" data-unit="Sq Ft" required="true">
+						<input type="text" name="total_area" data-unit="Sq Ft" value="{{ old('total_area') }}" required="true">
 					</div>
 				</div>
 
-				<!-- Rooms -->			
+				<!-- Rooms 		
 				<div class="col-md-6">
 					<h5>No of Sections <i class="tip" data-tip-content="How many different sections like halls,lawns etc. your venue has."></i></h5>
 					<div class="select-input disabled-first-option">
 						<input type="text" name="sections" data-unit="Count" required="true">
 					</div>
-				</div>
+				</div>-->	
 
 				
 
@@ -140,31 +144,31 @@
 				<!-- Address -->
 				<div class="col-md-6">
 					<h5>Address</h5>
-					<input name="address" type="text" required="true">
+					<input name="address" type="text" value="{{ old('address') }}" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>City</h5>
-					<input name="city" type="text" required="true">
+					<input name="city" type="text" value="{{ old('city') }}" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>State</h5>
-					<input name="state" type="text" required="true">
+					<input name="state" type="text" value="{{ old('state') }}" required="true">
 				</div>
 
 				<!-- City -->
 				<div class="col-md-6">
 					<h5>Country</h5>
-					<input name="country" type="text" required="true">
+					<input name="country" type="text" value="{{ old('country') }}" required="true">
 				</div>
 
 				<!-- Zip-Code -->
 				<div class="col-md-6">
 					<h5>Zip-Code</h5>
-					<input name="pincode" type="text" required="true">
+					<input name="pincode" type="text" value="{{ old('pincode') }}" required="true">
 				</div>
 
 			</div>
@@ -181,7 +185,7 @@
 			<!-- Description -->
 			<div class="form">
 				<h5>Description</h5>
-				<textarea  name="description" cols="40" rows="3" id="description" spellcheck="true"></textarea>
+				<textarea  name="description" cols="40" rows="3" id="description" spellcheck="true">{{ old('description') }}</textarea>
 			</div>
 
 			<!-- Row -->
@@ -194,7 +198,7 @@
 						<option label="blank"></option>	
 						<?php $year = date('Y'); ?>
 						@for($i = $year; $i >= 1950; $i--)
-						 <option>{{ $i }}</option>
+						 <option {{ old('venue_since') == $i ? 'selected' : '' }}>{{ $i }}</option>
 						@endfor
 					</select>
 				</div>
@@ -204,12 +208,12 @@
 					<h5>Rooms Available</h5>
 					<select name="rooms" class="chosen-select-no-single" required="true">
 						<option label="blank"></option>	
-						<option value="0">Not Available</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">More than 4</option>
+						<option value="0" {{ old('rooms') == 0 ? 'selected' : '' }}>Not Available</option>
+						<option value="1" {{ old('rooms') == 1 ? 'selected' : '' }}>1</option>
+						<option value="2" {{ old('rooms') == 2 ? 'selected' : '' }}>2</option>
+						<option value="3" {{ old('rooms') == 3 ? 'selected' : '' }}>3</option>
+						<option value="4" {{ old('rooms') == 4 ? 'selected' : '' }}>4</option>
+						<option value="5" {{ old('rooms') == 5 ? 'selected' : '' }}>More than 4</option>
 					</select>
 				</div>
 
@@ -217,7 +221,7 @@
 				<div class="col-md-6">
 					<h5>Distance From Railway Station</h5>
 					<div class="select-input disabled-first-option">
-						<input name="railway" type="text" data-unit="Km" >
+						<input name="railway" type="text" value="{{ old('railway') }}" data-unit="Km" >
 					</div>
 				</div>
 
@@ -225,7 +229,7 @@
 				<div class="col-md-6">
 					<h5>Distance From Airport</h5>
 					<div class="select-input disabled-first-option">
-						<input name="airport" type="text" data-unit="Km" >
+						<input name="airport" type="text" value="{{ old('airport') }}" data-unit="Km" >
 					</div>
 				</div>
 
@@ -233,7 +237,7 @@
 				<div class="col-md-12">
 					<h5>Exclusive Features</h5>
 						
-                  <input type="text" name="exclusive_features" class="rs-selectize-tags" value="Educated Staff,Green Place" >
+                  <input type="text" name="exclusive_features" value="{{ old('exclusive_features') }}" class="rs-selectize-tags" value="Educated Staff,Green Place" >
 					
 				</div>
 
@@ -359,31 +363,31 @@
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Name</h5>
-					<input name="contact_name" type="text" required="true">
+					<input name="contact_name" type="text" value="{{ old('contact_name') }}" required="true">
 				</div>
 
 				<!-- Email -->
 				<div class="col-md-4">
 					<h5>E-Mail</h5>
-					<input name="email" type="text" required="true">
+					<input name="email" type="text" value="{{ old('email') }}" required="true">
 				</div>
 
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Phone</h5>
-					<input name="phone" type="text" required="true">
+					<input name="phone" type="text" value="{{ old('phone') }}" required="true">
 				</div>
 
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Landline</h5>
-					<input name="landline" type="text" required="true">
+					<input name="landline" type="text" value="{{ old('landline') }}" required="true">
 				</div>
 
 				<!-- Name -->
 				<div class="col-md-4">
 					<h5>Website</h5>
-					<input name="website" type="text" required="true">
+					<input name="website" type="text" value="{{ old('website') }}" required="true">
 				</div>
 
 				

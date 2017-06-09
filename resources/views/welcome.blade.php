@@ -3,124 +3,6 @@
 
 @section('content')
 
-<style type="text/css">
-    .twitter-typeahead {
-        width: 100%;
-    }
-
-   .tt-dataset-venuesList {
-    top: 80%;
-    width: 22.7em;
-   }
-
-   .Typeahead-menu {
-  position: absolute;
-  top: 95%;
-  left: 2.5%;
-  z-index: 100;
-  display: none;
-  width: 95%;
-  margin-bottom: 20px;
-  overflow: hidden;
-  background-color: #fff;
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-          box-shadow: 0px 0px 0px 1px green;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-          box-shadow: 0 5px 10px rgba(0,0,0,.2);
-}
-
-.Typeahead-menu.is-open {
-  display: block;
-}
-
-.Typeahead-selectable {
-  cursor: pointer;
-}
-
-.Typeahead-selectable + .Typeahead-selectable {
-  border-top: 1px solid #ccd6dd;
-}
-
-   .ProfileCard {
-  position: relative;
-  padding: 8px;
-}
-
-.ProfileCard-avatar {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 52px;
-  height: 52px;
-  border: 2px solid #ccd6dd;
-  border-radius: 5px;
-}
-
-.ProfileCard:hover .ProfileCard-avatar {
-  border-color: #f5f8fa;
-}
-
-.ProfileCard-details {
-  min-height: 60px;
-  padding-left: 60px;
-}
-
-.ProfileCard-realName,
-.ProfileCard-screenName {
-  display: inline-block;
-}
-
-.ProfileCard-realName {
-  font-weight: 700;
-}
-
-.ProfileCard-screenName {
-  color: #8899a6;
-}
-
-.ProfileCard-description {
-  margin-top: 5px;
-  font-size: 14px;
-  line-height: 18px;
-}
-
-.ProfileCard-stats {
-  float: right;
-  text-align: right;
-}
-
-.ProfileCard-stat {
-  display: inline-block;
-  font-size: 12px;
-  line-height: 16px;
-  text-transform: uppercase;
-}
-
-.ProfileCard-stat-label {
-  color: #8899a6;
-  font-weight: 500;
-}
-
-.ProfileCard-stat + .ProfileCard-stat {
-  margin-left: 5px;
-}
-
-.ProfileCard:hover,
-.ProfileCard.is-active {
-  color: #fff;
-  background: #55acee;
-}
-
-.ProfileCard:hover .ProfileCard-screenName,
-.ProfileCard:hover .ProfileCard-stat-label,
-.ProfileCard.is-active .ProfileCard-screenName,
-.ProfileCard.is-active .ProfileCard-stat-label {
-  color: #fff;
-}
-</style>
 <!-- Banner
 ================================================== -->
 <div class="parallax" id="parallax-banner" style="" data-background="/images/slider.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600"  >
@@ -140,6 +22,8 @@
                       <form method="GET" action="/venues">
 
                          <!-- Main Search Input -->
+
+                         
                         
 
                         <!-- Property Type -->
@@ -156,7 +40,7 @@
                             </select>
                         </div>
 
-                        <!-- Status -->
+                         <!-- Status -->
                         <div class="col-md-3">
                             <select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single" >
                                 <option value="0">-- Venue Type --</option>
@@ -169,6 +53,8 @@
                                 <option value="plot">Plots</option>
                             </select>
                         </div>
+
+                       
 
                         <div class="col-md-6">
                             <div class="main-search-input">
@@ -206,94 +92,12 @@
 
 </div>
 
-<!-- Content
-================================================== -->
-<div class="container">
-    <div class="row">
-    
-        <div class="col-md-12">
-            <h3 class="headline margin-bottom-25 margin-top-65">Venues Near You &nbsp; <small><i class="fa fa-map-marker"></i> Nashik</small> </h3>
-        </div>
-        
-        <!-- Carousel -->
-        <div class="col-md-12">
-            <div class="carousel">
-
-
-            @foreach($venues as $venue)
-
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                <div class="listing-item">
-
-                        <a href="/venues/show/{{ $venue->slug }}" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Elite</span>
-                                <span><i class="fa fa-map-marker"></i> {{ $venue->city }}</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-price">&#8377 900 <i>hourly</i></span>
-                                <span class="like-icon"></span>
-                            </div>
-
-                            
-                            <div class="listing-carousel">
-                                <div><img src="/images/listing-02.jpg" alt=""></div>
-                                <div><img src="/images/listing-02.jpg" alt=""></div>
-                                <div><img src="/images/listing-02.jpg" alt=""></div>
-                            </div>
-
-                        </a>
-                        
-                        <div class="listing-content">
-
-                            <div class="listing-title">
-                                <h4><a href="/venues/show/{{ $venue->slug }}">{{ $venue->venue_name }}</a></h4>
-                                <a href="https://maps.google.com/maps?q=Racca+Estate,+Old+Gangapur+Naka+Hanuman+Wadi,+Hanumanwadi+Road,+Panchavati,+Nashik,+Maharashtra+422003,+India" class="listing-address popup-gmaps">
-                                    <i class="fa fa-map-marker"></i>
-                                    <?= substr( $venue->address , 0, 60); ?>...å
-                                </a>
-                            </div>
-
-                            <ul class="listing-features">
-                                <li>Rating <span><i class="fa fa-star"></i> 3.5</span></li>
-                                <li>Capacity <span>100-200</span></li>
-                                <li>Reviews <span>1</span></li>
-                            </ul>
-
-                            <div class="listing-footer">
-                                <a href="#"><i class="fa fa-user"></i> 36 Favourites</a>
-                                <span><i class="fa fa-eye"></i> 19 Views</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-                <!-- Listing Item / End -->
-                  </div>
-               
-               @endforeach
-                
-                
-
-
-
-            </div>
-        </div>
-        <!-- Carousel / End -->
-
-    </div>
-</div>
-
 
 
 <!-- Fullwidth Section -->
-<section class="fullwidth margin-top-105 hidden-xs" data-background-color="#f7f7f7" style="margin-bottom: 0;">
+<section class="fullwidth margin-top-0 hidden-xs" data-background-color="#f7f7f7" style="margin-bottom: 0;">
 
-    <!-- Box Headline -->
-    <h3 class="headline-box">Our Features</h3>
+   
     
     <!-- Content -->
     <div class="container">
@@ -332,12 +136,12 @@
                 <div class="icon-box-1">
 
                     <div class="icon-container">
-                        <i class="fa fa-check-square-o"></i>
+                        <i class="fa fa-users"></i>
                         
                     </div>
 
-                    <h3>Easy To Use</h3>
-                    <p>An advanced search panel that help you find the best venue that caters your needs.</p>
+                    <h3>Vendors</h3>
+                    <p>An advanced search panel that help you find the best vendor that caters your needs.</p>
                 </div>
             </div>
 
@@ -346,11 +150,11 @@
                 <div class="icon-box-1">
 
                     <div class="icon-container">
-                        <i class="fa fa-sitemap"></i>
+                        <i class="fa fa-check-square-o"></i>
                         
                     </div>
 
-                    <h3>Categorised</h3>
+                    <h3>Planner</h3>
                     <p>Here everything is managed and categorised that shows you exactly what you want.</p>
                 </div>
             </div>
@@ -359,6 +163,92 @@
     </div>
 </section>
 <!-- Fullwidth Section / End -->
+
+<!-- Content
+================================================== -->
+<div class="container margin-bottom-55">
+    <div class="row">
+    
+        <div class="col-md-12">
+            <h3 class="headline margin-bottom-25 margin-top-65">Venues Near You &nbsp; <small><i class="fa fa-map-marker"></i> Nashik</small> </h3>
+        </div>
+        
+        <!-- Carousel -->
+        <div class="col-md-12">
+            <div class="carousel">
+
+
+            @foreach($venues as $venue)
+
+                <!-- Listing Item -->
+                <div class="carousel-item">
+                <div class="listing-item">
+
+                        <a href="/venues/{{ $venue->slug }}" class="listing-img-container">
+
+                            <div class="listing-badges">
+                                <span class="featured">Elite</span>
+                                <span><i class="fa fa-map-marker"></i> {{ $venue->city }}</span>
+                            </div>
+
+                            <div class="listing-img-content">
+                                <span class="listing-price">&#8377 {{ $venue->serves_from }} <i>per plate</i></span>
+                                @if(!$venue->isFavourited())
+                                <span  class="like-icon" onclick="toggleFavourite({{$venue->id}})"></span>
+
+                                @else
+                                 <span  class="like-icon liked" onclick="toggleFavourite({{$venue->id}})"></span>
+
+                                @endif 
+
+                                <i hidden="true" id="{{$venue->id}}" data-slug="{{$venue->slug}}"></i>
+                            </div>
+
+                            
+                            <div class="listing-carousel">
+                                @foreach($venue->photos as $photo)
+                                  <div><img src="{{ asset($photo->thumbnail_path) }}" alt=""></div>
+                                @endforeach 
+                            </div>
+
+                        </a>
+                        
+                        <div class="listing-content">
+
+                            <div class="listing-title">
+                                <h4><a href="/venues/{{ $venue->slug }}">{{ $venue->venue_name }}</a><br>
+                                    @foreach($venue->types as $type)
+                                  <span class="badge">{{ ucwords($type) }}</span> 
+                                 @endforeach
+                                </h4>
+                                <a href="https://maps.google.com/maps?q=Racca+Estate,+Old+Gangapur+Naka+Hanuman+Wadi,+Hanumanwadi+Road,+Panchavati,+Nashik,+Maharashtra+422003,+India" class="listing-address popup-gmaps">
+                                    <i class="fa fa-map-marker"></i>
+                                    <?= substr( $venue->address , 0, 60); ?>...
+                                </a>
+                            </div>
+
+                            
+
+                        </div>
+
+                    </div>
+                <!-- Listing Item / End -->
+                  </div>
+               
+               @endforeach
+                
+                
+
+
+
+            </div>
+        </div>
+        <!-- Carousel / End -->
+
+    </div>
+</div>
+
+
 
 <div class="parallax margin-bottom-30" data-background="images/listings-parallax.jpg" data-color="#36383e" data-color-opacity="0.7" data-img-width="800" data-img-height="505" style="background-image: url(&quot;images/listings-parallax.jpg&quot;); background-attachment: fixed; background-size: 1866.14px 1178px; background-position: 50% -53.0945px;"><div class="parallax-overlay" style="background-color: rgb(54, 56, 62); opacity: 0.7;"></div>
 
@@ -394,168 +284,37 @@
         <!-- Carousel -->
         <div class="col-md-12">
             <div class="carousel">
+
+             @foreach($events as $event)
                 
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
+                    <!-- Listing Item -->
+                    <div class="carousel-item">
+                        <div class="listing-item compact">
 
-                        <a href="single-property-page-1.html" class="listing-img-container">
+                            <a href="single-property-page-1.html" class="listing-img-container">
 
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
+                                <div class="listing-badges">
+                                    <span class="featured">Featured</span>
+                                    <span><i class="fa fa-map-marker"></i> {{ $event->city }}</span>
+                                </div>
 
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
+                                <div class="listing-img-content">
+                                    <span class="listing-compact-title">{{ $event->name }} <i> &#8377 {{$event->starting_price }}/person</i></span>
 
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
+                                    <ul class="listing-hidden-content">
+                                        <li>Date <span>{{ $event->event_dates }}</span></li>
+                                        <li>Timings <span>{{ $event->event_timings }}</span></li>
+                                    </ul>
+                                </div>
 
-                            <img src="/images/single-property-01.jpg" alt="">
-                        </a>
+                                <img src="{{ count($event->photos) ? $event->photos()->latest()->first()->thumbnail_path : '' }}" alt="">
+                            </a>
 
+                        </div>
                     </div>
-                </div>
-                <!-- Listing Item / End -->
+                    <!-- Listing Item / End -->
 
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
-
-                        <a href="single-property-page-2.html" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
-
-                            <img src="/images/single-property-02.jpg" alt="">
-                        </a>
-
-                    </div>
-                </div>
-                <!-- Listing Item / End -->
-
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
-
-                        <a href="single-property-page-1.html" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
-
-                            <img src="/images/single-property-03.jpg" alt="">
-                        </a>
-
-                    </div>
-                </div>
-                <!-- Listing Item / End -->
-
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
-
-                        <a href="single-property-page-3.html" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
-
-                            <img src="/images/single-property-04.jpg" alt="">
-                        </a>
-
-                    </div>
-                </div>
-                <!-- Listing Item / End -->
-
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
-
-                        <a href="single-property-page-2.html" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
-
-                            <img src="/images/single-property-05.jpg" alt="">
-                        </a>
-
-                    </div>
-                </div>
-                <!-- Listing Item / End -->
-
-                <!-- Listing Item -->
-                <div class="carousel-item">
-                    <div class="listing-item compact">
-
-                        <a href="single-property-page-1.html" class="listing-img-container">
-
-                            <div class="listing-badges">
-                                <span class="featured">Featured</span>
-                                <span><i class="fa fa-map-marker"></i> Nashik</span>
-                            </div>
-
-                            <div class="listing-img-content">
-                                <span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-                                <ul class="listing-hidden-content">
-                                    <li>Date <span>Feb 23 - 24</span></li>
-                                    <li>Timings <span>10:00 AM - 2:00 PM</span></li>
-                                </ul>
-                            </div>
-
-                            <img src="/images/single-property-06.jpg" alt="">
-                        </a>
-
-                    </div>
-                </div>
-                <!-- Listing Item / End -->
+              @endforeach
 
             </div>
         </div>
@@ -667,6 +426,8 @@
 
 @section('js')
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function($) {
     // Set the Options for "Bloodhound" suggestion engine
@@ -679,52 +440,31 @@ jQuery(document).ready(function($) {
         queryTokenizer: Bloodhound.tokenizers.whitespace
     });
 
-    $("#venue-search-input").typeahead({
-    menu: $('.Typeahead-menu'),
-        hint: true,
-        highlight: true,
-        minLength: 1,
-        classNames: {
-      open: 'is-open',
-      empty: 'is-empty',
-      cursor: 'is-active',
-      suggestion: 'Typeahead-suggestion',
-      selectable: 'Typeahead-selectable'
-    }
-    }, {
-        source: engine.ttAdapter(),
-
-        // This will be appended to "tt-dataset-" to form the class name of the suggestion menu.
-        name: 'venuesList',
-
-        // the key from the array we want to display (name,id,email,etc...)
-        templates: {
-            empty: [
-                '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
-            ],
-          suggestion: function (data) {
-                return '<div class="ProfileCard u-cf">' +
-                        
-                        '<div class="ProfileCard-details">' +
-                          '<div class="ProfileCard-realName">' + data.venue_name + '</div>' +
-                          '<div class="ProfileCard-screenName">@' + data.city + '</div>' + 
-                          '<div class="ProfileCard-description">' + data.address + '</div>' +
-                        '</div>' +
-
-                        '<div class="ProfileCard-stats">' +
-                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Reviews:</span> 45</div>' + 
-                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Rating:</span>3.5</div>' +
-                          '<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Favourites:</span>12</div>' +
-                        '</div>' +
-                      '</div>' 
-
-      }
-        }
-    });
-
-    
+        
 
         
 });
+
+
+
+    function toggleFavourite(id) {
+        console.log('clicked');
+      
+       
+      var slug = $('#' + id).data('slug');
+
+      console.log(id);
+       
+      axios.post("/venues/" + slug + "/favourites", {})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
+     
 </script>
 @endsection
+

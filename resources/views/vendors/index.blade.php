@@ -9,224 +9,406 @@
 <i class="fa fa-filter my-float"></i>
 </a>
 
-<!-- Titlebar
+<!-- Search
 ================================================== -->
-@if(!Request::has('platform'))
-<div id="titlebar">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
+<section id="search-panel" class="search margin-bottom-50 hidden-xs">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
 
-				<h2>Vendors</h2>
-				<span>List of all vendors and services required for an event!</span>
+			<!-- Title -->
+			<h3 class="search-title">Find perfect vendors as per your need!</h3>
+
+			<!-- Form -->
+			<div class="main-search-box no-shadow">
+
+			 <form method="GET">
+
+
+				<!-- Row With Forms -->
+				<div class="row with-forms">
+
+					<!-- Status -->
+					<div class="col-md-6">
+						
+                      <select class="chosen-select-no-single" name="vendor_types[]" multiple="true"  data-placeholder="Vendor Types">
+							 @if(Request::has('vendor_types'))
+								<option value="0" {{ Request::get('vendor_types') == '0' ? 'selected' : '' }}>-- Vendor Types --</option>
+								<option value="play" {{ Request::get('vendor_types') == 'play' ? 'selected' : '' }}>Play</option>
+								<option value="conference" {{ Request::get('vendor_types') == 'conference' ? 'selected' : '' }}>Conferences</option>
+		                        <option value="workshop" {{ Request::get('vendor_types') == 'workshop' ? 'selected' : '' }}>Workshop</option>
+		                        <option value="exihibition"{{ Request::get('vendor_types') == 'exihibition' ? 'selected' : '' }}>Exhibition</option>
+		                        <option value="concert" {{ Request::get('vendor_types') == 'concert' ? 'selected' : '' }} >Concert</option>
+		                        <option value="music-film" {{ Request::get('vendor_types') == 'music-film' ? 'selected' : '' }}>Musical/Film Festivals</option>
+		                        <option value="fest" {{ Request::get('vendor_types') == 'fest' ? 'selected' : '' }}>Fest</option>
+		                        <option value="party" {{ Request::get('vendor_types') == 'party' ? 'selected' : '' }}>Parites</option>
+		                        <option value="club-pub" {{ Request::get('vendor_types') == 'club-pub' ? 'selected' : '' }}>Club and Pub Events</option>
+		                        <option value="standup" {{ Request::get('vendor_types') == 'standup' ? 'selected' : '' }}>Stand-Up Comedy</option>
+		                        <option value="kids" {{ Request::get('vendor_types') == 'kids' ? 'selected' : '' }}>Kids Activity</option>
+		                        <option value="adventure" {{ Request::get('vendor_types') == 'adventure' ? 'selected' : '' }}>Adventure</option>
+		                        <option value="arts" {{ Request::get('vendor_types') == 'arts' ? 'selected' : '' }}>Arts &amp; Culture</option>
+		                        <option value="travel" {{ Request::get('vendor_types') == 'travel' ? 'selected' : '' }}>Travel</option>
+		                        <option value="entertainment" {{ Request::get('vendor_types') == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
+		                        <option value="others" {{ Request::get('vendor_types') == 'others' ? 'selected' : '' }}>Others</option>
+
+	                          @else 
+	                          	<option label="blank"></option>	
+								<option value="play" >Photographer</option>
+								<option value="conference" >Mehendi</option>
+		                        <option value="workshop">Bride Makeup</option>
+		                        <option value="exihibition" >Exhibition</option>
+		                        <option value="concert" >Concert</option>
+		                        <option value="music-film">Musical/Film Festivals</option>
+		                        <option value="fest">Fest</option>
+		                        <option value="party">Parites</option>
+		                        <option value="club-pub">Club and Pub Events</option>
+		                        <option value="standup">Stand-Up Comedy</option>
+		                        <option value="kids">Kids Activity</option>
+		                        <option value="adventure">Adventure</option>
+		                        <option value="arts">Arts &amp; Culture</option>
+		                        <option value="travel">Travel</option>
+		                        <option value="entertainment">Entertainment</option>
+		                        <option value="others">Others</option>
+
+						
+
+	                          @endif  
+						</select>
+
+					</div>
+
+					
+
+					<!-- Main Search Input -->
+					<div class="col-md-6">
+						<div class="main-search-input">
+							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ Request::has('location') ? Request::get('location') : '' }}"/>
+							<button class="button" type="submit">Search</button>
+						</div>
+					</div>
+
+				</div>
+				<!-- Row With Forms / End -->
+
+
+				<!-- Row With Forms -->
+				<div class="row with-forms">
+
+						<!-- Status -->
 				
-				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Listings</li>
-					</ul>
-				</nav>
 
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<select data-placeholder="Experience" name="experience" class="chosen-select-no-single">
+							 @if(Request::has('event_time'))
+							 	<option label="blank" value="0" {{ Request::get('experience') == '0' ? 'selected' : '' }}></option>	
+							 	<option value="all" {{ Request::get('experience') == 'all' ? 'selected' : '' }} >All</option>
+								<option value="all" {{ Request::get('experience') == '1' ? 'selected' : '' }} >1+ Year</option>
+                                <option value="10" {{ Request::get('experience') == '3' ? 'selected' : '' }} >3+ Years</option>
+                                <option value="12" {{ Request::get('experience') == '5' ? 'selected' : '' }} >5+ Years</option>
+                                <option value="16" {{ Request::get('experience') == '7' ? 'selected' : '' }} >7+ Years</option>
+                                <option value="19" {{ Request::get('experience') == '10' ? 'selected' : '' }}>10+ Years</option>
+							 @else
+							    <option label="blank" value="0"></option>	
+								<option value="all">All</option>
+								<option value="1">1+ Year</option>
+                                <option value="3" >3+ Years</option>
+                                <option value="5" >5+ Years</option>
+                                <option value="7" >7+ Years</option>
+                                <option value="10">10+ Years</option>
+                             @endif   
+							</select>
+						
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+
+					<!-- Min Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input ">
+							<input type="text" name="minprice" value="{{ Request::get('minprice') }}" placeholder="Min Price/Person" data-unit="INR">
+							
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<input type="text" name="maxprice" value="{{ Request::get('maxprice') }}" placeholder="Max Price/Person" data-unit="INR">
+							
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<select data-placeholder="Rating" name="rating" class="chosen-select-no-single">
+							 @if(Request::has('event_time'))
+							 	<option label="blank" value="0" {{ Request::get('experience') == '0' ? 'selected' : '' }}></option>	
+							 	<option value="all" {{ Request::get('experience') == 'all' ? 'selected' : '' }} >All</option>
+								<option value="all" {{ Request::get('experience') == '1' ? 'selected' : '' }} >1+ Star</option>
+                                <option value="10" {{ Request::get('experience') == '2' ? 'selected' : '' }} >2+ Stars</option>
+                                <option value="12" {{ Request::get('experience') == '3' ? 'selected' : '' }} >3+ Stars</option>
+                                <option value="16" {{ Request::get('experience') == '4' ? 'selected' : '' }} >4+ Stars</option>
+                                <option value="19" {{ Request::get('experience') == '5' ? 'selected' : '' }}>5 Star</option>
+							 @else
+							    <option label="blank" value="0"></option>	
+								<option value="all">All</option>
+								<option value="1">1+ Star</option>
+                                <option value="2" >2+ Star</option>
+                                <option value="3" >3+ Star</option>
+                                <option value="4" >4+ Star</option>
+                                <option value="5">5 Star</option>
+                             @endif   
+							</select>
+						
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+				</div>
+				<!-- Row With Forms / End -->
+
+
+				<!-- More Search Options -->
+				<a href="#" class="more-search-options-trigger margin-top-10" data-open-title="More Options" data-close-title="Less Options"></a>
+
+				<div class="more-search-options relative">
+					<div class="more-search-options-container">
+
+						
+
+
+						<!-- Checkboxes -->
+						<div class="checkboxes in-row">
+
+						 @if(Request::has('facilities'))
+
+						 <input id="check-2" type="checkbox" name="facilities[]" value="air_conditioning"
+						 {{ in_array('air_conditioning', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-2">Air Conditioning</label>
+
+							<input id="check-4" type="checkbox" name="facilities[]" value="parking"
+							{{ in_array('parking', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-4">Ample Parking</label>
+
+							<input id="check-5" type="checkbox" name="facilities[]" value="power"
+							{{ in_array('power', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-5">Power Backup</label>	
+
+							<input id="check-10" type="checkbox" name="facilities[]" value="cctv"
+							{{ in_array('cctv', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-10">CCTV</label>
+
+							<input id="check-11" type="checkbox" name="facilities[]" value="food"
+							{{ in_array('food', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-11">Food Available</label>
+
+							<input id="check-13" type="checkbox" name="facilities[]" value="valet"
+							{{ in_array('valet', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-13">Valet Parking</label>
+
+							<input id="check-14" type="checkbox" name="facilities[]" value="guests"
+							{{ in_array('guests', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-14">International Guests</label>
+
+
+
+							@else
+
+								 <input id="check-2" type="checkbox" name="facilities[]" value="air_conditioning">
+								<label for="check-2">Air Conditioning</label>
+
+								<input id="check-4" type="checkbox" name="facilities[]" value="parking">
+								<label for="check-4">Ample Parking</label>
+
+								<input id="check-5" type="checkbox" name="facilities[]" value="power">
+								<label for="check-5">Power Backup</label>	
+
+								<input id="check-10" type="checkbox" name="facilities[]" value="cctv">
+								<label for="check-10">CCTV</label>
+
+								<input id="check-11" type="checkbox" name="facilities[]" value="food">
+								<label for="check-11">Food Available</label>
+
+								<input id="check-13" type="checkbox" name="facilities[]" value="valet">
+								<label for="check-13">Valet Parking</label>
+
+								<input id="check-14" type="checkbox" name="facilities[]" value="guests">
+								<label for="check-14">International Guests</label>
+
+							@endif
+					
+						</div>
+						<!-- Checkboxes / End -->
+                      
+                     
+
+
+
+					</div>
+
+				</div>
+				<!-- More Search Options / End -->
+
+              
+              </form>
 			</div>
+			<!-- Box / End -->
 		</div>
 	</div>
 </div>
-@endif
+</section>
 
 
 
 <!-- Content
 ================================================== -->
 <div class="container">
-	<div class="row">
+	<div class="row fullwidth-layout">
 
 		<div class="col-md-12">
-			<!-- Main Search Input -->
-			<div class="main-search-input margin-bottom-40">
-				<input type="text" class="ico-01" placeholder="Type an agent name or location" value=""/>
-				<button class="button">Search</button>
-			</div>
-		</div>
 
+			<!-- Sorting / Layout Switcher -->
+			<div class="row margin-bottom-15">
 
-		<div class="col-md-12">
-			<div class="row">
+				<div class="col-md-6">
+					<!-- Sort by 
+					<div class="sort-by">
+						<label>Sort by:</label>
 
-				<!-- Agents Container -->
-				<div class="agents-grid-container">
-
-					<!-- Agent -->
-					<div class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
-						<div class="agent">
-
-							<div class="agent-avatar">
-								<a href="agent-page.html">
-									<img src="/images/agent-01.jpg" alt="">
-									<span class="view-profile-btn">View Profile</span>
-								</a>
-							</div>
-
-							<div class="agent-content">
-								<div class="agent-name">
-									<h4><a href="agent-page.html">Tom Wilson</a></h4>
-									<span>Agent In New York</span>
-								</div>
-
-								<ul class="agent-contact-details">
-									<li><i class="sl sl-icon-call-in"></i>(123) 123-456</li>
-									<li><i class="fa fa-envelope-o "></i><a href="#"><span class="__cf_email__" data-cfemail="d1a5bebc91b4a9b0bca1bdb4ffb2bebc">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
-								</ul>
-
-								<ul class="social-icons">
-									<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-									<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-									<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-									<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-
+						<div class="sort-by-select">
+							<select data-placeholder="Default order" class="chosen-select-no-single" >
+								<option>Default Order</option>	
+								<option>Price Low to High</option>
+								<option>Price High to Low</option>
+								<option>Newest Venues</option>
+								<option>Oldest Venues</option>
+							</select>
 						</div>
-					</div>
-					<!-- Agent / End -->
-					
-	
-					<!-- Agent -->
-					<div class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
-						<div class="agent">
-
-							<div class="agent-avatar">
-								<a href="agent-page.html">
-									<img src="/images/agent-02.jpg" alt="">
-									<span class="view-profile-btn">View Profile</span>
-								</a>
-							</div>
-
-							<div class="agent-content">
-								<div class="agent-name">
-									<h4><a href="agent-page.html">Jennie Wilson</a></h4>
-									<span>Agent In New York</span>
-								</div>
-
-								<ul class="agent-contact-details">
-									<li><i class="sl sl-icon-call-in"></i>(123) 123-456</li>
-									<li><i class="fa fa-envelope-o "></i><a href="#"><span class="__cf_email__" data-cfemail="264c4348484f4366435e474b564a430845494b">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
-								</ul>
-
-								<ul class="social-icons">
-									<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-									<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-									<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-									<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-
-						</div>
-					</div>
-					<!-- Agent / End -->
-					
-	
-					<!-- Agent -->
-					<div class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
-						<div class="agent">
-
-							<div class="agent-avatar">
-								<a href="agent-page.html">
-									<img src="/images/agent-03.jpg" alt="">
-									<span class="view-profile-btn">View Profile</span>
-								</a>
-							</div>
-
-							<div class="agent-content">
-								<div class="agent-name">
-									<h4><a href="agent-page.html">David Strozier</a></h4>
-									<span>Agent In Chicago</span>
-								</div>
-
-								<ul class="agent-contact-details">
-									<li><i class="sl sl-icon-call-in"></i>(123) 123-456</li>
-									<li><i class="fa fa-envelope-o "></i><a href="#"><span class="__cf_email__" data-cfemail="cfabaeb9a6ab8faab7aea2bfa3aae1aca0a2">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
-								</ul>
-
-								<ul class="social-icons">
-									<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-									<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-									<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-									<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-
-						</div>
-					</div>
-					<!-- Agent / End -->
-					
-
-					<!-- Agent -->
-					<div class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
-						<div class="agent">
-
-							<div class="agent-avatar">
-								<a href="agent-page.html">
-									<img src="/images/agent-04.jpg" alt="">
-									<span class="view-profile-btn">View Profile</span>
-								</a>
-							</div>
-
-							<div class="agent-content">
-								<div class="agent-name">
-									<h4><a href="agent-page.html">Charles Watson</a></h4>
-									<span>Agent In Dallas</span>
-								</div>
-
-								<ul class="agent-contact-details">
-									<li><i class="sl sl-icon-call-in"></i>(123) 123-456</li>
-									<li><i class="fa fa-envelope-o "></i><a href="#"><span class="__cf_email__" data-cfemail="7a19121b08161f093a1f021b170a161f54191517">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
-								</ul>
-
-								<ul class="social-icons">
-									<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-									<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-									<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-									<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-
-						</div>
-					</div>
-					<!-- Agent / End -->
-
-
+					</div>-->
 				</div>
-				<!-- Agents Container / End -->
+
+				<div class="col-md-6">
+					<!-- Layout Switcher -->
+					<div class="layout-switcher">
+
+						<a href="#" class="grid-three"><i class="fa fa-th"></i></a>
+
+						<a href="#" class="grid"><i class="fa fa-th-large"></i></a>
+						<a href="#" class="list"><i class="fa fa-th-list"></i></a>
+					</div>
+				</div>
+			</div>
+
+			
+			<!-- Listings -->
+			<div class="listings-container grid-layout-three">
+
+
+			@foreach($vendors as $vendor)
+
+				<!-- Listing Item -->
+				<div class="listing-item">
+
+						<a href="/vendors/{{ $vendor->slug }}" class="listing-img-container">
+
+							<div class="listing-badges">
+							    <span class="featured">Elite</span>
+								<span><i class="fa fa-map-marker"></i> {{ $vendor->city }}</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-price">&#8377 {{ $vendor->starting_package }} <i>onwards</i></span>
+								  @if(!$vendor->isFavourited)
+						        <span  class="like-icon" onclick="toggleFavourite({{$vendor->id}})"></span>
+
+						        @else
+						         <span  class="like-icon liked" onclick="toggleFavourite({{$vendor->id}})"></span>
+
+						        @endif 
+
+						        <i hidden="true" id="{{$vendor->id}}" data-slug="{{$vendor->slug}}"></i>
+							</div>
+
+							
+                            <div class="listing-carousel">
+                            	@foreach($vendor->photos as $photo)
+                                  <div><img src="{{ asset($photo->thumbnail_path) }}" alt=""></div>
+                                @endforeach 
+                            </div>
+
+						</a>
+						
+						<div class="listing-content">
+
+							<div class="listing-title">
+								<h4><a href="/venues/{{ $vendor->slug }}">{{ $vendor->venue_name }}</a><br>
+								 @foreach($vendor->vendor_types as $type)
+								  <span class="badge">{{ ucwords($type) }}</span> 
+								 @endforeach 
+								</h4>
+								<a href="https://maps.google.com/maps?q=Racca+Estate,+Old+Gangapur+Naka+Hanuman+Wadi,+Hanumanwadi+Road,+Panchavati,+Nashik,+Maharashtra+422003,+India" class="listing-address popup-gmaps">
+									<i class="fa fa-map-marker"></i>
+									<?= substr( $vendor->address , 0, 60); ?>...
+								</a>
+							</div>
+
+							<ul class="listing-features">
+								<li>Rating <span><i class="fa fa-star"></i> {{ $vendor->avg_rating }}</span></li>
+								<li>Reviews <span>{{ count($vendor->reviews) }}</span></li>
+							</ul>
+
+							<div class="listing-footer">
+								<a href="#"><i class="fa fa-user"></i> 36 Favourites</a>
+								<span><i class="fa fa-eye"></i> 19 Views</span>
+							</div>
+
+						</div>
+
+					</div>
+				<!-- Listing Item / End -->
+
+               
+               @endforeach
+				
+
+				
+				
 
 			</div>
-		</div>
+			<!-- Listings Container / End -->
 
-
-		<div class="col-md-12">
 			<div class="clearfix"></div>
 			<!-- Pagination -->
 			<div class="pagination-container margin-top-20">
-				<nav class="pagination">
-					<ul>
-						<li><a href="#" class="current-page">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-					</ul>
-				</nav>
+				{{ $vendors->links() }}
 
-				
 			</div>
 			<!-- Pagination / End -->
+
 		</div>
 
 	</div>
 </div>
-
 
 <!-- Footer
 ================================================== -->

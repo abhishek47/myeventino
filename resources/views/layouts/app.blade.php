@@ -7,6 +7,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+ <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -40,8 +51,27 @@
 @yield('css')
 
 </head>
-
 <body>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '755804334581004',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -73,7 +103,7 @@
       <div class="right-side ">
         <ul class="header-widget">
 
-        <li class="with-btn"><a href="/venues/create" class="button border">Add My Business</a></li>
+        <li class="with-btn"><a href="#" data-toggle="modal" data-target="#listModal" class="button border">Add My Business</a></li>
 
         <li>
             <i class="fa fa-map-marker"></i>
@@ -100,7 +130,6 @@
 
     </div>
 
-    
    @include('layouts.nav')
    
   </div>
@@ -184,6 +213,34 @@
 <!-- Footer / End -->
 
 
+<!-- Modal -->
+<div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel"><b><i class="fa fa-bars"></i> List Your Business with Eventino</b></h4>
+      </div>
+      <div class="modal-body">
+
+       <div class="row" >
+
+         <div class="col-md-4 col-md-offset-2">
+          <a href="/venues/create" class="button"><i class="fa fa-map-marker"></i> I own a Venue</a>
+        </div>  
+         
+         <div class="col-md-4">
+          <a href="/vendors/create" class="button"><i class="fa fa-user"></i> I am a Vendor</a>
+        </div>
+        </div>  
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
 
@@ -202,7 +259,9 @@
 <script type="text/javascript" src="/js/masonry.min.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCfuZbN6dONQboOHw7ZHrSICrxeUsk9Ee4&sensor=false&amp;language=en"></script>
+ 
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKrFnTEPkHKOMtrSkj9q8-Cc9QgysFkLc&sensor=false&amp;language=en"></script>
 <script type="text/javascript" src="/scripts/infobox.min.js"></script>
 <script type="text/javascript" src="/scripts/markerclusterer.js"></script>
 <script type="text/javascript" src="/scripts/maps.js"></script>
@@ -212,6 +271,9 @@
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+
+<script type="text/javascript" src="/js/dropzone.js"></script>
+
 
 
 @yield('js')

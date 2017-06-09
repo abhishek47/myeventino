@@ -18,6 +18,9 @@
               <li><a class="" href="/vendors">Vendors</a></li>
               <li><a class="" href="/blog">Blog</a></li>
 
+
+                <li><a class="" href="/events/create">Showcase My Event</a></li>
+
             
                 <!-- Authentication Links -->
                 @if (Auth::guest())
@@ -26,10 +29,14 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->name }} 
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                           <li><a href="/user/account">My Account</a></li>
+                           <li><a href="/user/favourites">Favourites</a></li>
+                           <li><a href="/user/events">Manage Events</a></li>
+                           <li><a href="/user/venues">Manage Venues</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -45,7 +52,6 @@
                     </li>
                 @endif
 
-                <li><a class="" href="/">Showcase My Event</a></li>
 
               
                 

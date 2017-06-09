@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\{User, Vendor};
 use Illuminate\Http\Request;
+use App\Http\Requests\SubmitVendorRequest;
+
 
 class VendorsController extends Controller
 {
@@ -11,9 +15,10 @@ class VendorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('vendors.index');
+    public function index(Request $request)
+    { 
+        $vendors = Vendor::latest()->paginate(15);
+        return view('vendors.index', compact('vendors'));
     }
 
 
@@ -29,7 +34,7 @@ class VendorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendors.new');
     }
 
     /**
@@ -38,9 +43,19 @@ class VendorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubmitVendorRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = str_slug($data['name']);
+        
+        $data['user_id'] = User::findOrCreate($data);
+
+        $vendor = Vendor::create($data);
+
+        flash('You are now a Vendor on vendorino!', 'Your business was successfully listed on Myvendorino!You can now start promoting your self and get paid directly here for your services!');
+
+        return redirect('/vendors/' . $vendor->slug . '/manage');
     }
 
     /**
@@ -49,20 +64,23 @@ class VendorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Vendor $vendor)
     {
-        //
+        $vendor->load('photos');
+        
+        return view('vendors.show.index', compact('vendor'));
     }
 
+   
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function manage(Vendor $vendor)
     {
-        //
+        return view('vendors.manage.index', compact('vendor'));
     }
 
     /**
@@ -72,19 +90,114 @@ class VendorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubmitVendorRequest $request, Vendor $vendor)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = str_slug($data['name']);
+
+        $vendor->update($data);
+
+        flash('Vendor Profile Successfully Updated!', 'Vendor Profile has been successfully updated on vendorino!!');
+
+        return back();
     }
 
+
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function policies(Request $request, Vendor $vendor)
+    {
+        $policies = $vendor->policies ? $vendor->policies : [];
+
+        $policies[] = $request->get('term');
+
+        $vendor->policies = $policies;
+       
+        
+        $vendor->save();
+
+        return redirect('/vendors/' . $vendor->slug . '/manage#terms')->with('msg', 'updated');
+
+
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deletePolicy(Request $request, Vendor $vendor, $index)
+    {
+        $policies = $vendor->policies;
+
+        unset($policies[$index]);
+
+        $vendor->policies = array_values($policies);
+        
+        $vendor->save();
+
+        if($request->wantsJson())
+        {
+            return response([], 200);
+        }
+
+        return redirect('/vendors/' . $vendor->slug . '/manage#policies')->with('msg', 'updated');
+
+
+    }
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePolicy(Request $request, Vendor $vendor, $index)
+    {
+        $policies = $vendor->policies;
+
+        $policies[$index] = $request->get('value');
+
+        $vendor->policies = array_values($policies);
+        
+        $vendor->save();
+
+        if($request->wantsJson())
+        {
+            return response([], 200);
+        }
+
+        return redirect('/vendors/' . $vendor->slug . '/manage#policies')->with('msg', 'updated');
+
+
+    }
+
+
+
+   /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Vendor $vendor)
     {
-        //
+        $vendor->delete();
+
+        if($request->wantsJson())
+        {
+            return response([], 200);
+        }    
+ 
+        return back();
     }
 }

@@ -1,39 +1,310 @@
 @extends('layouts.app')
 
+
+@section('css')
+
+<link rel="stylesheet" type="text/css" href="/css/plugins.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/css/multidate.css">
+
+<style type="text/css">
+	
+	.ui-datepicker .ui-datepicker-calendar .ui-state-highlight a {
+		    background: #192942 none;
+		    color: white;
+		}
+
+</style>
+
+@endsection
+
 @section('content')
 
 
 <div class="clearfix"></div>
 <!-- Header Container / End -->
-<a href="/events/filter" class="float visible-xs">
-<i class="fa fa-filter my-float"></i>
-</a>
 
 
-<!-- Titlebar
+
+@if(Request::has('platform'))
+   <a href="/events/filter"  class="float visible-xs">
+	<i class="fa fa-filter my-float"></i>
+	</a>
+@else
+	<a href="#" id="search-trigger" class="float visible-xs">
+	<i class="fa fa-filter my-float"></i>
+	</a>
+@endif
+
+
+<!-- Search
 ================================================== -->
-@if(!Request::has('platform'))
-<div id="titlebar">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
+<section id="search-panel" class="search margin-bottom-50 hidden-xs">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
 
-				<h2>Events Showcase</h2>
-				<span>Find information about various events nearby and get booking details.</span>
-				
-				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Events</li>
-					</ul>
-				</nav>
+			<!-- Title -->
+			<h3 class="search-title">Find an interesting event to visit!</h3>
 
+			<!-- Form -->
+			<div class="main-search-box no-shadow">
+
+			 <form method="GET">
+
+
+				<!-- Row With Forms -->
+				<div class="row with-forms">
+
+					<!-- Status -->
+					<div class="col-md-3">
+						
+                      <select class="chosen-select-no-single" name="event_type[]" multiple="true"  data-placeholder="Event Type">
+							 @if(Request::has('event_type'))
+								<option value="0" {{ Request::get('event_type') == '0' ? 'selected' : '' }}>-- Event Type --</option>
+								<option value="play" {{ Request::get('event_type') == 'play' ? 'selected' : '' }}>Play</option>
+								<option value="conference" {{ Request::get('event_type') == 'conference' ? 'selected' : '' }}>Conferences</option>
+		                        <option value="workshop" {{ Request::get('event_type') == 'workshop' ? 'selected' : '' }}>Workshop</option>
+		                        <option value="exihibition"{{ Request::get('event_type') == 'exihibition' ? 'selected' : '' }}>Exhibition</option>
+		                        <option value="concert" {{ Request::get('event_type') == 'concert' ? 'selected' : '' }} >Concert</option>
+		                        <option value="music-film" {{ Request::get('event_type') == 'music-film' ? 'selected' : '' }}>Musical/Film Festivals</option>
+		                        <option value="fest" {{ Request::get('event_type') == 'fest' ? 'selected' : '' }}>Fest</option>
+		                        <option value="party" {{ Request::get('event_type') == 'party' ? 'selected' : '' }}>Parites</option>
+		                        <option value="club-pub" {{ Request::get('event_type') == 'club-pub' ? 'selected' : '' }}>Club and Pub Events</option>
+		                        <option value="standup" {{ Request::get('event_type') == 'standup' ? 'selected' : '' }}>Stand-Up Comedy</option>
+		                        <option value="kids" {{ Request::get('event_type') == 'kids' ? 'selected' : '' }}>Kids Activity</option>
+		                        <option value="adventure" {{ Request::get('event_type') == 'adventure' ? 'selected' : '' }}>Adventure</option>
+		                        <option value="arts" {{ Request::get('event_type') == 'arts' ? 'selected' : '' }}>Arts &amp; Culture</option>
+		                        <option value="travel" {{ Request::get('event_type') == 'travel' ? 'selected' : '' }}>Travel</option>
+		                        <option value="entertainment" {{ Request::get('event_type') == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
+		                        <option value="others" {{ Request::get('event_type') == 'others' ? 'selected' : '' }}>Others</option>
+
+	                          @else 
+	                          	<option label="blank"></option>	
+								<option value="play">Play</option>
+								<option value="conference">Conferences</option>
+		                        <option value="workshop">Workshop</option>
+		                        <option value="exihibition" >Exhibition</option>
+		                        <option value="concert" >Concert</option>
+		                        <option value="music-film">Musical/Film Festivals</option>
+		                        <option value="fest">Fest</option>
+		                        <option value="party">Parites</option>
+		                        <option value="club-pub">Club and Pub Events</option>
+		                        <option value="standup">Stand-Up Comedy</option>
+		                        <option value="kids">Kids Activity</option>
+		                        <option value="adventure">Adventure</option>
+		                        <option value="arts">Arts &amp; Culture</option>
+		                        <option value="travel">Travel</option>
+		                        <option value="entertainment">Entertainment</option>
+		                        <option value="others">Others</option>
+
+						
+
+	                          @endif  
+						</select>
+
+					</div>
+
+					<!-- Property Type -->
+					<div class="col-md-3">
+						<select data-placeholder="Venue Type" name="venue_type" class="chosen-select-no-single">
+                           @if(Request::has('venue_type'))
+
+							  <option value="0" {{ Request::get('venue_type') == '0' ? 'selected' : '' }}>-- Venue Type --</option>
+							   <option value="all" {{ Request::get('venue_type') == 'all' ? 'selected' : '' }}>All</option>
+                                <option value="banquet" {{ Request::get('venue_type') == 'banquet' ? 'selected' : '' }}>Banquet</option>
+                                <option value="lawns" {{ Request::get('venue_type') == 'lawns' ? 'selected' : '' }}>Lawns</option>
+                                <option value="dome" {{ Request::get('venue_type') == 'dome' ? 'selected' : '' }}>Dome</option>
+                                <option value="resort" {{ Request::get('venue_type') == 'resort' ? 'selected' : '' }}>Resorts</option>
+                                <option value="plot" {{ Request::get('venue_type') == 'plot' ? 'selected' : '' }}>Plots</option>
+                                <option value="conference" {{ Request::get('venue_type') == 'conference' ? 'selected' : '' }}>Conference Room</option>
+                            @else
+                               <option value="0" >-- Venue Type --</option>
+                                <option value="all">All</option>
+                                <option value="banquet" >Banquet</option>
+                                <option value="lawns" >Lawns</option>
+                                <option value="dome" >Dome</option>
+                                <option value="conference" >Conference Room</option>
+                                <option value="resort">Resorts</option>
+                                <option value="plot">Plots</option>
+
+
+                            @endif    
+						</select>
+					</div>
+
+					<!-- Main Search Input -->
+					<div class="col-md-6">
+						<div class="main-search-input">
+							<input type="text" name="location" placeholder="Enter address e.g. street, city or state" value="{{ Request::has('location') ? Request::get('location') : '' }}"/>
+							<button class="button" type="submit">Search</button>
+						</div>
+					</div>
+
+				</div>
+				<!-- Row With Forms / End -->
+
+
+				<!-- Row With Forms -->
+				<div class="row with-forms">
+
+						<!-- Status -->
+				<div class="col-md-3">
+					
+					<input name="dates" id="datesPicker" value="{{ Request::get('dates') }}"  placeholder="Event Dates" readonly="">
+
+					
+				</div>
+
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<select data-placeholder="Event Starts" name="event_time" class="chosen-select-no-single">
+							 @if(Request::has('event_time'))
+							 	<option label="blank" value="0" {{ Request::get('event_time') == '0' ? 'selected' : '' }}></option>	
+								<option value="all" {{ Request::get('event_time') == 'all' ? 'selected' : '' }} >All</option>
+                                <option value="10" {{ Request::get('event_time') == '10' ? 'selected' : '' }} >Morning</option>
+                                <option value="12" {{ Request::get('event_time') == '12' ? 'selected' : '' }} >Afternoon</option>
+                                <option value="16" {{ Request::get('event_time') == '16' ? 'selected' : '' }} >Evening</option>
+                                <option value="19" {{ Request::get('event_time') == '19' ? 'selected' : '' }}>Night</option>
+							 @else
+							    <option label="blank" value="0"></option>	
+								<option value="all">All</option>
+                                <option value="10" >Morning</option>
+                                <option value="12" >Afternoon</option>
+                                <option value="16" >Evening</option>
+                                <option value="19">Night</option>
+                             @endif   
+							</select>
+						
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+
+					<!-- Min Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input ">
+							<input type="text" name="minprice" value="{{ Request::get('minprice') }}" placeholder="Min Price/Person" data-unit="INR">
+							
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<input type="text" name="maxprice" value="{{ Request::get('maxprice') }}" placeholder="Max Price/Person" data-unit="INR">
+							
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+				</div>
+				<!-- Row With Forms / End -->
+
+
+				<!-- More Search Options -->
+				<a href="#" class="more-search-options-trigger margin-top-10" data-open-title="More Options" data-close-title="Less Options"></a>
+
+				<div class="more-search-options relative">
+					<div class="more-search-options-container">
+
+						
+
+
+						<!-- Checkboxes -->
+						<div class="checkboxes in-row">
+
+						 @if(Request::has('facilities'))
+
+						 <input id="check-2" type="checkbox" name="facilities[]" value="air_conditioning"
+						 {{ in_array('air_conditioning', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-2">Air Conditioning</label>
+
+							<input id="check-4" type="checkbox" name="facilities[]" value="parking"
+							{{ in_array('parking', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-4">Ample Parking</label>
+
+							<input id="check-5" type="checkbox" name="facilities[]" value="power"
+							{{ in_array('power', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-5">Power Backup</label>	
+
+							<input id="check-10" type="checkbox" name="facilities[]" value="cctv"
+							{{ in_array('cctv', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-10">CCTV</label>
+
+							<input id="check-11" type="checkbox" name="facilities[]" value="food"
+							{{ in_array('food', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-11">Food Available</label>
+
+							<input id="check-13" type="checkbox" name="facilities[]" value="valet"
+							{{ in_array('valet', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-13">Valet Parking</label>
+
+							<input id="check-14" type="checkbox" name="facilities[]" value="guests"
+							{{ in_array('guests', Request::get('facilities')) ? 'checked' : '' }}>
+							<label for="check-14">International Guests</label>
+
+
+
+							@else
+
+								 <input id="check-2" type="checkbox" name="facilities[]" value="air_conditioning">
+								<label for="check-2">Air Conditioning</label>
+
+								<input id="check-4" type="checkbox" name="facilities[]" value="parking">
+								<label for="check-4">Ample Parking</label>
+
+								<input id="check-5" type="checkbox" name="facilities[]" value="power">
+								<label for="check-5">Power Backup</label>	
+
+								<input id="check-10" type="checkbox" name="facilities[]" value="cctv">
+								<label for="check-10">CCTV</label>
+
+								<input id="check-11" type="checkbox" name="facilities[]" value="food">
+								<label for="check-11">Food Available</label>
+
+								<input id="check-13" type="checkbox" name="facilities[]" value="valet">
+								<label for="check-13">Valet Parking</label>
+
+								<input id="check-14" type="checkbox" name="facilities[]" value="guests">
+								<label for="check-14">International Guests</label>
+
+							@endif
+					
+						</div>
+						<!-- Checkboxes / End -->
+                      
+                     
+
+
+
+					</div>
+
+				</div>
+				<!-- More Search Options / End -->
+
+              
+              </form>
 			</div>
+			<!-- Box / End -->
 		</div>
 	</div>
 </div>
-@endif
+</section>
+
+
 
 
 <!-- Content
@@ -41,14 +312,9 @@
 <div class="container">
 	<div class="row sticky-wrapper">
 
-		<div class="col-md-8">
+		<div class="col-md-12">
 
-			<!-- Main Search Input -->
-			<div class="main-search-input margin-bottom-35">
-				<input type="text" class="ico-01" placeholder="Enter address e.g. street, city and state or zip" value=""/>
-				<button class="button">Search</button>
-			</div>
-
+			
 			
 
 			
@@ -56,139 +322,38 @@
 			<div class="row">
 
 
+			 @foreach($events as $event)
+
+
 
 				<!-- Listing Item -->
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="listing-item compact">
 
-						<a href="single-property-page-1.html" class="listing-img-container">
+						<a href="/events/{{$event->slug}}" class="listing-img-container">
 
 							<div class="listing-badges">
 								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
+								<span><i class="fa fa-map-marker"></i> {{ $event->city }}</span>
 							</div>
 
 							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
+								<span class="listing-compact-title">{{ $event->name }} <i> &#8377 {{ $event->starting_price }}/person onwards</i></span>
 
 								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
+									<li>Date <span>{{ $event->event_dates }}</span></li>
+									<li>Timings <span>{{ $event->event_timings }}</span></li>
 								</ul>
 							</div>
-
-							<img src="/images/listing-01.jpg" alt="">
+                            
+                            <img src="{{ count($event->photos) ? $event->photos()->latest()->first()->thumbnail_path : '' }}" alt="">
 						</a>
 
 					</div>
 				</div>
 				<!-- Listing Item / End -->
 
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-02.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-03.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span class="featured">Featured</span>
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-04.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-md-6">
-					<div class="listing-item compact">
-
-						<a href="single-property-page-1.html" class="listing-img-container">
-
-							<div class="listing-badges">
-								<span><i class="fa fa-map-marker"></i> Nashik</span>
-							</div>
-
-							<div class="listing-img-content">
-								<span class="listing-compact-title">Event Name <i>&#8377 900/person</i></span>
-
-								<ul class="listing-hidden-content">
-									<li>Date <span>Feb 23 - 24</span></li>
-									<li>Timings <span>10:00 AM - 2:00 PM</span></li>
-								</ul>
-							</div>
-
-							<img src="/images/listing-05.jpg" alt="">
-						</a>
-
-					</div>
-				</div>
-				<!-- Listing Item / End -->
+			@endforeach	
 
 				
 
@@ -198,23 +363,11 @@
 			
 			<!-- Pagination -->
 			<div class="clearfix"></div>
+			<!-- Pagination -->
 			<div class="pagination-container margin-top-20">
-				<nav class="pagination">
-					<ul>
-						<li><a href="#" class="current-page">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li class="blank">...</li>
-						<li><a href="#">22</a></li>
-					</ul>
-				</nav>
+				
+				
 
-				<nav class="pagination-next-prev hidden-xs">
-					<ul>
-						<li><a href="#" class="prev">Previous</a></li>
-						<li><a href="#" class="next">Next</a></li>
-					</ul>
-				</nav>
 			</div>
 			<!-- Pagination / End -->
 
@@ -222,227 +375,6 @@
         
 
 
-        @if(!Request::has('platform'))
-
-		<!-- Sidebar
-		================================================== -->
-		<div class="col-md-4">
-			<div class="sidebar sticky right">
-
-				<!-- Widget -->
-				<div class="widget margin-bottom-40">
-					<h3 class="margin-top-0 margin-bottom-35">Find An Event</h3>
-
-					<!-- Row -->
-					<div class="row with-forms">
-						<!-- Status -->
-						<div class="col-md-12">
-							<select data-placeholder="Any Status" class="chosen-select-no-single" >
-								<option>Any Status</option>	
-								<option>For Sale</option>
-								<option>For Rent</option>
-							</select>
-						</div>
-					</div>
-					<!-- Row / End -->
-
-
-					<!-- Row -->
-					<div class="row with-forms">
-						<!-- Type -->
-						<div class="col-md-12">
-							<select data-placeholder="Any Type" class="chosen-select-no-single" >
-								<option>Any Type</option>	
-								<option>Apartments</option>
-								<option>Houses</option>
-								<option>Commercial</option>
-								<option>Garages</option>
-								<option>Lots</option>
-							</select>
-						</div>
-					</div>
-					<!-- Row / End -->
-
-
-					<!-- Row -->
-					<div class="row with-forms">
-						<!-- States -->
-						<div class="col-md-12">
-							<select data-placeholder="All States" class="chosen-select" >
-								<option>All States</option>	
-								<option>Alabama</option>
-								<option>Alaska</option>
-								<option>Arizona</option>
-								<option>Arkansas</option>
-								<option>California</option>
-								<option>Colorado</option>
-								<option>Connecticut</option>
-								<option>Delaware</option>
-								<option>Florida</option>
-								<option>Georgia</option>
-								<option>Hawaii</option>
-								<option>Idaho</option>
-								<option>Illinois</option>
-								<option>Indiana</option>
-								<option>Iowa</option>
-								<option>Kansas</option>
-								<option>Kentucky</option>
-								<option>Louisiana</option>
-								<option>Maine</option>
-								<option>Maryland</option>
-								<option>Massachusetts</option>
-								<option>Michigan</option>
-								<option>Minnesota</option>
-								<option>Mississippi</option>
-								<option>Missouri</option>
-								<option>Montana</option>
-								<option>Nebraska</option>
-								<option>Nevada</option>
-								<option>New Hampshire</option>
-								<option>New Jersey</option>
-								<option>New Mexico</option>
-								<option>New York</option>
-								<option>North Carolina</option>
-								<option>North Dakota</option>
-								<option>Ohio</option>
-								<option>Oklahoma</option>
-								<option>Oregon</option>
-								<option>Pennsylvania</option>
-								<option>Rhode Island</option>
-								<option>South Carolina</option>
-								<option>South Dakota</option>
-								<option>Tennessee</option>
-								<option>Texas</option>
-								<option>Utah</option>
-								<option>Vermont</option>
-								<option>Virginia</option>
-								<option>Washington</option>
-								<option>West Virginia</option>
-								<option>Wisconsin</option>
-								<option>Wyoming</option>
-							</select>
-						</div>
-					</div>
-					<!-- Row / End -->
-
-
-					<!-- Row -->
-					<div class="row with-forms">
-						<!-- Cities -->
-						<div class="col-md-12">
-							<select data-placeholder="All Cities" class="chosen-select" >
-								<option>All Cities</option>
-								<option>New York</option>
-								<option>Los Angeles</option>
-								<option>Chicago</option>
-								<option>Brooklyn</option>
-								<option>Queens</option>
-								<option>Houston</option>
-								<option>Manhattan</option>
-								<option>Philadelphia</option>
-								<option>Phoenix</option>
-								<option>San Antonio</option>
-								<option>Bronx</option>
-								<option>San Diego</option>
-								<option>Dallas</option>
-								<option>San Jose</option>
-							</select>
-						</div>
-					</div>
-					<!-- Row / End -->
-
-
-					<!-- Row -->
-					<div class="row with-forms">
-
-						<!-- Min Area -->
-						<div class="col-md-6">
-							<select data-placeholder="Beds" class="chosen-select-no-single" >
-								<option label="blank"></option>	
-								<option>Beds (Any)</option>	
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-
-						<!-- Max Area -->
-						<div class="col-md-6">
-							<select data-placeholder="Baths" class="chosen-select-no-single" >
-								<option label="blank"></option>	
-								<option>Baths (Any)</option>	
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-
-					</div>
-					<!-- Row / End -->
-
-					<br>
-
-					
-					
-					<!-- Price Range -->
-					<div class="range-slider">
-						<label>Price Range</label>
-						<div id="price-range" data-min="0" data-max="400000" data-unit="$"></div>
-						<div class="clearfix"></div>
-					</div>
-
-
-
-					<!-- More Search Options -->
-					<a href="#" class="more-search-options-trigger margin-bottom-10 margin-top-30" data-open-title="Additional Features" data-close-title="Additional Features"></a>
-
-					<div class="more-search-options relative">
-
-						<!-- Checkboxes -->
-						<div class="checkboxes one-in-row margin-bottom-10">
-					
-							<input id="check-2" type="checkbox" name="check">
-							<label for="check-2">DJ Party</label>
-
-							<input id="check-3" type="checkbox" name="check">
-							<label for="check-3"></label>
-
-							<input id="check-4" type="checkbox" name="check" >
-							<label for="check-4">Central Heating</label>
-
-							<input id="check-5" type="checkbox" name="check">
-							<label for="check-5">Laundry Room</label>	
-
-
-							<input id="check-6" type="checkbox" name="check">
-							<label for="check-6">Gym</label>
-
-							<input id="check-7" type="checkbox" name="check">
-							<label for="check-7">Alarm</label>
-
-							<input id="check-8" type="checkbox" name="check">
-							<label for="check-8">Window Covering</label>
-					
-						</div>
-						<!-- Checkboxes / End -->
-
-					</div>
-					<!-- More Search Options / End -->
-
-					<button class="button fullwidth margin-top-30">Search</button>
-
-
-				</div>
-				<!-- Widget / End -->
-
-			</div>
-		</div>
-		<!-- Sidebar / End -->
-		@endif
 	</div>
 </div>
 
@@ -453,5 +385,21 @@
 
 
 
+
+@endsection
+
+
+@section('js')
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+<script src="/js/multidate.js"></script>
+
+<script type="text/javascript">
+	
+       $('#datesPicker').multiDatesPicker({ dateFormat: 'dd-mm-yy' });
+     
+
+</script>
 
 @endsection
