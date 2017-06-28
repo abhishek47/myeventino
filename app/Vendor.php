@@ -4,11 +4,14 @@ namespace App;
 
 use App\Traits\{Reviewable, Favouritable};
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 
 use Carbon\Carbon;
 
 class Vendor extends Model
 {
+    use CrudTrait;
+
     use Reviewable;
 
     use Favouritable;
@@ -24,6 +27,11 @@ class Vendor extends Model
    {
      return 'slug';
    }
+
+   public function user()
+   {
+       return $this->belongsTo(User::class);
+   } 
     
    public function photos()
    {
@@ -80,6 +88,19 @@ class Vendor extends Model
    {
    		return $this->packages()->min('price');
    }
+
+   public function getExperienceAttribute()
+   {
+   	    $today = Carbon::today();
+   	    $etd = new Carbon($this->establishment_date); 
+   		return $etd->diffInYears($today);
+   }
+
+
+   public function getUserEmailAttribute()
+    {
+        return $this->user->email;
+    }
 
 
 }

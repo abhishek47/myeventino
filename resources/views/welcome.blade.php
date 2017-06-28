@@ -105,7 +105,7 @@
 
             <div class="col-md-3 col-sm-6">
                 <!-- Icon Box -->
-                <div class="icon-box-1">
+                <a href="/venues" class="icon-box-1">
 
                     <div class="icon-container">
                         <i class="fa fa-map-marker"></i>
@@ -114,12 +114,12 @@
 
                     <h3>Venues</h3>
                     <p>We have huge list of venues for any particular event you want to have!</p>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <!-- Icon Box -->
-                <div class="icon-box-1">
+                <a href="/events" class="icon-box-1">
 
                     <div class="icon-container">
                         <i class="fa fa-calendar-check-o"></i>
@@ -128,12 +128,12 @@
 
                     <h3>Events</h3>
                     <p>A showcase of exciting events happening near you.</p>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <!-- Icon Box -->
-                <div class="icon-box-1">
+                <a href="/vendors" class="icon-box-1">
 
                     <div class="icon-container">
                         <i class="fa fa-users"></i>
@@ -142,21 +142,22 @@
 
                     <h3>Vendors</h3>
                     <p>An advanced search panel that help you find the best vendor that caters your needs.</p>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <!-- Icon Box -->
-                <div class="icon-box-1">
+                <a href="#" class="icon-box-1">
 
                     <div class="icon-container">
                         <i class="fa fa-check-square-o"></i>
+                        <i style="position: absolute;background: green;" class="badge">Coming Soon</i>
                         
                     </div>
 
                     <h3>Planner</h3>
-                    <p>Here everything is managed and categorised that shows you exactly what you want.</p>
-                </div>
+                    <p>Make Eventino your event manager and let Eventino help you plan your event.</p>
+                </a>
             </div>
 
         </div>
@@ -259,8 +260,8 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-8">
                     <h2>Finding a best vendor to make it a best event.</h2>
-                    <p>We’re full-service, local agents who know how to find people and home each together. We use online tools with an unmatched search capability to make you smarter and faster.</p>
-                    <a href="listings-list-with-sidebar.html" class="button margin-top-25">Find Vendors</a>
+                    <p>An advanced search panel that help you find the best vendor that caters your needs.From photographers to make-up artists everything at one place.A simple process - Search.Compare.Choose</p>
+                    <a href="/vendors" class="button margin-top-25">Find Vendors</a>
                 </div>
             </div>
 

@@ -4,12 +4,14 @@ namespace App;
 
 use App\Traits\{Reviewable, Favouritable};
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 
 use Carbon\Carbon;
 
 class Event extends Model
 {
-  
+    
+    use CrudTrait;
     
 
     use Reviewable;
@@ -20,13 +22,18 @@ class Event extends Model
 
     protected $with = ['favourites'];
 
-    protected $appends = ['favouritesCount', 'isFavourited'];
+    protected $appends = ['favouritesCount', 'isFavourited', 'avg_rating'];
 
 
    public function getRouteKeyName()
    {
      return 'slug';
    }
+
+   public function user()
+   {
+       return $this->belongsTo(User::class);
+   } 
     
 
    public function people()
@@ -205,4 +212,10 @@ class Event extends Model
       
        return $sales;
    }
+
+
+    public function getUserEmailAttribute()
+    {
+        return $this->user->email;
+    }
 }

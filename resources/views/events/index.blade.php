@@ -59,7 +59,7 @@
 					<!-- Status -->
 					<div class="col-md-3">
 						
-                      <select class="chosen-select-no-single" name="event_type[]" multiple="true"  data-placeholder="Event Type">
+                      <select class="chosen-select-no-single" name="event_type" data-placeholder="Event Type">
 							 @if(Request::has('event_type'))
 								<option value="0" {{ Request::get('event_type') == '0' ? 'selected' : '' }}>-- Event Type --</option>
 								<option value="play" {{ Request::get('event_type') == 'play' ? 'selected' : '' }}>Play</option>
@@ -205,6 +205,36 @@
 						<div class="select-input">
 							<input type="text" name="maxprice" value="{{ Request::get('maxprice') }}" placeholder="Max Price/Person" data-unit="INR">
 							
+						</div>
+						<!-- Select Input / End -->
+
+					</div>
+
+					<!-- Max Price -->
+					<div class="col-md-3">
+						
+						<!-- Select Input -->
+						<div class="select-input">
+							<select data-placeholder="Rating" name="rating" class="chosen-select-no-single">
+							 @if(Request::has('rating'))
+							 	<option label="blank" value="0" {{ Request::get('rating') == '0' ? 'selected' : '' }}></option>	
+							 	<option value="all" {{ Request::get('rating') == 'all' ? 'selected' : '' }} >All</option>
+								<option value="1" {{ Request::get('rating') == '1' ? 'selected' : '' }} >1+ Star</option>
+                                <option value="2" {{ Request::get('rating') == '2' ? 'selected' : '' }} >2+ Stars</option>
+                                <option value="3" {{ Request::get('rating') == '3' ? 'selected' : '' }} >3+ Stars</option>
+                                <option value="4" {{ Request::get('rating') == '4' ? 'selected' : '' }} >4+ Stars</option>
+                                <option value="5" {{ Request::get('rating') == '5' ? 'selected' : '' }}>5 Star</option>
+							 @else
+							    <option label="blank" value="0"></option>	
+								<option value="all">All</option>
+								<option value="1">1+ Star</option>
+                                <option value="2" >2+ Star</option>
+                                <option value="3" >3+ Star</option>
+                                <option value="4" >4+ Star</option>
+                                <option value="5">5 Star</option>
+                             @endif   
+							</select>
+						
 						</div>
 						<!-- Select Input / End -->
 

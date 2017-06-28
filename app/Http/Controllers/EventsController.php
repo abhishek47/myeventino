@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\{Event, User};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubmitEventRequest;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Carbon\Carbon;
 
 class EventsController extends Controller
@@ -20,9 +21,9 @@ class EventsController extends Controller
 
         if($request->has('event_type') && $request->get('event_type') != 'all' && $request->get('event_type') != '0')
         {
-            foreach ($request->get('event_type') as $key => $type) {
-               $events = $events->where('event_type', 'LIKE', '%'. $type . '%'); 
-            }
+            
+             $events = $events->where('event_type', 'LIKE', '%'. $request->get('event_type') . '%'); 
+           
         }
 
          if($request->has('venue_type') && $request->get('venue_type') != 'all' && $request->get('venue_type') != '0')
@@ -47,7 +48,7 @@ class EventsController extends Controller
         }
 
 
-        $events = $events->paginate(15);
+        $events = $events->get();
 
         if($request->has('dates'))
         {
@@ -56,6 +57,7 @@ class EventsController extends Controller
 
                 return count(array_intersect($event->dates, explode(',', $request->get('dates')))) > 0;
              });
+       
         }
 
         if($request->has('event_time') && $request->get('event_time') != 'all')
@@ -69,6 +71,7 @@ class EventsController extends Controller
 
 
              });
+
         }
 
         
@@ -77,6 +80,7 @@ class EventsController extends Controller
              $events = $events->filter(function($event) use ($request){
                 return $event->starting_price >= $request->get('minprice');
              });
+
         }
 
         if($request->has('maxprice'))
@@ -84,7 +88,21 @@ class EventsController extends Controller
              $events = $events->filter(function($event) use ($request){
                 return $event->starting_price <= $request->get('maxprice');
              });
+
         }
+
+        if($request->has('rating'))
+        {
+             $events = $events->filter(function($event) use ($request){
+                return $event->avg_rating >= $request->get('rating');
+             });
+
+             
+        }
+        
+
+        
+        
 
         return view('events.index', compact('events'));
     }

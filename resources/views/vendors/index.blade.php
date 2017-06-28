@@ -21,7 +21,7 @@
 
 			<!-- Form -->
 			<div class="main-search-box no-shadow">
-
+ 
 			 <form method="GET">
 
 
@@ -31,12 +31,12 @@
 					<!-- Status -->
 					<div class="col-md-6">
 						
-                      <select class="chosen-select-no-single" name="vendor_types[]" multiple="true"  data-placeholder="Vendor Types">
+                      <select class="chosen-select-no-single" name="vendor_types"  data-placeholder="Vendor Types">
 							 @if(Request::has('vendor_types'))
 								<option value="0" {{ Request::get('vendor_types') == '0' ? 'selected' : '' }}>-- Vendor Types --</option>
-								<option value="play" {{ Request::get('vendor_types') == 'play' ? 'selected' : '' }}>Play</option>
-								<option value="conference" {{ Request::get('vendor_types') == 'conference' ? 'selected' : '' }}>Conferences</option>
-		                        <option value="workshop" {{ Request::get('vendor_types') == 'workshop' ? 'selected' : '' }}>Workshop</option>
+								<option value="photography" {{ Request::get('vendor_types') == 'photography' ? 'selected' : '' }}>Photographer</option>
+								<option value="conference" {{ Request::get('vendor_types') == 'conference' ? 'selected' : '' }}>Mehendi</option>
+		                        <option value="workshop" {{ Request::get('vendor_types') == 'workshop' ? 'selected' : '' }}>Bride Makeup</option>
 		                        <option value="exihibition"{{ Request::get('vendor_types') == 'exihibition' ? 'selected' : '' }}>Exhibition</option>
 		                        <option value="concert" {{ Request::get('vendor_types') == 'concert' ? 'selected' : '' }} >Concert</option>
 		                        <option value="music-film" {{ Request::get('vendor_types') == 'music-film' ? 'selected' : '' }}>Musical/Film Festivals</option>
@@ -103,14 +103,14 @@
 						<!-- Select Input -->
 						<div class="select-input">
 							<select data-placeholder="Experience" name="experience" class="chosen-select-no-single">
-							 @if(Request::has('event_time'))
+							 @if(Request::has('experience'))
 							 	<option label="blank" value="0" {{ Request::get('experience') == '0' ? 'selected' : '' }}></option>	
 							 	<option value="all" {{ Request::get('experience') == 'all' ? 'selected' : '' }} >All</option>
-								<option value="all" {{ Request::get('experience') == '1' ? 'selected' : '' }} >1+ Year</option>
-                                <option value="10" {{ Request::get('experience') == '3' ? 'selected' : '' }} >3+ Years</option>
-                                <option value="12" {{ Request::get('experience') == '5' ? 'selected' : '' }} >5+ Years</option>
-                                <option value="16" {{ Request::get('experience') == '7' ? 'selected' : '' }} >7+ Years</option>
-                                <option value="19" {{ Request::get('experience') == '10' ? 'selected' : '' }}>10+ Years</option>
+								<option value="1" {{ Request::get('experience') == '1' ? 'selected' : '' }} >1+ Year</option>
+                                <option value="3" {{ Request::get('experience') == '3' ? 'selected' : '' }} >3+ Years</option>
+                                <option value="5" {{ Request::get('experience') == '5' ? 'selected' : '' }} >5+ Years</option>
+                                <option value="7" {{ Request::get('experience') == '7' ? 'selected' : '' }} >7+ Years</option>
+                                <option value="10" {{ Request::get('experience') == '10' ? 'selected' : '' }}>10+ Years</option>
 							 @else
 							    <option label="blank" value="0"></option>	
 								<option value="all">All</option>
@@ -160,14 +160,14 @@
 						<!-- Select Input -->
 						<div class="select-input">
 							<select data-placeholder="Rating" name="rating" class="chosen-select-no-single">
-							 @if(Request::has('event_time'))
-							 	<option label="blank" value="0" {{ Request::get('experience') == '0' ? 'selected' : '' }}></option>	
-							 	<option value="all" {{ Request::get('experience') == 'all' ? 'selected' : '' }} >All</option>
-								<option value="all" {{ Request::get('experience') == '1' ? 'selected' : '' }} >1+ Star</option>
-                                <option value="10" {{ Request::get('experience') == '2' ? 'selected' : '' }} >2+ Stars</option>
-                                <option value="12" {{ Request::get('experience') == '3' ? 'selected' : '' }} >3+ Stars</option>
-                                <option value="16" {{ Request::get('experience') == '4' ? 'selected' : '' }} >4+ Stars</option>
-                                <option value="19" {{ Request::get('experience') == '5' ? 'selected' : '' }}>5 Star</option>
+							 @if(Request::has('rating'))
+							 	<option label="blank" value="0" {{ Request::get('rating') == '0' ? 'selected' : '' }}></option>	
+							 	<option value="all" {{ Request::get('rating') == 'all' ? 'selected' : '' }} >All</option>
+								<option value="1" {{ Request::get('rating') == '1' ? 'selected' : '' }} >1+ Star</option>
+                                <option value="2" {{ Request::get('rating') == '2' ? 'selected' : '' }} >2+ Stars</option>
+                                <option value="3" {{ Request::get('rating') == '3' ? 'selected' : '' }} >3+ Stars</option>
+                                <option value="4" {{ Request::get('rating') == '4' ? 'selected' : '' }} >4+ Stars</option>
+                                <option value="5" {{ Request::get('rating') == '5' ? 'selected' : '' }}>5 Star</option>
 							 @else
 							    <option label="blank" value="0"></option>	
 								<option value="all">All</option>
@@ -400,7 +400,7 @@
 			<div class="clearfix"></div>
 			<!-- Pagination -->
 			<div class="pagination-container margin-top-20">
-				{{ $vendors->links() }}
+				
 
 			</div>
 			<!-- Pagination / End -->

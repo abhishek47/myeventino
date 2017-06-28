@@ -10405,6 +10405,7 @@ body .notification strong {
 }
 
 .icon-box-1 {
+    display: block;
     text-align: center;
     padding: 20px 0;
     padding-bottom: 15px;
@@ -10444,15 +10445,7 @@ body .notification strong {
     display: inline-block;
 }
 
-.icon-box-1:hover .icon-container i {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scale(1.16);
-}
 
-.icon-box-1.alternative:hover .icon-container i {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-}
 
 .icon-box-1 .icon-container .icon-links {
     opacity: 0;

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\{User, Vendor};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubmitVendorRequest;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 
 class VendorsController extends Controller
@@ -17,7 +18,71 @@ class VendorsController extends Controller
      */
     public function index(Request $request)
     { 
-        $vendors = Vendor::latest()->paginate(15);
+        $vendors = Vendor::latest();
+        
+        if($request->has('vendor_types') && $request->get('vendor_types') != 'all' && $request->get('vendor_types') != '0')
+        {
+            
+               $vendors = $vendors->where('vendor_types', 'LIKE', '%'. $request->get('vendor_types') . '%'); 
+            
+        }
+
+       
+
+        if($request->has('location'))
+        {
+            $vendors = $vendors->where('name', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('address', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('city', 'LIKE', '%'. $request->get('location') . '%')
+                   ->orWhere('state', 'LIKE', '%'. $request->get('location') . '%');
+        }
+
+        if($request->has('facilities'))
+        {
+            foreach ($request->get('facilities') as $key => $facility) {
+               $vendors = $vendors->where('facilities', 'LIKE', '%'. $facility . '%'); 
+            }
+        }
+
+
+        
+        $vendors = $vendors->get();
+
+        if($request->has('experience'))
+        {
+             $vendors = $vendors->filter(function($vendor) use ($request){
+                return $vendor->experience >= $request->get('experience');
+
+             });
+
+        }
+
+
+        if($request->has('rating'))
+        {
+             $vendors = $vendors->filter(function($vendor) use ($request){
+                return $vendor->avg_rating >= $request->get('rating');
+             });
+
+        }
+
+        if($request->has('minprice'))
+        {
+             $vendors = $vendors->filter(function($vendor) use ($request){
+                return $vendor->starting_package >= $request->get('minprice');
+             });
+
+        }
+
+        if($request->has('maxprice'))
+        {
+             $vendors = $vendors->filter(function($vendor) use ($request){
+                return $vendor->starting_package <= $request->get('maxprice');
+             });
+
+
+        }
+
         return view('vendors.index', compact('vendors'));
     }
 

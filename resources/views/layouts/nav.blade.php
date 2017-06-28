@@ -16,7 +16,7 @@
 
              <li><a class="" href="/events">Events</a></li>
               <li><a class="" href="/vendors">Vendors</a></li>
-              <li><a class="" href="/blog">Blog</a></li>
+              <li><a class="" target="_blank" href="http://blog.myeventino.com">Blog</a></li>
 
 
                 <li><a class="" href="/events/create">Showcase My Event</a></li>
@@ -24,8 +24,19 @@
             
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            My Account 
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                            
+                        </ul>
+                    </li>
+                   
+                   
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -51,6 +62,15 @@
                         </ul>
                     </li>
                 @endif
+
+                 <li class="dropdown ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-map-marker"></i> Nashik 
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                        </ul>
+                    </li>
 
 
               

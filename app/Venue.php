@@ -5,12 +5,14 @@ namespace App;
 use App\Traits\{Reviewable, Favouritable};
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Backpack\CRUD\CrudTrait;
 
 
 class Venue extends Model
 {
 
-    
+    use CrudTrait;
+
     use SearchableTrait;
 
     use Reviewable;
@@ -21,7 +23,7 @@ class Venue extends Model
 
      protected $with = ['favourites'];
 
-    protected $appends = ['favouritesCount'];
+    protected $appends = ['favouritesCount', 'user_email'];
 
 
     protected $searchable = [
@@ -31,7 +33,11 @@ class Venue extends Model
             'address' => 3,
         ]
     ];
-
+   
+   public function user()
+   {
+       return $this->belongsTo(User::class);
+   } 
 
    public function getRouteKeyName()
    {
@@ -122,6 +128,11 @@ class Venue extends Model
     public function getTypesAttribute()
     {
         return json_decode($this->venue_type);
+    }
+
+     public function getUserEmailAttribute()
+    {
+        return $this->user->email;
     }
 
 

@@ -13,6 +13,10 @@
 
 Route::get('/', 'PagesController@index');
 
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -115,6 +119,7 @@ Route::post('/events/{event}/package/{index}/buy', 'EventPaymentsController@buyP
 Route::get('/payments/response/order:{oid}', 'EventPaymentsController@response');
 
 Route::get('/invoice/download/{oid}', 'EventPaymentsController@download')->name('payments.orders.download');
+
 
 
 

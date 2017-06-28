@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\{Venue, User, VenueSection};
 use Illuminate\Http\Request;
 use App\Http\Requests\SubmitVenueRequest;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 
 
@@ -66,7 +67,7 @@ class VenuesController extends Controller
             }
         }
 
-        $venues = $venues->paginate(15);
+        $venues = $venues->get();
 
         
         if($request->has('people'))
@@ -74,6 +75,7 @@ class VenuesController extends Controller
              $venues = $venues->filter(function($venue) use ($request){
                 return $venue->max_cap >= $request->get('people');
              });
+
         }
 
         if($request->has('minprice'))
@@ -81,6 +83,7 @@ class VenuesController extends Controller
              $venues = $venues->filter(function($venue) use ($request){
                 return $venue->serves_from >= $request->get('minprice');
              });
+
         }
 
         if($request->has('maxprice'))
@@ -88,8 +91,20 @@ class VenuesController extends Controller
              $venues = $venues->filter(function($venue) use ($request){
                 return $venue->serves_from <= $request->get('maxprice');
              });
+
         }
+
+        if($request->has('rating'))
+        {
+             $venues = $venues->filter(function($venue) use ($request){
+                return $venue->avg_rating >= $request->get('rating');
+             });
+        }
+
         
+
+
+
          return view('venues.index', compact('venues'));
     }
     
