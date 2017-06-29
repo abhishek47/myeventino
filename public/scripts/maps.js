@@ -168,7 +168,8 @@
         }
         );
         var boxText=document.createElement("div");
-        boxText.className='map-box' var currentInfobox;
+        boxText.className='map-box';
+        var currentInfobox;
         var boxOptions= {
             content:boxText, disableAutoPan:true, alignBottom:true, maxWidth:0, pixelOffset:new google.maps.Size(-60, -55), zIndex:null, boxStyle: {
                 width: "260px"
