@@ -3,7 +3,7 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>MyEventino | Where Celebration Begins</title>
+<title> @yield('title') MyEventino | Where Celebration Begins</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('title')
+	
+	{{ $venue->venue_name . ' | ' }} 
+
+@endsection
 
 @section('css')
 
