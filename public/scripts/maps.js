@@ -264,7 +264,9 @@
                 );
             }
         }
-        ) $("#geoLocation").click(function(e) {
+        );
+
+        $("#geoLocation").click(function(e) {
             e.preventDefault();
             geolocate();
         }
