@@ -16,7 +16,7 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next)
     {
-         /* if($request->is('admin*')) {
+          if($request->is('admin*')) {
 
             if(Auth::guest())
             {
@@ -33,7 +33,7 @@ class RoleMiddleware
             
             
 
-       } */
+       }
 
        return $next($request);
     }   
