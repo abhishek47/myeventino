@@ -89,6 +89,9 @@
 				    </div>
 				    <div role="tabpanel" class="tab-pane" id="location">
 				    	@include('venues.show.location')
+				    	<script type="text/javascript">
+				    		initMap();
+				    	</script>
 				    </div>
 				     <div role="tabpanel" class="tab-pane " id="facilities">
 				    	@include('venues.show.facilities')
