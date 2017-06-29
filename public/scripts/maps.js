@@ -7,7 +7,7 @@
         $(".fs-container").css('height', ''+ $(window).height()- headerHeight+'px');
 
          var map = new google.maps.Map(document.getElementById('propertyMap'), {
-          center: {lat: -34.397, lng: 150.644},
+          center: {lat: 20.073275, lng: 73.636491},
           zoom: 8
         });
     }
