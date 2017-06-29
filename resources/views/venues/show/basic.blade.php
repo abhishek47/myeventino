@@ -53,7 +53,11 @@
                 
 
 				<h3 class="desc-headline">Seating Capacity</h3>
+
                 <ul class="property-features margin-top-0  margin-bottom-60">
+                 @if(Request::has('platform') || isMobile()) 
+                   <div class="logo-carousel">
+                 @endif
                    <li>
                      <div class="row">
                      <div class="col-md-4">
@@ -89,6 +93,10 @@
                      </div> 
                      </div> 
                    </li>
+
+                    @if(Request::has('platform') || isMobile())
+                     </div>
+                   @endif
 					
 				</ul>
 

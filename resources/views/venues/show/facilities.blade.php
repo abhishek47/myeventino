@@ -4,7 +4,7 @@
         </h3>
 				<ul class="property-features facilities margin-top-0">
 
-  				 @if(Request::has('platform')) 
+  				 @if(Request::has('platform') || isMobile()) 
   				   <div class="logo-carousel">
   				 @endif
 
@@ -17,7 +17,7 @@
 
               @endforeach
 
-           @if(Request::has('platform'))
+           @if(Request::has('platform') || isMobile())
              </div>
            @endif
 				</ul>
