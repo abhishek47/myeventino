@@ -782,7 +782,8 @@
             defaults = $.extend({
                 shadow: true,
                 shadowOpacity: 0.12,
-                zIndex: -10
+                zIndex: 100,
+                position: relative
             }, options),
             settings = $.extend(true, {}, defaults, options);
         $this.before('<div class="footer-reveal-offset"></div>');
